@@ -259,17 +259,44 @@ var a = new Donate({
       
             
       
+        
+  <!-- Gitment START! Deploy by Z4HD -->
+	<div id="comments"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+	var gitment = new Gitment({
+		id: 'http://sunnymorning.github.io/zh-CN/myd-am335x/',
+		owner: 'SunnyGeGe',
+		repo: 'gitment-comments',
+		oauth: {
+			client_id: '145e9516aed93af340ac',
+			client_secret: 'c764088a854aa2cb139be592d4698f5c86bc2eb5',
+		},
+	})
+	gitment.render('comments')
+	</script>
+	<!-- Gitment 自定义样式表 -->
+	<link rel="stylesheet" href="../../css/comment-gitment.css">
+	<!-- Gitment END! -->
+
+
+      
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-  
-    <a href="../../en/myd-am335x/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">MYD AM335X Linux Development Guide</div>
+    <a href="../../en/myd-am335x/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          MYD AM335X Linux Development Guide
+        
+      </div>
     </a>
+  
   
 </nav>
 

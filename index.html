@@ -233,8 +233,14 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong> 前言 </strong>  </p>
-<p>本小节概述文档所覆盖的范围，包含的内容，适合的读者，文档版本历史记录，适用的硬件版本。<br>本文主要讲述在MYD-AM335X系列开发板上安装运行Linux系统，以及嵌入式Linux驱动和应用程序的开发流程。其中包括开发环境的搭建、源码编译、Linux应用程序的实例分析、映像的下载。<br>本文档适合有一定开发经验的嵌入式linux开发工程师。</p>
+        
+<div>
+<img src="https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/zh-CN/myd-am335x/cover.jpg" ,alt="first" ,="" width="200" height="300">
+</div>
+
+
+<p><strong> 前言 </strong>  </p>
+<p>&emsp;&emsp;本小节概述文档所覆盖的范围，包含的内容，适合的读者，文档版本历史记录，适用的硬件版本。<br>本文主要讲述在MYD-AM335X系列开发板上安装运行Linux系统，以及嵌入式Linux驱动和应用程序的开发流程。其中包括开发环境的搭建、源码编译、Linux应用程序的实例分析、映像的下载。<br>本文档适合有一定开发经验的嵌入式linux开发工程师。</p>
 <p><strong> 版本历史 </strong>  </p>
 <table>
 <thead>
@@ -269,10 +275,335 @@ var themeMenus = {};
 </tr>
 </tbody>
 </table>
-<p>本文档仅适用以上三个版本的硬件<br><blockquote><p>content</p>
-<footer><strong>[author[</strong><cite>source]] [link] [source_link_title]</cite></footer></blockquote></p>
-<p><img src="/gallery/markdown.jpg" alt="Figure 1 MarkDown"></p>
+<p>本文档仅适用以上三个版本的硬件</p>
+<h1 id="软件资源介绍"><a href="#软件资源介绍" class="headerlink" title="软件资源介绍"></a>软件资源介绍</h1><p>本小节表格描述MYD-AM335X系列的软件资源。</p>
+<p>表 1-1软件资源列表</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>名称</th>
+<th>描述</th>
+<th>源码</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bootloader</td>
+<td>U-boot</td>
+<td>引导程序，负责系统初始化和引导内核</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>Linux 4.1.18</td>
+<td>专为MYD-AM335X系列的硬件制定的Linux内核</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>LCD</td>
+<td>LCD屏驱动，可支持4.3寸、7寸液晶屏</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>Touch Panel</td>
+<td>电阻触摸屏驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>Touch Panel</td>
+<td>电容触摸屏驱动</td>
+<td>YES</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>RTC</td>
+<td>内置RTC时钟驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>UART</td>
+<td>串口驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>SDIO WiFi</td>
+<td>WiFi驱动</td>
+<td>YES</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>RS485</td>
+<td>RS485驱动，提供源码</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>CAN Bus</td>
+<td>CAN驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>Ethernet</td>
+<td>以太网驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>MMC/SD</td>
+<td>MMC/SD卡驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>NAND Flash</td>
+<td>NAND Flash驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>Audio</td>
+<td>音频驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>GPIO-LED</td>
+<td>GPIO-LED 驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>I2C</td>
+<td>I2C驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>HDMI</td>
+<td>HDMI驱动，提供源码</td>
+<td>YES</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>PMU</td>
+<td>电源管理驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>USB Host</td>
+<td>USB Host驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>USB Device</td>
+<td>USB Device驱动（Gadget）</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>Rootfs</td>
+<td>基于buildroot定制的文件系统</td>
+<td>二进制</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>Rootfs-qt</td>
+<td>基于buildroot定制的Qt文件系统</td>
+<td>二进制</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>UBI</td>
+<td>提供镜像文件</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>Ramdisk.gz</td>
+<td>Ramdisk文件系统</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>LCD</td>
+<td>LCD测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>RTC</td>
+<td>RTC时钟测试实验</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>RS485</td>
+<td>RS485测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>CAN</td>
+<td>CAN 测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>Ethernet</td>
+<td>网络测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>NAND Flash</td>
+<td>NAND Flash测试实验</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>GPIO-LED</td>
+<td>GPIO-LED测试实验</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>Audio</td>
+<td>Audio测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>Qt</td>
+<td>Qt环境验证Demo程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+ 
+<!--
+{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
 
+{% raw %}
+
+<img src="https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/gallery/AliPayQR.jpg",alt="first", width=200 height=10>
+
+{% endraw%}
+{% asset_img AliPayQR.jpg This is an example image %}
+<p>–&gt;<br></p>
+-->
       
     </div>
     <footer class="entry-meta entry-footer">

@@ -1,0 +1,37 @@
+---
+title: 3.1 Bulid Bootloader
+date: 2018-04-10 15:48:57
+tags: [AM335X, u-boot]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+Enter the directory of bootloader, uncompress the source code package as shown below：
+
+```c
+$ cd <WORKDIR>/Bootloader
+$ tar -jxvf myir-u-boot.tar.bz2
+$ cd myir-u-boot
+```
+
+* Compile U-Boot：
+
+The configuration of U-boot for MYD-AM335X series is located at *myir-u-boot/configs/*, the corresponding configuration file name are shown below:
+
+| Board| Configuration File Name |
+|---------|-------------|------|
+| MYD-AM335X | myd_c335x_defconfig |
+| MYD-AM335X-Y | myd_j335x_defconfig |
+| MYD-AM335X-J | myd_y335x_defconfig |
+
+Compile U-boot for MYD-AM335X development board：
+```
+$ make distclean
+$ make myd_c335x_defconfig
+$ make
+```
+
+The second make in the configuration options see table,after build is completed, In the u-boot directory will generate MLO and u-boot.img files. MYD-AM335X-Y and MYD-AM335X-J are in the similar way.

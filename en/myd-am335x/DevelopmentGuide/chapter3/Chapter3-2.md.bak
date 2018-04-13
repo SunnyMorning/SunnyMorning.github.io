@@ -1,0 +1,79 @@
+---
+title: 3.2 Build Linux Kernel
+date: 2018-04-10 15:48:55
+tags: [AM335X, Kernel]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+Enter the work directory and uncompress the Linux Kernel source code package：
+
+```
+$ cd <WORKDIR>/
+$ tar -jxvf myir-kernel.tar.bz2
+$ cd myir-kernel
+```
+Compile Kernel：
+
+The configuration of Kernel for MYD-AM335X series is located at myir-kernel/arch/arm/configs/,customers can compile Kernel as shown below:
+
+| Board Type| Configuration File Name |
+|---------|-------------|------|
+| MYD-AM335X | myd_c335x_defconfig |
+| MYD-AM335X-Y | myd_j335x_defconfig |
+| MYD-AM335X-J | myd_y335x_defconfig |
+
+Compile U-boot for MYD-AM335X development board：
+```c
+$ make distclean
+$ make myd_c335x_defconfig
+$ make zImage dtbs
+```
+
+The configuration options in the second make are shown in the table above.Then, will find “zImage“ in the `arch/arm/boot` ，will find Binary devices tree “.dtb“ in the `arch/arm/boot/dts`.The same development board,Modifying DTS files can be adapted to different hardware configurations,Such as the screen size can modify the dts file.MYD-AM335X-Y and MYD-AM335X-J compilation and MYD-AM335X similar.
+
+The default configuration is 7-inch screen，256N256D，You can generate a different screen and NAND DDR device tree file from the patch file in `<WORKDIR> / Patches`，and then compile the kernel using the device tree file.The following is a list of related patches:
+
+  | Board Type | MYD-AM335X | MYD-AM335X-Y | MYD-AM335X-J |
+  | ----| ---- | ---- | ---- |
+  | HDMI patches | myd_c335x_hdmi_display.diff | No expansion | No expansion |
+  | 4.3 inch screen patch | myd-am335x-lcd4.3.diff | myd-am335x-y-lcd4.3.diff | myd-am335x-j-lcd4.3.diff |
+  | 512M NAND 512M ddr patch | myd-am335x-512N512D.diff | myd-am335x-y-512N512D.diff | myd-am335x-j-512N512D.diff |
+
+For example: MYD-AM335X-Y 512N512D 4.3-inch screen patch:
+
+```c
+$ patch -p1 < <WORKDIR>/Patches/myd-am335x-y-lcd4.3.diff
+
+$ patch -p1 < <WORKDIR>/Patches/myd-am335x-y-512N512D.diff
+```
+Compile device tree：
+```c
+make dtbs
+```
+And use the arch/arm/boot/dts directory of the device tree file to replace the system image device tree file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

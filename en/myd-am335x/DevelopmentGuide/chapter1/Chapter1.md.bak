@@ -1,0 +1,66 @@
+---
+title: 1. Software Resources
+date: 2018-04-11 15:50:59
+tags: [AM335X, Software Resources]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+This section describes the software resources of the MYD-AM335X series development boards.
+{% raw %}
+<div align="center" > Table 1-1 Software Resources.</div>
+{% endraw %}  
+
+Category | Name | Description | Source | MYD-AM335X | MYD-AM335X-Y | MYD-AM335X-J
+---- | ---- | ---- | ---- | ---- | ---- | ----
+Bootloader | U-boot | Responsible for system initialization and boot kernel. | YES | √ | √ | √
+Kernel | Linux 4.1.18 | Designed for MYD-AM335X hardware | YES | √ | √ | √
+Drivers | LCD Controller | LCD driver，for 4.3 inch、7 inch | YES | √ | √ | √
+Drivers | Touch Panel | Resistive touch screen driver | YES | √ | √ | √
+Drivers | Touch Panel | Capacitance touch screen driver | YES | × | √ | √
+Drivers | RTC | RTC clock driver | YES | √ | √ | √
+Drivers | UART | Serial driver | YES | √ | √ | √
+Drivers | SDIO WiFi | WiFi driver | YES | × | √ | ×
+Drivers | RS485 | RS485 driver | YES | √ | √ | √
+Drivers | CAN | CAN driver | YES | √ | √ | √
+Drivers | Ethernet | Ethernet driver | YES | √ | √ | √
+Drivers | MMC/SD | MMC/SD driver | YES | √ | √ | √
+Drivers | NAND Flash | NAND Flash driver | YES | √ | √ | √
+Drivers | Audio | Audio driver | YES | √ | √ | √
+Drivers | GPIO-LED | GPIO-LED driver | YES | √ | √ | √
+Drivers | I2C | I2C driver | YES | √ | √ | √
+Drivers | HDMI | HDMI driver | YES | √ | × | ×
+Drivers | PMU | Power Management Unit driver | YES | √ | √ | √
+Drivers | USB Host | USB Host driver | YES | √ | √ | √
+Drivers | USB Device | USB Device driver（Gadget）| YES | √ | √ | √
+Filesystem | Rootfs | Base on buildroot | Bin | √ | √ | √
+Filesystem | Rootfs-qt | Qt filesystem | Bin | √ | √ | √
+Filesystem | UBI | Provide image file | YES | √ | √ | √
+Filesystem | Ramdisk.gz | ramdisk filesystem | YES | √ | √ | √
+Demo | LCD | LCD test program | YES | √ | √ | √
+Demo | RTC | RTC clock test program | YES | √ | √ | √
+Demo | RS485 | RS485 test program| YES | √ | √ | √
+Demo | CAN | CAN test program | YES | √ | √ | √
+Demo | Ethernet | Ethernet test program | YES | √ | √ | √
+Demo | NAND Flash | NAND Flash test program| YES | √ | √ | √
+Demo | GPIO-LED | GPIO-LED test program | YES | √ | √ | √
+Demo | Audio | Audio test program | YES | √ | √ | √
+Demo | Qt | QT environment verification program | YES | √ | √ | √
+
+***
+
+{% raw %}
+<div align="center" > Table 1-2 Software Download URLs.</div>
+{% endraw %}  
+
+|Product  | Download | Description |  
+|-------- | -------- | ----------- |  
+| MYD-AM335X | http://d.myirtech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso | u-boot 2011.09, kernel 3.2.0 |
+|  &ensp;| http://d.myirtech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso | u-boot 2016.05, kernel 4.1.18, buildroot 2017.02 |
+| MYD-AM335X-Y |http://d.myirtech.com/MYD-AM335X-Y/public/MYD-AM335X_Y_V04_20150609.iso | u-boot 2011.09, kernel 3.2.0 |
+| &ensp; | http://d.myirtech.com/MYD-AM335X-Y/public/MYD-AM335X-Y_V20_20170522.iso | u-boot 2016.05, kernel 4.1.18, buildroot 2017.02 |
+| MYD-AM335X-J | http://d.myirtech.com/MYD-AM335X-J/public/MYD-AM335X_J_V10_20151027.iso | u-boot 2011.09, kernel 3.2.0 |
+| &ensp; | http://d.myirtech.com/MYD-AM335X-J/public/MYD-AM335X-J_V20_20170522.iso |u-boot 2016.05, kernel 4.1.18, buildroot 2017.02 |

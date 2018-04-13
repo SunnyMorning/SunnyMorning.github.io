@@ -161,6 +161,747 @@ var themeMenus = {};
         
           <section id="main">
   
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-1"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-1/">4.1 LCD</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-1/" class="article-date">
+	  <time datetime="2018-04-10T07:47:57.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程通过对Linux的FrameBuffer操作，实现LCD的彩色画点，画线，以及区域填充的测试。 也可以使用Buildroot文件系统自带的fbv程序显示图片。</p>
+<p><strong>测试硬件环境：</strong></p>
+<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LCD屏接口</td>
+<td>(MY-TFT070CV2) 7寸电容屏连接J8</td>
+<td>(MY-TFT070CV2) 7寸电容屏连接J7</td>
+<td>(MY-TFT070CV2) 7寸电容屏连接J8</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意：本例程中所用的7寸电容屏资料参见<a href="http://www.myir-tech.com/product/my-tft070cv2.htm" target="_blank" rel="noopener">LCD 屏</a>。</strong></p>
+</blockquote>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>framebuffer_test 应用程序</li>
+<li>fbv应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/framebuffer</code>目录下的测试程序framebuffer_test至开发板/usr/bin目录。在Linux终端输入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/framebuffer_test</span><br><span class="line"># framebuffer_test -h</span><br><span class="line">Usage: framebuffer_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Available options:</span><br><span class="line">-d | --device name   framebuffer device name, default: /dev/fb0</span><br><span class="line">-h | --help          Print this message</span><br><span class="line"></span><br><span class="line"># framebuffer_test -d /dev/fb0</span><br><span class="line">xres:800 &gt;&gt;&gt; yres:480 &gt;&gt;&gt; bpp:32&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;运行程序后，终端显示屏幕信息，LCD屏幕会先后出现多种背景色，然后进行彩色画点，画线，以及区域填充的测试。</p>
+<p>&emsp;&emsp;重启开发板后，将一个24位颜色深度，分辨率800X480的BMP图像拷贝到开发板/media/, 用fbv测试图片显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># fbv</span><br><span class="line">Usage: fbv [options] image1 image2 image3 ...</span><br><span class="line"></span><br><span class="line">Available options:</span><br><span class="line"> --help        | -h : Show this help</span><br><span class="line"> --alpha       | -a : Use the alpha channel (if applicable)</span><br><span class="line"> --dontclear   | -c : Do not clear the screen before and after displaying the image</span><br><span class="line"> --donthide    | -u : Do not hide the cursor before and after displaying the image</span><br><span class="line"> --noinfo      | -i : Supress image information</span><br><span class="line"> --stretch     | -f : Strech (using a simple resizing routine) the image to fit onto </span><br><span class="line">                      screen if necessary</span><br><span class="line"> --colorstretch| -k : Strech (using a &apos;color average&apos; resizing routine) the image to</span><br><span class="line">                      fit onto screen if necessary</span><br><span class="line"> --enlarge     | -e : Enlarge the image to fit the whole screen if necessary</span><br><span class="line"> --ignore-aspect| -r : Ignore the image aspect while resizing</span><br><span class="line"> --delay &lt;d&gt;   | -s &lt;delay&gt; : Slideshow, &apos;delay&apos; is the slideshow delay in tenths of</span><br><span class="line">                      seconds.</span><br><span class="line"></span><br><span class="line">Keys:</span><br><span class="line"> r            : Redraw the image</span><br><span class="line"> a, d, w, x   : Pan the image</span><br><span class="line"> f            : Toggle resizing on/off</span><br><span class="line"> k            : Toggle resizing quality</span><br><span class="line"> e            : Toggle enlarging on/off</span><br><span class="line"> i            : Toggle respecting the image aspect on/off</span><br><span class="line"> n            : Rotate the image 90 degrees left</span><br><span class="line"> m            : Rotate the image 90 degrees right</span><br><span class="line"> p            : Disable all transformations</span><br><span class="line">Copyright (C) 2000 - 2004 Mateusz Golicz, Tomasz Sterna.</span><br><span class="line">Error: Required argument missing.</span><br><span class="line"></span><br><span class="line"># fbv /meida/800-480.bmp</span><br><span class="line">fbv - The Framebuffer Viewer</span><br><span class="line">/media/800-480.bmp</span><br><span class="line">800 x 480</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;程序执行完毕，图片完整显示在LCD上。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/FrameBuffer/">FrameBuffer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/LCD/">LCD</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-2"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-2/">4.2 Touch Panel</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-2/" class="article-date">
+	  <time datetime="2018-04-10T07:47:55.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程主要使用buildroot制作的文件系统自带TS_CALIBRATE测试程序，进行触摸屏的校准测试。</p>
+<p><strong>测试硬件环境：</strong></p>
+<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>触摸屏接口</td>
+<td>(MY-TFT070RV2) 7寸电阻屏连接J8</td>
+<td>(MY-TFT070CV2) 7寸电容屏/(MY-TFT070RV2) 7寸电阻屏连接J7</td>
+<td>(MY-TFT070CV2) 7寸电容屏/(MY-TFT070RV2) 7寸电阻屏连接J8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>TS_CALIBRATE应用程序</li>
+</ul>
+<p><strong>测试过程:</strong><br> &emsp;&emsp;连接电容触摸模组，启动开发板，查看触摸设备对应的设备节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input</span><br><span class="line">by-path  event1   event3   mice     mouse1</span><br><span class="line">event0   event2   event4   mouse0</span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">beeper</span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">tps65217_pwrbutton</span><br><span class="line"># cat /sys/class/input/event2/device/name</span><br><span class="line">ft5x06_ts</span><br><span class="line"># cat /sys/class/input/event3/device/name</span><br><span class="line">ti-tsc</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;从以上查询结果可知，电阻触摸对应的设备节点为/dev/input/event3, 电容触摸对应的设备节点为/dev/input/event2,测试步骤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># export TSLIB_TSDEVICE=/dev/input/event2</span><br><span class="line"># ts_calibrate</span><br><span class="line">xres = 800, yres = 480</span><br><span class="line">Took 4 samples...</span><br><span class="line">Top left : X =   57 Y =   56</span><br><span class="line">Took 2 samples...</span><br><span class="line">Top right : X =  743 Y =   64</span><br><span class="line">Took 4 samples...</span><br><span class="line">Bot right : X =  742 Y =  438</span><br><span class="line">Took 4 samples...</span><br><span class="line">Bot left : X =   61 Y =  443</span><br><span class="line">Took 4 samples...</span><br><span class="line">Center : X =  398 Y =  246</span><br><span class="line">-8.802551 1.024123 -0.004216</span><br><span class="line">-8.078796 -0.002245 0.998305</span><br><span class="line">Calibration constants: -576884 67116 -276 -529452 -147 65424 65536</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;断电，连接电阻触摸模组，启动开发板，查看触摸设备对应的设备节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input</span><br><span class="line">by-path  event0   event1   event2   event3   mice     mouse0</span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">beeper</span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"># cat /sys/class/input/event2/device/name</span><br><span class="line">tps65217_pwrbutton</span><br><span class="line"># cat /sys/class/input/event3/device/name</span><br><span class="line">volume_keys@0</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;从以上查询结果可知，电阻触摸对应的设备节点为/dev/input/event1, 测试步骤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># export TSLIB_TSDEVICE=/dev/input/event1</span><br><span class="line"># ts_calibrate</span><br><span class="line">xres = 800, yres = 480</span><br><span class="line">Took 32 samples...</span><br><span class="line">Top left : X =  299 Y =  619</span><br><span class="line">Took 21 samples...</span><br><span class="line">Top right : X = 3689 Y =  659</span><br><span class="line">Took 29 samples...</span><br><span class="line">Bot right : X = 3732 Y = 3463</span><br><span class="line">Took 27 samples...</span><br><span class="line">Bot left : X =  280 Y = 3423</span><br><span class="line">Took 18 samples...</span><br><span class="line">Center : X = 2009 Y = 2072</span><br><span class="line">-7.786255 0.204611 -0.000881</span><br><span class="line">-34.248169 -0.001587 0.135514</span><br><span class="line">Calibration constants: -510280 13409 -57 -2244488 -103 8881 65536</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Touch-Panel/">Touch Panel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/ts-calibrate/">ts_calibrate</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-3/">4.3 RTC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-3/" class="article-date">
+	  <time datetime="2018-04-10T07:47:53.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示如何使用Linux API对开发板上的RTC进行时间设置与读取，详情请参考源码。用户也可以使用Buildroot文件系统自带的date和hwclock配合使用对RTC进行测试。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
+<li>RTC所用CR1220 3V纽扣电池一块</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CR1220电池座子</td>
+<td>J1</td>
+<td>J2</td>
+<td>J23</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>date, hwclock或rtc_test应用程序</li>
+</ul>
+<p><strong>测试过程:</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/rtc</code>中的可执行程序rtc_test拷贝至开发板/usr/bin/，执行以下命令将rtc当前时间设置为2016/11/18  17:58:18 并读取当前时间：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/rtc_test</span><br><span class="line"># rtc_test -h</span><br><span class="line">Usage: rtc_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   rtc device name, default: /dev/rtc0</span><br><span class="line">-w | --write  time   time string with format MMDDhhmm[CCYY][.ss]. </span><br><span class="line">                     such as: 111817582016.18</span><br><span class="line">-h | --help          Print this message</span><br><span class="line"></span><br><span class="line"># rtc_test -d /dev/rtc -w 111817582016.18</span><br><span class="line">date/time is updated to:  18-11-2016, 17:58:18.</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;将开发板断电，经过一段时间之后，重新上电开机，再次通过rtc_test读出rtc的时间，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># rtc_test -d /dev/rtc</span><br><span class="line"></span><br><span class="line">  Current RTC date/time is 18-11-2016, 18:04:32.</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;用户也可以使用date, hwclock配合，进行RTC的测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># date  081518002016.30         -- 设置系统时间为2016年8月15日18:00:30</span><br><span class="line">Mon Aug 15 18:00:30 UTC 2016</span><br><span class="line"># date</span><br><span class="line">Mon Aug 15 18:00:38 UTC 2016</span><br><span class="line"># hwclock -w /dev/rtc           -- 将系统时间写入到rtc</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;将开发板断电，经过一段时间之后，重新上电开机，再次通过hwclock读出rtc的时间，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># hwclock -r /dev/rtc</span><br><span class="line">Mon Aug 15 18:11:08 2016  0.000000 seconds</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/RTC/">RTC</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-4"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-4/">4.4 RS485</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-4/" class="article-date">
+	  <time datetime="2018-04-10T07:47:51.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示MYD-AM335X系列同类型2块开发板如何使用Linux API配置开发板上的RS485并使其发送和接收数据，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong></p>
+<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RS485接口</td>
+<td>U16的4，5脚分别连接同类型开发板的4，5脚</td>
+<td>CON2的5，4脚分别连接同类型开发板的5，4脚</td>
+<td>短接JP2和JP3，断开JP5和JP7，J18的1，2，4，5脚分别连接同类型开发板的1，2，4，5脚</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>tty_test 应用程序</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设备节点</td>
+<td>ttyO1</td>
+<td>ttyO2</td>
+<td>ttyO2 ttyO3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/tty</code>中的可执行程序tty_test拷贝至开发板/usr/bin/目录下，执行<code>tty_test -h</code>, 查看测试程序帮助信息，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -h</span><br><span class="line">Usage: tty_test [options]</span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   tty device name, default: /dev/tty0</span><br><span class="line">-m | --mode  mode   operate mode. 0: RS232, 1: RS485  default mode: 0</span><br><span class="line">-f | --flow  	 			 flow control</span><br><span class="line">-b | --baudrate baudrate  set baudrate, default baudrate: 115200</span><br><span class="line">-l | --loop   	  	 operate circularly</span><br><span class="line">-w | --write  frame	 frame string. such as: 0123456789</span><br><span class="line">-h | --help          Print this message</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;两块开发板一个作为发送端另一个作为接收端，先在一块开发板执行以下命令发送数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -d /dev/ttyO1 -b 9600 -w &quot;123456789&quot; -m 1 -l</span><br><span class="line">SEND:123456789</span><br><span class="line">SEND:123456789</span><br><span class="line">SEND:123456789</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;再在另一开发板执行以下命令接收数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -d /dev/ttyO2 -b 9600 -m 1  -l</span><br><span class="line">RECV:1, total:1</span><br><span class="line">RECV:2, total:1</span><br><span class="line">RECV:3, total:1</span><br><span class="line">RECV:4, total:1</span><br><span class="line">RECV:5, total:1</span><br><span class="line">RECV:6, total:1</span><br><span class="line">RECV:7, total:1</span><br><span class="line">RECV:8, total:1</span><br><span class="line">RECV:9, total:1</span><br><span class="line">RECV:1, total:1</span><br><span class="line">RECV:2, total:1</span><br><span class="line">RECV:3, total:1</span><br><span class="line">RECV:4, total:1</span><br><span class="line">RECV:5, total:1</span><br><span class="line">RECV:6, total:1</span><br><span class="line">RECV:7, total:1</span><br><span class="line">RECV:8, total:1</span><br><span class="line">RECV:9, total:1</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;两块板互换一下角色，结果一样，不再赘述。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/RS485/">RS485</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-5"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/">4.5 CAN BUS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/" class="article-date">
+	  <time datetime="2018-04-10T07:47:49.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示MYD-AM335X系列同类型2块开发板使用Linux API让开发板上的CAN实现点对点发送和接收数据，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong></p>
+<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAN接口</td>
+<td>U16的7，8脚分别连接同类型开发板的7，8脚</td>
+<td>CON2的1，2脚分别连接同类型开发板的1，2脚</td>
+<td>断开跳线帽JP7，短接JP4，J17的1，2脚分别连接同类型开发板的1，2脚</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>can_test 应用程序</li>
+<li>ip link应用程序</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作节点</td>
+<td>can1</td>
+<td>can1</td>
+<td>can0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/can</code>中的可执行程序can_test拷贝至开发板/usr/bin/, 分别将两块开发板上的can1通信波特率都设置位50Kbps，并使能can0设备, 如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># can_test --help</span><br><span class="line">Usage: can_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   can device name: can0</span><br><span class="line">-b | --baudrate baudrate   set baudrate, default baudrate:50000</span><br><span class="line">-l | --loop              operate circularly, default not operate circularly!</span><br><span class="line">-w | --write  frame     frame string with format ID#MESSAGE. such as: 123#112233445566</span><br><span class="line">-h | --help                Print this message</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ip link set can1 down</span><br><span class="line"># ip link set can1 type can bitrate 50000 triple-sampling on</span><br><span class="line"># ip link set can1 up</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上述设置波特率的命令在can_test程序初始化时已经执行，不需再次手动执行。两块开发板一个作为发送端另一个作为接收端，先在一块开发板执行以下命令发送数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">[ 5783.823623] c_can_platform 481cc000.can can0: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5786.888723] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5786.895565] NET: Registered protocol family 29</span><br><span class="line">[ 5786.952090] can: raw protocol (rev 20120528)</span><br><span class="line">====== write  frame: ======</span><br><span class="line"> frame_id = 0x123</span><br><span class="line"> frame_len = 6</span><br><span class="line"> frame_data = 0x11 0x22 0x33 0x44 0x55 0x66</span><br><span class="line">===========================</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;再在另一开发板执行以下命令接收数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can1 -l</span><br><span class="line">[ 5888.821956] c_can_platform 481d0000.can can1: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5891.884726] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5891.898711] NET: Registered protocol family 29</span><br><span class="line">[ 5891.952878] can: raw protocol (rev 20120528)</span><br><span class="line">can1 0x123 [6] 0x11 0x22 0x33 0x44 0x55 0x66</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;如果使用-l参数，则会循环执行读写操作，两块板互换一下角色，结果一样，不再赘述。注意, 如果程序运行过程中出现下述错误，可以修改tx_queue_len， 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">  can raw socket write: No buffer space available</span><br><span class="line"></span><br><span class="line"># echo 1000 &gt; /sys/class/net/can0/tx_queue_len</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;两块板互换一下角色，结果一样，不再赘述。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/CAN-BUS/">CAN BUS</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-6"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-6/">4.6 Ethernet</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-6/" class="article-date">
+	  <time datetime="2018-04-10T07:47:47.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示使用Linux API让开发板上的网口发送和接收数据，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong></p>
+<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网口接口</td>
+<td>网线连接J5</td>
+<td>网线连接J5</td>
+<td>网线连接J5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>server应用程序</li>
+<li>client应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/network</code>目录下的测试程序client至开发板/usr/bin目录，server拷贝至虚拟机。假设虚拟机的ip是192.168.30.114。</p>
+<p>&emsp;&emsp;配置开发板的ip：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 192.168.30.122 up</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;配置好网络后，将开发板上eth0用网线连到PC，以虚拟机为服务器端，开发板为客户端，先在虚拟机上执行以下命令：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$./server <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;再在开发板执行以下命令可看到所发送的信息：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># ./client <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;同时可以看到虚拟机接收到开发板发送的数据：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ./server <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Ethernet/">Ethernet</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-7"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/">4.7 NAND Flash</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/" class="article-date">
+	  <time datetime="2018-04-10T07:47:45.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示如何使用Linux API擦除、写入和读取开发板上的NAND Flash，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
+<li>MYD-AM335x系列开发板一块</li>
+</ul>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>mtd_test 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/mtd</code>目录下的测试程序mtd_test至开发板/usr/bin目录。在Linux终端输入如下命令可对nandflash进行擦除、写入和读取数据：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># ./mtd_test /dev/mtd7</span><br><span class="line"></span><br><span class="line">MTD Type: <span class="number">4</span></span><br><span class="line">MTD total size: <span class="number">131072</span> bytes</span><br><span class="line">MTD erase size: <span class="number">131072</span> bytes</span><br><span class="line">MTD write size: <span class="number">2048</span> bytes</span><br><span class="line"></span><br><span class="line">erase the last block at <span class="number">0</span></span><br><span class="line"></span><br><span class="line">erase done!</span><br><span class="line"></span><br><span class="line">writing <span class="number">16</span> bytes data to flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">write done!</span><br><span class="line"></span><br><span class="line">reading data from flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">read done!</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/NAND-Flash/">NAND Flash</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-8"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-8/">4.8 KeyPad测试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-8/" class="article-date">
+	  <time datetime="2018-04-10T07:47:43.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示使用Linux User API读取按键信息，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
+<li>MYD-AM335x系列开发板一块</li>
+</ul>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>hexdump或keypad_test应用程序</li>
+</ul>
+<p><strong>测试过程:</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/keypad</code>中的可执行程序keypad_test拷贝至开发板/usr/bin/目录下, 执行该程序进行测试如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 777 /usr/bin/keypad_test</span><br><span class="line">$ keypad_test -h</span><br><span class="line">Usage: keypad_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   keypad device name, default: /dev/input/event0</span><br><span class="line">-h | --help          Print this message</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;查看MYD-AM335X按键设备对应的设备节点，可以发现K2,K3两个按键对应/dev/input/event1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path/ event0   event1   mice     mouse0</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;测试MYD-AM335X K2和K3。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event1</span><br><span class="line">Event: Code = 115, Type = 1, Value=1                -- 按下K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0                -- 释放K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1                -- 按下K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=2</span><br><span class="line">Event: Code = 0, Type = 0, Value=1</span><br><span class="line">Event: Code = 114, Type = 1, Value=0                -- 释放K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;查看MYD-AM335X-Y按键设备对应的设备节点，可以发现K3,K4两个按键对应/dev/input/event3，K5对应/dev/input/event2。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path  event0   event1   event2   event3   mice     mouse0</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">beeper</span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"># cat /sys/class/input/event2/device/name</span><br><span class="line">tps65217_pwrbutton</span><br><span class="line"># cat /sys/class/input/event3/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;测试MYD-AM335X-Y K3和K4。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event3</span><br><span class="line">Event: Code = 115, Type = 1, Value=1                -- 按下K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0                -- 释放K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1                -- 按下K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=0                -- 释放K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;测试MYD-AM335X-Y K5。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event2</span><br><span class="line">Event: Code = 116, Type = 1, Value=1                -- 按下K5</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 116, Type = 1, Value=0                -- 释放K5</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;查看MYD-AM335X-J按键设备对应的设备节点，可以发现K3,K4两个按键对应/dev/input/event3，K2对应/dev/input/event1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path  event0   event1   event2   event3   mice     mouse0   mouse1</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">tps65217_pwrbutton</span><br><span class="line"># cat /sys/class/input/event2/device/name</span><br><span class="line">ft5x06_ts</span><br><span class="line"># cat /sys/class/input/event3/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;测试MYD-AM335X-J K3和K4。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event3</span><br><span class="line">Event: Code = 115, Type = 1, Value=1            -- 按下K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0            -- 释放K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1            -- 按下K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=0            -- 释放K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;测试MYD-AM335X-J K2。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event1</span><br><span class="line">Event: Code = 116, Type = 1, Value=1            -- 按下K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 116, Type = 1, Value=0            -- 释放K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;以上测试结果中返回的Event Code即为按键键值，和内核设备树中定义的键值必须一致。<br>&emsp;&emsp;用户也可以通过Buildroot文件系统中自带的hexdump程序进行按键的测试，下面以MYD-AM335X为例，其它版型的KeyPad测试情况类似。分别按K2,K3这两个按键。 其中输出信息中第7列中的0073和0072即为设备树中定义的按键键值115和114，其它信息含义请参阅hexdump说明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># hexdump /dev/input/event1</span><br><span class="line">0000000 022b 0000 2a83 0005 0001 0073 0001 0000</span><br><span class="line">0000010 022b 0000 2a83 0005 0000 0000 0000 0000</span><br><span class="line">0000020 022b 0000 78b5 0007 0001 0073 0000 0000</span><br><span class="line">0000030 022b 0000 78b5 0007 0000 0000 0000 0000</span><br><span class="line"></span><br><span class="line">0000040 0231 0000 8c69 0001 0001 0072 0001 0000</span><br><span class="line">0000050 0231 0000 8c69 0001 0000 0000 0000 0000</span><br><span class="line">0000060 0231 0000 fc11 0003 0001 0072 0000 0000</span><br><span class="line">0000070 0231 0000 fc11 0003 0000 0000 0000 0000</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/KeyPad/">KeyPad</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-9"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-9/">4.9 GPIO-LED</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-9/" class="article-date">
+	  <time datetime="2018-04-10T07:47:41.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;Linux系统下，LED的控制主要是通过访问sysfs文件系统下文件节点实现的，本例程演示如何使用echo命令和led_test应用对LED进行控制，验证开发板上的LED驱动程序。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部。</li>
+<li>MYD-AM335x系列开发板一块</li>
+</ul>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>echo, led_test 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/led</code>目录下的测试程序led_test至开发板/usr/bin目录。</p>
+<p>&emsp;&emsp;查看MYD-AM335X LED的设备节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2  myd:green:user3</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;用’echo’命令对MYD-AM335X LED进行控制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myc\:green\:user1/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myc\:green\:user1/brightness</span><br><span class="line">D39：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myd\:green\:user2/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myd\:green\:user2/brightness</span><br><span class="line">D40：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myd\:green\:user3/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myd\:green\:user3/brightness</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;查看MYD-AM335X-Y LED的设备节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;用’echo’命令对MYD-AM335X-Y LED进行控制。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line"><span class="meta">#echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line"><span class="meta">#echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line">D2：</span><br><span class="line"><span class="meta">#echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br><span class="line"><span class="meta">#echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;查看MYD-AM335X-J LED的设备节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;用’echo’命令对MYD-AM335X-J LED进行控制。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line"><span class="meta"># echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line"><span class="meta"># echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line">D2：</span><br><span class="line"><span class="meta"># echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br><span class="line"><span class="meta"># echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;用’led_test’应用程序对LED进行控制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># led_test -h</span><br><span class="line">Usage: led_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   led name myc:blue:cpu0</span><br><span class="line">-l | --light brightness   led brightness. 0~255 0: off.</span><br><span class="line">-h | --help                Print this message</span><br><span class="line"></span><br><span class="line"># led_test -d myc:green:user1 -l 0</span><br><span class="line">Set led myc:green:user1 off, brightness = 0</span><br><span class="line"># led_test -d myc:green:user1 -l 1</span><br><span class="line">Set led myc:green:user1 on, brightness = 1</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;依照不同的板型更换对应的设备节点可以用led_test实现不同LED的控制。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/GPIO-LED/">GPIO-LED</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-10"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -222,685 +963,6 @@ var themeMenus = {};
       
   <span class="ico-tags"></span>
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Audio/">Audio</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-10"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-10/">4.10 Audio</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-10/" class="article-date">
-	  <time datetime="2018-04-10T07:47:39.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This example demonstrates how to use the Linux API to control the input and output of audio,please refer to the source code for detail.</p>
-<p><strong>Hardware Preparation: </strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Board Type</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audio interface</td>
-<td>Audio input J11，Headphones Connect J10</td>
-<td>Audio input J9，Headphones Connect J8</td>
-<td>Audio input J10，Headphones Connect J9</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Software Preparation: </strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>audio_test application</li>
-</ul>
-<p><strong>Test Steps: </strong></p>
-<ul>
-<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/audio/audio_test</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board.Plug the headset into the audio output port, enter the audio input to the audio input port, enter the following command at the Linux terminal:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># audio_test</span><br><span class="line">rate <span class="built_in">set</span> to <span class="number">21999</span>, expected <span class="number">22000</span></span><br><span class="line">Init capture successfully, rate: <span class="number">21999</span>, period_size: <span class="number">128</span></span><br><span class="line">rate <span class="built_in">set</span> to <span class="number">21998</span>, expected <span class="number">21999</span></span><br><span class="line">Period size: <span class="number">128</span> frames, buffer size: <span class="number">256</span> bytes</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Audio/">Audio</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-11"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-11/">4.11 USB Host</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-11/" class="article-date">
-	  <time datetime="2018-04-10T07:47:35.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本例程演示通过相关命令来验证USB Host驱动的可行性，实现读写U盘的功能。</p>
-<p><strong>测试硬件环境：</strong></p>
-<ul>
-<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
-<li>U盘一个</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>USB Host接口</td>
-<td>J3或J4</td>
-<td>J19</td>
-<td>J27</td>
-</tr>
-</tbody>
-</table>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>mount, umount 应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;将U盘连接到开发板USB Host接口，并且执行mount, umount，读写，插拔等操作。插入U盘至USB Host接口时内核提示信息如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># [  334.568567] usb 2-1.4: new high-speed USB device number 3 using musb-hdrc</span><br><span class="line">[  334.688922] usb 2-1.4: New USB device found, idVendor=1908, idProduct=0226</span><br><span class="line">[  334.696305] usb 2-1.4: New USB device strings: Mfr=0, Product=0, SerialNumber=0</span><br><span class="line">[  334.743502] usb-storage 2-1.4:1.0: USB Mass Storage device detected</span><br><span class="line">[  334.751563] scsi host0: usb-storage 2-1.4:1.0</span><br><span class="line">[  334.762053] usbcore: registered new interface driver usb-storage</span><br><span class="line">[  334.788766] cpu cpu0: clk_voltdm_notifier_handler: Failed to scale voltage(1100000)</span><br><span class="line">: -22</span><br><span class="line">[  334.797531] cpu cpu0: clk_voltdm_notifier_handler: Failed to scale voltage(950000)</span><br><span class="line">: -22</span><br><span class="line">[  334.806827] cpu cpu0: failed to set clock rate: -16</span><br><span class="line">[  334.812093] cpufreq: __target_index: Failed to change cpu frequency: -16</span><br><span class="line">[  335.759638] scsi 0:0:0:0: Direct-Access     Generic  Mass-Storage     1.11 PQ: 0</span><br><span class="line">ANSI: 2</span><br><span class="line">[  336.488565] sd 0:0:0:0: [sda] 15605760 512-byte logical blocks: (7.99 GB/7.44 GiB)</span><br><span class="line">[  336.497237] sd 0:0:0:0: [sda] Write Protect is off</span><br><span class="line">[  336.503459] sd 0:0:0:0: [sda] Mode Sense: 03 00 00 00</span><br><span class="line">[  336.509699] sd 0:0:0:0: [sda] No Caching mode page found</span><br><span class="line">[  336.515366] sd 0:0:0:0: [sda] Assuming drive cache: write through</span><br><span class="line">[  336.531208]  sda: sda1</span><br><span class="line">[  336.552003] sd 0:0:0:0: [sda] Attached SCSI removable disk</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;将U盘挂载到文件系统/mnt目录，并执行基本的查看，读写操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># mount /dev/sda1 /mnt</span><br><span class="line">[  429.892793] FAT-fs (sda1): Volume was not properly unmounted. Some data may be</span><br><span class="line">corrupt. Please run fsck.</span><br><span class="line"># cd /mnt</span><br><span class="line"># ls</span><br><span class="line">1.bmp                mtd                  rootfs.ubi</span><br><span class="line">MLO                  myd_c335x.dtb        spi</span><br><span class="line">audio                myir-linux-examples  u-boot.img</span><br><span class="line">audio1               network              zImage</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;拔下U盘，内核提示信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># [  493.899143] usb 2-1.4: USB disconnect, device number 3</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/USB-Host/">USB Host</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-11"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-11/">4.11 USB Host</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-11/" class="article-date">
-	  <time datetime="2018-04-10T07:47:35.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This example demonstrates how to use USB host to mount mass stroage device and verify the driver of USB host,to achieve the function of reading and writing USB flash disk.</p>
-<p><strong>Hardware Preparation:</strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
-<li>USB flash disk</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Board Type</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>USB Host interface</td>
-<td>J3 or J4</td>
-<td>J19</td>
-<td>J27</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Software Preparation:</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>mount and umount commands</li>
-</ul>
-<p><strong>Test Steps:</strong></p>
-<ul>
-<li>Plug the USB disk in the USB host interface of development board, use <code>mount</code> or <code>umount</code> command to load and unload USB disk. When users plug in  the USB disk, Linux kernel dumps the message as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># [  334.568567] usb 2-1.4: new high-speed USB device number 3 using musb-hdrc</span><br><span class="line">[  334.688922] usb 2-1.4: New USB device found, idVendor=1908, idProduct=0226</span><br><span class="line">[  334.696305] usb 2-1.4: New USB device strings: Mfr=0, Product=0, SerialNumber=0</span><br><span class="line">[  334.743502] usb-storage 2-1.4:1.0: USB Mass Storage device detected</span><br><span class="line">[  334.751563] scsi host0: usb-storage 2-1.4:1.0</span><br><span class="line">[  334.762053] usbcore: registered new interface driver usb-storage</span><br><span class="line">[  334.788766] cpu cpu0: clk_voltdm_notifier_handler: Failed to scale voltage(1100000): -22</span><br><span class="line">[  334.797531] cpu cpu0: clk_voltdm_notifier_handler: Failed to scale voltage(950000): -22</span><br><span class="line">[  334.806827] cpu cpu0: failed to set clock rate: -16</span><br><span class="line">[  334.812093] cpufreq: __target_index: Failed to change cpu frequency: -16</span><br><span class="line">[  335.759638] scsi 0:0:0:0: Direct-Access     Generic  Mass-Storage     1.11 PQ: 0 ANSI: 2</span><br><span class="line">[  336.488565] sd 0:0:0:0: [sda] 15605760 512-byte logical blocks: (7.99 GB/7.44 GiB)</span><br><span class="line">[  336.497237] sd 0:0:0:0: [sda] Write Protect is off</span><br><span class="line">[  336.503459] sd 0:0:0:0: [sda] Mode Sense: 03 00 00 00</span><br><span class="line">[  336.509699] sd 0:0:0:0: [sda] No Caching mode page found</span><br><span class="line">[  336.515366] sd 0:0:0:0: [sda] Assuming drive cache: write through</span><br><span class="line">[  336.531208]  sda: sda1</span><br><span class="line">[  336.552003] sd 0:0:0:0: [sda] Attached SCSI removable disk</span><br></pre></td></tr></table></figure>
-<ul>
-<li>It shows USB host works well and USB disk is detected, users can mount it to /mnt directory of the embedded Linux system as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># mount /dev/sda1 /mnt</span><br><span class="line">[  429.892793] FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.</span><br><span class="line"># cd /mnt</span><br><span class="line"># ls</span><br><span class="line">1.bmp                mtd                  rootfs.ubi</span><br><span class="line">MLO                  myd_c335x.dtb        spi</span><br><span class="line">audio                myir-linux-examples  u-boot.img</span><br><span class="line">audio1               network              zImage</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Plug out the USB disk, Linux kernel dumps the message as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># [  493.899143] usb 2-1.4: USB disconnect, device number 3</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/USB-Host/">USB Host</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-12"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-12/">4.12 USB Device</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-12/" class="article-date">
-	  <time datetime="2018-04-10T07:47:33.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This example demonstrates how to use USB device interface and verify the driver of USB client. The MYD-AM335X series development board works as a TF card reader, it is connected to the USB host of PC with a USB mini B to USB A cable.</p>
-<p><strong>Hardware Preparation：</strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
-<li>One TF card</li>
-<li>One USB mini B to USB A cable.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Board Type</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MINI USB interface</td>
-<td>J2</td>
-<td>J3</td>
-<td>J3</td>
-</tr>
-<tr>
-<td>TF Card</td>
-<td>J17</td>
-<td>J12</td>
-<td>J19</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Software Preparation:</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>modprobe command</li>
-</ul>
-<p><strong>Test Steps:</strong></p>
-<ul>
-<li>After the MYD-AM335X series development is booted, connect it to the USB host interface of PC with a USB mini B to USB A cable, Insert the TF card to MYD-AM335X series development. Load the mass storage gadget driver as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># modprobe g_mass_storage stall=0 file=/dev/mmcblk0p1 removable=1</span><br><span class="line">[  687.171803] udc musb-hdrc.0.auto: registering UDC driver [g_mass_storage]</span><br><span class="line">[  687.179455] Mass Storage Function, version: 2009/09/11</span><br><span class="line">[  687.184933] LUN: removable file: (no medium)</span><br><span class="line">[  687.192157] lun0: open backing file: /dev/mmcblk0p1</span><br><span class="line">[  687.197379] LUN: removable file: /dev/mmcblk0p1</span><br><span class="line">[  687.202952] Number of LUNs=1</span><br><span class="line">[  687.206057] g_mass_storage gadget: adding config #1 &apos;Linux File-Backed Storage&apos;/bf2a45cc</span><br><span class="line">[  687.215260] Number of LUNs=1</span><br><span class="line">[  687.219060] g_mass_storage gadget: I/O thread pid: 185</span><br><span class="line">[  687.224576] g_mass_storage gadget: adding &apos;Mass Storage Function&apos;/dc896b00 to config &apos;Linux File-Backed Storage&apos;</span><br><span class="line">/bf2a45cc</span><br><span class="line">[  687.236802] g_mass_storage gadget: cfg 1/bf2a45cc speeds: high full</span><br><span class="line">[  687.243534] g_mass_storage gadget:   interface 0 = Mass Storage Function/dc896b00</span><br><span class="line">[  687.252005] g_mass_storage gadget: Mass Storage Gadget, version: 2009/09/11</span><br><span class="line">[  687.259466] g_mass_storage gadget: userspace failed to provide iSerialNumber</span><br><span class="line">[  687.266948] g_mass_storage gadget: g_mass_storage ready</span><br><span class="line">[  687.273141] g_mass_storage musb-hdrc.0.auto: usb_gadget_udc_start</span><br></pre></td></tr></table></figure>
-<ul>
-<li>After g_mass_storage driver is loaded, a removable disk will be detected on PC. The content of this removable disk is just the same with the TF card.</li>
-</ul>
-<blockquote>
-<p>Note: Beyond that, users can load different gadget modules to achieve different functions. such as g_ether is used to make a RNDIS network interface.</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/USB-Device/">USB Device</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-12"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-12/">4.12 USB Device</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-12/" class="article-date">
-	  <time datetime="2018-04-10T07:47:33.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本实例演示通过相关命令来验证USB DEVICE驱动的可行性。使用USB数据线连接开发板的miniUSB接口与电脑端的USB接口，开发板实现一个读卡器功能。</p>
-<p><strong>测试硬件环境：</strong></p>
-<ul>
-<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
-<li>TF卡一个</li>
-<li>USB miniB to mini A 线一根</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MINI USB接口</td>
-<td>J2</td>
-<td>J3</td>
-<td>J3</td>
-</tr>
-<tr>
-<td>TF卡接口</td>
-<td>J17</td>
-<td>J12</td>
-<td>J19</td>
-</tr>
-</tbody>
-</table>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>modprobe 应用程序</li>
-</ul>
-<p><strong>测试过程：</strong></p>
-<p>&emsp;&emsp;开发板上的系统起来后，使用USB mini B to USB A转接线连接开发板与电脑端，其中USB mini B接口连接开发板，USB A接口连接电脑端，插入TF卡,在开发板上运行如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># modprobe g_mass_storage stall=0 file=/dev/mmcblk0p1 removable=1</span><br><span class="line">[  687.171803] udc musb-hdrc.0.auto: registering UDC driver [g_mass_storage]</span><br><span class="line">[  687.179455] Mass Storage Function, version: 2009/09/11</span><br><span class="line">[  687.184933] LUN: removable file: (no medium)</span><br><span class="line">[  687.192157] lun0: open backing file: /dev/mmcblk0p1</span><br><span class="line">[  687.197379] LUN: removable file: /dev/mmcblk0p1</span><br><span class="line">[  687.202952] Number of LUNs=1</span><br><span class="line">[  687.206057] g_mass_storage gadget: adding config #1 &apos;Linux File-Backed Storage&apos;</span><br><span class="line">/bf2a45cc</span><br><span class="line">[  687.215260] Number of LUNs=1</span><br><span class="line">[  687.219060] g_mass_storage gadget: I/O thread pid: 185</span><br><span class="line">[  687.224576] g_mass_storage gadget: adding &apos;Mass Storage Function&apos;/dc896b00 to</span><br><span class="line">config &apos;Linux File-Backed Storage&apos;/bf2a45cc</span><br><span class="line">[  687.236802] g_mass_storage gadget: cfg 1/bf2a45cc speeds: high full</span><br><span class="line">[  687.243534] g_mass_storage gadget:   interface 0 = Mass Storage Function/dc896b00</span><br><span class="line">[  687.252005] g_mass_storage gadget: Mass Storage Gadget, version: 2009/09/11</span><br><span class="line">[  687.259466] g_mass_storage gadget: userspace failed to provide iSerialNumber</span><br><span class="line">[  687.266948] g_mass_storage gadget: g_mass_storage ready</span><br><span class="line">[  687.273141] g_mass_storage musb-hdrc.0.auto: usb_gadget_udc_start</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;g_mass_storage 驱动加载成功之后， PC端会识别到一个可移动磁盘，磁盘内容正是TF上的内容，至此就实现了读卡器的功能。</p>
-<p>&emsp;&emsp;除此之外，通过加载不同的gadget模块驱动，开发板可以实现不同的功能，如g_ether实现RNDIS网卡的功能等等。这里不一一列举。</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/USB-Device/">USB Device</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-13"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/">4.13 SDIO WiFi</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/" class="article-date">
-	  <time datetime="2018-04-10T07:47:31.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This example demonstrates the feasibility of verifying SDIO Wi-Fi drivers through related commands.There is a SDIO WiFi wireless card in development board, Through the relevant configuration after the implementation of wireless networking capabilities.</p>
-<p><strong>Hardware Preparation：</strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
-<li>MYD-AM335X-Y development board</li>
-</ul>
-<blockquote>
-<p><strong>Note：MYD-AM335X and MYD-AM335X-J no onboard SDIO, SDIO Wi-Fi information please click<a href="http://www.myir-tech.com/product/MY-WF004S.htm" target="_blank" rel="noopener">SDIO WiFi</a>.</strong></p>
-</blockquote>
-<p><strong>Software Preparation:</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>wpa_supplicant applicatoin</li>
-<li>wpa_cli applicatoin</li>
-</ul>
-<p><strong>Test Steps:</strong></p>
-<ul>
-<li>After the MYD-AM335X-Y development is booted, Run the following command on the development board:</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ifconfig eth0 down</span></span><br><span class="line"># wpa_supplicant -iwlan0 -Dwext -B -c /etc/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Use wpa_cli to configure the network:</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># wpa_cli</span><br><span class="line">&gt; scan</span><br><span class="line">OK</span><br><span class="line">&gt; scan_r</span><br><span class="line">&gt; scan_r</span><br><span class="line">bssid / frequency / signal level / flags / ssid</span><br><span class="line"><span class="number">30</span>:fc:<span class="number">68</span>:<span class="number">9</span>a:e8:<span class="number">99</span>       <span class="number">2412</span>    <span class="number">-43</span>     [WPA-PSK-CCMP][WPA2-PSK-CCMP][ESS]      MYIR_TECH</span><br><span class="line">&gt; remove_n all</span><br><span class="line">OK</span><br><span class="line">&gt; add_n</span><br><span class="line"><span class="number">0</span></span><br><span class="line">&gt; set_n <span class="number">0</span> ssid <span class="string">"MYIR_TECH"</span></span><br><span class="line">OK</span><br><span class="line">&gt; set_n <span class="number">0</span> psk <span class="string">"myir2016"</span></span><br><span class="line">OK</span><br><span class="line">&gt; enable_n <span class="number">0</span></span><br><span class="line">OK</span><br><span class="line">&gt; quit</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Get IP address by DHCP:</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># udhcpc -n -i wlan0</span></span><br><span class="line">udhcpc: started, v1<span class="number">.25</span><span class="number">.1</span></span><br><span class="line">udhcpc: sending discover</span><br><span class="line">udhcpc: sending select <span class="keyword">for</span> <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span></span><br><span class="line">udhcpc: lease of <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span> obtained, lease time <span class="number">3600</span></span><br><span class="line">deleting routers</span><br><span class="line">adding dns <span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line">adding dns <span class="number">201.104</span><span class="number">.111</span><span class="number">.114</span></span><br><span class="line">adding dns <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>Check whether the network is connected by Ping server:</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ping 192.168.30.137</span></span><br><span class="line">PING <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span> (<span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>): <span class="number">56</span> data bytes</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">0</span> ttl=<span class="number">64</span> time=<span class="number">75.532</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">1</span> ttl=<span class="number">64</span> time=<span class="number">4.074</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">2</span> ttl=<span class="number">64</span> time=<span class="number">3.461</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">3</span> ttl=<span class="number">64</span> time=<span class="number">12.684</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">4</span> ttl=<span class="number">64</span> time=<span class="number">11.986</span> ms</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SDIO-WiFi/">SDIO WiFi</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-13"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/">4.13 SDIO WiFi</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/" class="article-date">
-	  <time datetime="2018-04-10T07:47:31.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本实例演示通过相关命令来验证SDIO Wi-Fi驱动的可行性。开发板上集成了一块SDIO无线网卡，通过相关配置后实行无线连网的功能。</p>
-<p><strong>测试硬件环境：</strong></p>
-<ul>
-<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
-<li>MYD-AM335X-Y开发板一块</li>
-</ul>
-<blockquote>
-<p><strong>注意：MYD-AM335X和MYD-AM335X-J无板载SDIO，详情点击<a href="http://www.myir-tech.com/product/MY-WF004S.htm" target="_blank" rel="noopener">SDIO WiFi</a>。</strong></p>
-</blockquote>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>wpa_supplicant 应用程序</li>
-<li>wpa_cli 应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;开发板上的系统起来后，在开发板上运行如下命令：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ifconfig eth0 down</span></span><br><span class="line"># wpa_supplicant -iwlan0 -Dwext -B -c /etc/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;使用wpa_cli配置网络：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># wpa_cli</span><br><span class="line">&gt; scan</span><br><span class="line">OK</span><br><span class="line">&gt; scan_r</span><br><span class="line">&gt; scan_r</span><br><span class="line">bssid / frequency / signal level / flags / ssid</span><br><span class="line"><span class="number">30</span>:fc:<span class="number">68</span>:<span class="number">9</span>a:e8:<span class="number">99</span>       <span class="number">2412</span>    <span class="number">-43</span>     [WPA-PSK-CCMP][WPA2-PSK-CCMP][ESS]</span><br><span class="line">MYIR_TECH</span><br><span class="line">&gt; remove_n all</span><br><span class="line">OK</span><br><span class="line">&gt; add_n</span><br><span class="line"><span class="number">0</span></span><br><span class="line">&gt; set_n <span class="number">0</span> ssid <span class="string">"MYIR_TECH"</span></span><br><span class="line">OK</span><br><span class="line">&gt; set_n <span class="number">0</span> psk <span class="string">"myir2016"</span></span><br><span class="line">OK</span><br><span class="line">&gt; enable_n <span class="number">0</span></span><br><span class="line">OK</span><br><span class="line">&gt; quit</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;通过DHCP获取IP地址：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># udhcpc -n -i wlan0</span></span><br><span class="line">udhcpc: started, v1<span class="number">.25</span><span class="number">.1</span></span><br><span class="line">udhcpc: sending discover</span><br><span class="line">udhcpc: sending select <span class="keyword">for</span> <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span></span><br><span class="line">udhcpc: lease of <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span> obtained, lease time <span class="number">3600</span></span><br><span class="line">deleting routers</span><br><span class="line">adding dns <span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line">adding dns <span class="number">201.104</span><span class="number">.111</span><span class="number">.114</span></span><br><span class="line">adding dns <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;通过ping server检查网络是否联通:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ping 192.168.30.137</span></span><br><span class="line">PING <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span> (<span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>): <span class="number">56</span> data bytes</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">0</span> ttl=<span class="number">64</span> time=<span class="number">75.532</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">1</span> ttl=<span class="number">64</span> time=<span class="number">4.074</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">2</span> ttl=<span class="number">64</span> time=<span class="number">3.461</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">3</span> ttl=<span class="number">64</span> time=<span class="number">12.684</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">4</span> ttl=<span class="number">64</span> time=<span class="number">11.986</span> ms</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SDIO-WiFi/">SDIO WiFi</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter5/Chapter5"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter5/Chapter5/">5. Qt开发</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter5/Chapter5/" class="article-date">
-	  <time datetime="2018-04-10T07:46:59.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;在<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/chapter3-3/">3.3节</a>中使用Buildroot构建系统时，我们得到了QT应用的构建工具qmake，可以用它来生成QT应用程序的Makefile和各种工程文件，然后通过交叉编译得到可执行的QT应用程序。<br>&emsp;&emsp;如果开发大型的应用，还需要用到专门的集成开发环境QtCreator。在我们产品发布资料中<em>03-Tools</em>目录下提供了一个Ubuntu 64位系统下的QtCreator安装包qt-creator-opensource-linux-x86_64-4.1.0.run。<br>&emsp;&emsp;下面的章节将会介绍集成开发环境QtCreator的安装，配置和开发的过程，并使用QtCreator创建一个简单的演示程序在MYD-AM335X 系列开发板上运行。</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QT5/">QT5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QtCreator/">QtCreator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/开发环境/">开发环境</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter5/Chapter5"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5/">5. Qt Applications Development</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5/" class="article-date">
-	  <time datetime="2018-04-10T07:46:59.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>In the previous sections, a build tool for QT5 application <code>qmake</code> has been created. It is used for generate Makefiles and other project files for QT5 application,<br>after that, users can build QT5 application with cross compile toolchain. For development of larger QT5 application, IDE tools named as <code>QtCreator</code> is commonly used.<br>There is a evaluation edition of QtCreator in our release package at the path <em>03-Tools/qt-creator-opensource-linux-x86_64-4.1.0.run</em>.</p>
-<p>In the following sections, we will introduce the installation, configuration of QtCreator, and demonstrate how to create a simple QT5 application running on MYD-AM335x series development board.</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QT5/">QT5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QtCreator/">QtCreator</a></li></ul>
 
       
             
@@ -1014,31 +1076,7 @@ var themeMenus = {};
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter1/Chapter1/">1. 软件资源介绍</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
             </div>
 
           </li>
@@ -1050,19 +1088,7 @@ var themeMenus = {};
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter1/Chapter1/">1. Software Resources</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
             </div>
 
           </li>
@@ -1074,7 +1100,43 @@ var themeMenus = {};
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2-1/">2.1 Install tools</a></h6>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2-2/">2.2 Setup GCC Toolchain</a></h6>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3/">3. Bulid System</a></h6>
+              <span>April 12, 2018</span>
             </div>
 
           </li>

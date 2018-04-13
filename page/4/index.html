@@ -161,7 +161,7 @@ var themeMenus = {};
         
           <section id="main">
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-5"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-myd-am335x/DevelopmentGuide/chapter1/Chapter1"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -169,7 +169,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/">4.5 CAN BUS</a>
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter1/Chapter1/">1. 软件资源介绍</a>
     </h1>
   
 
@@ -177,21 +177,24 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/" class="article-date">
-	  <time datetime="2018-04-10T07:47:49.000Z" itemprop="datePublished">April 10, 2018</time>
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter1/Chapter1/" class="article-date">
+	  <time datetime="2018-04-10T07:50:59.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;&emsp;本例程演示MYD-AM335X系列同类型2块开发板使用Linux API让开发板上的CAN实现点对点发送和接收数据，详情请参考源码。</p>
-<p><strong>测试硬件环境：</strong></p>
-<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+        <p>&emsp;&emsp;本小节以表格的形式描述MYD-AM335X系列开发板的软件资源。<br>
+<div align="center"> 表 1-1软件资源列表 </div>
+  </p>
 <table>
 <thead>
 <tr>
-<th>板型</th>
+<th>类别</th>
+<th>名称</th>
+<th>描述</th>
+<th>源码</th>
 <th>MYD-AM335X</th>
 <th>MYD-AM335X-Y</th>
 <th>MYD-AM335X-J</th>
@@ -199,47 +202,349 @@ var themeMenus = {};
 </thead>
 <tbody>
 <tr>
-<td>CAN接口</td>
-<td>U16的7，8脚分别连接同类型开发板的7，8脚</td>
-<td>CON2的1，2脚分别连接同类型开发板的1，2脚</td>
-<td>断开跳线帽JP7，短接JP4，J17的1，2脚分别连接同类型开发板的1，2脚</td>
+<td>Boot</td>
+<td>U-boot</td>
+<td>引导程序，负责系统初始化和引导内核</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>内核</td>
+<td>Linux 4.1.18</td>
+<td>专为MYD-AM335X系列的硬件制定的Linux内核</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>LCD</td>
+<td>LCD屏驱动，可支持4.3寸、7寸液晶屏</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>Touch Panel</td>
+<td>电阻触摸屏驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>Touch Panel</td>
+<td>电容触摸屏驱动</td>
+<td>YES</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>RTC</td>
+<td>内置RTC时钟驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>UART</td>
+<td>串口驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>SDIO WiFi</td>
+<td>WiFi驱动</td>
+<td>YES</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>RS485</td>
+<td>RS485驱动，提供源码</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>CAN Bus</td>
+<td>CAN驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>Ethernet</td>
+<td>以太网驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>MMC/SD</td>
+<td>MMC/SD卡驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>NAND Flash</td>
+<td>NAND Flash驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>Audio</td>
+<td>音频驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>GPIO-LED</td>
+<td>GPIO-LED 驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>I2C</td>
+<td>I2C驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>HDMI</td>
+<td>HDMI驱动，提供源码</td>
+<td>YES</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>PMU</td>
+<td>电源管理驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>USB Host</td>
+<td>USB Host驱动</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>USB Device</td>
+<td>USB Device驱动（Gadget）</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>Rootfs</td>
+<td>基于buildroot定制的文件系统</td>
+<td>二进制</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>Rootfs-qt</td>
+<td>基于buildroot定制的Qt文件系统</td>
+<td>二进制</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>UBI</td>
+<td>提供镜像文件</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>文件系统</td>
+<td>Ramdisk.gz</td>
+<td>Ramdisk文件系统</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>LCD</td>
+<td>LCD测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>RTC</td>
+<td>RTC时钟测试实验</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>RS485</td>
+<td>RS485测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>CAN</td>
+<td>CAN 测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>Ethernet</td>
+<td>网络测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>NAND Flash</td>
+<td>NAND Flash测试实验</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>GPIO-LED</td>
+<td>GPIO-LED测试实验</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>Audio</td>
+<td>Audio测试程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>应用程序</td>
+<td>Qt</td>
+<td>Qt环境验证Demo程序</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
 </tr>
 </tbody>
 </table>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>can_test 应用程序</li>
-<li>ip link应用程序</li>
-</ul>
+<hr>
+
+<div align="center"> 表 1-2 软件下载链接.</div>
+  
 <table>
 <thead>
 <tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
+<th>产品</th>
+<th>下载</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>操作节点</td>
-<td>can1</td>
-<td>can1</td>
-<td>can0</td>
+<td>MYD-AM335X</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X-Y/public/MYD-AM335X_Y_V04_20150609.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X-Y/public/MYD-AM335X_Y_V04_20150609.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X-Y/public/MYD-AM335X-Y_V20_20170522.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X-Y/public/MYD-AM335X-Y_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X-J/public/MYD-AM335X_J_V10_20151027.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X-J/public/MYD-AM335X_J_V10_20151027.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X-J/public/MYD-AM335X-J_V20_20170522.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X-J/public/MYD-AM335X-J_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
 </tr>
 </tbody>
 </table>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/can</code>中的可执行程序can_test拷贝至开发板/usr/bin/, 分别将两块开发板上的can1通信波特率都设置位50Kbps，并使能can0设备, 如下所示:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># can_test --help</span><br><span class="line">Usage: can_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   can device name: can0</span><br><span class="line">-b | --baudrate baudrate   set baudrate, default baudrate:50000</span><br><span class="line">-l | --loop              operate circularly, default not operate circularly!</span><br><span class="line">-w | --write  frame     frame string with format ID#MESSAGE. such as: 123#112233445566</span><br><span class="line">-h | --help                Print this message</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ip link set can1 down</span><br><span class="line"># ip link set can1 type can bitrate 50000 triple-sampling on</span><br><span class="line"># ip link set can1 up</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;上述设置波特率的命令在can_test程序初始化时已经执行，不需再次手动执行。两块开发板一个作为发送端另一个作为接收端，先在一块开发板执行以下命令发送数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">[ 5783.823623] c_can_platform 481cc000.can can0: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5786.888723] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5786.895565] NET: Registered protocol family 29</span><br><span class="line">[ 5786.952090] can: raw protocol (rev 20120528)</span><br><span class="line">====== write  frame: ======</span><br><span class="line"> frame_id = 0x123</span><br><span class="line"> frame_len = 6</span><br><span class="line"> frame_data = 0x11 0x22 0x33 0x44 0x55 0x66</span><br><span class="line">===========================</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;再在另一开发板执行以下命令接收数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can1 -l</span><br><span class="line">[ 5888.821956] c_can_platform 481d0000.can can1: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5891.884726] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5891.898711] NET: Registered protocol family 29</span><br><span class="line">[ 5891.952878] can: raw protocol (rev 20120528)</span><br><span class="line">can1 0x123 [6] 0x11 0x22 0x33 0x44 0x55 0x66</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;如果使用-l参数，则会循环执行读写操作，两块板互换一下角色，结果一样，不再赘述。注意, 如果程序运行过程中出现下述错误，可以修改tx_queue_len， 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">  can raw socket write: No buffer space available</span><br><span class="line"></span><br><span class="line"># echo 1000 &gt; /sys/class/net/can0/tx_queue_len</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;两块板互换一下角色，结果一样，不再赘述。</p>
 
       
     </div>
@@ -250,7 +555,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/CAN-BUS/">CAN BUS</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li></ul>
 
       
             
@@ -263,7 +568,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-5"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-myd-am335x/DevelopmentGuide/chapter2/Chapter2"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -271,7 +576,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/">4.5 CAN BUS</a>
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a>
     </h1>
   
 
@@ -279,23 +584,345 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/" class="article-date">
-	  <time datetime="2018-04-10T07:47:49.000Z" itemprop="datePublished">April 10, 2018</time>
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/" class="article-date">
+	  <time datetime="2018-04-10T07:49:59.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>This example demonstrates the MYD-AM335X series of the same type of two development board how to use Linux APIs to send and receive data from CAN bus, please refer to the source code for detail.</p>
-<p><strong>Hardware Preparation: </strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
+        <p>&emsp;&emsp;本小节主要介绍相关工具和环境，工具链的设置，开发环境验证。</p>
+<p><strong>pc开发环境：</strong>Ubuntu12.04/14.04/16.04 64位桌面版<br><strong>交叉编译器：</strong>gcc5.3(Linaro GCC 2016.02)</p>
+<h2 id="硬件调试环境搭建"><a href="#硬件调试环境搭建" class="headerlink" title="硬件调试环境搭建"></a>硬件调试环境搭建</h2><ul>
+<li>MYD-AM335X硬件调试环境搭建：</li>
 </ul>
+<p>&emsp;&emsp;把调试串口J12连到PC上并将PC串口的波特率设为115200，数据位为8，停止位为1，无奇偶校验。具体如图2-1：<br><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/2-1.png" alt="图2-1 MYD-AM335X硬件调试接口"></p>
+<ul>
+<li>MYD-AM335X-Y硬件调试环境搭建：</li>
+</ul>
+<p>&emsp;&emsp;把调试串口J10连到PC上并将PC串口的波特率设为115200，数据位为8，停止位为1，无奇偶校验。具体如下2-2：<br><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/2-2.png" alt="图2-2 MYD-AM335X-Y硬件调试接口"></p>
+<ul>
+<li>MYD-AM335X-J硬件调试环境搭建：</li>
+</ul>
+<p>&emsp;&emsp;把调试串口J3连到PC上并将PC串口的波特率设为115200，数据位为8，停止位为1，无奇偶校验。具体如下图2-3：<br><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/2-3.png" alt="图2-3 MYD-AM335X-J硬件调试接口"></p>
+<h2 id="建立工作目录"><a href="#建立工作目录" class="headerlink" title="建立工作目录"></a>建立工作目录</h2><p>&emsp;&emsp;创建工作目录, 并拷贝MYD AM335X系列开发板出厂附带资料04-Linux_Source目录到Linux开发主机中，具体目录用户可根据实际情况调整，后文不再赘述，如下所示：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p &lt;WORKDIR&gt;</span><br><span class="line">$ cp /media/cdrom/<span class="number">04</span>-Linux_Source<span class="comment">/* &lt;WORKDIR&gt; -rf</span></span><br><span class="line"><span class="comment">$ ls  &lt;WORKDIR&gt;</span></span><br><span class="line"><span class="comment">Bootloader/ Examples/  Filesystem/  Kernel/  Patches/ ToolChain/</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/工具链/">工具链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/开发环境/">开发环境</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter2/Chapter2-1"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2-1/">2.1 安装工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2-1/" class="article-date">
+	  <time datetime="2018-04-10T07:49:57.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>安装其它开发工具依赖包</strong><br>&emsp;&emsp;下面安装一些linux开发常用的工具，比如build-essential（提供编译程序必须软件包的列表信息）zip unzip xz-utils解压缩工具等。</p>
+<p><strong>Ubuntu 12.04</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install build-essential git-core libncurses5-dev</span><br><span class="line">$ sudo apt-get install flex bison texinfo zip unzip zlib1g-dev gettext</span><br><span class="line">$ sudo apt-get install gperf libsdl-dev libesd0-dev libwxgtk2.6-dev</span><br><span class="line">$ sudo apt-get install uboot-mkimage</span><br><span class="line">$ sudo apt-get install g++ xz-utils</span><br></pre></td></tr></table></figure></p>
+<p><strong>Ubuntu 14.04</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install build-essential git-core libncurses5-dev u-boot-tools</span><br><span class="line">$ sudo apt-get install flex bison texinfo zip unzip zlib1g-dev gettext</span><br><span class="line">$ sudo apt-get install gperf libsdl-dev libesd0-dev</span><br><span class="line">$ sudo apt-get install g++ xz-utils</span><br><span class="line">$ sudo apt-get install subversion</span><br></pre></td></tr></table></figure></p>
+<p><strong>Ubuntu 16.04</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install build-essential git-core libncurses5-dev u-boot-tools</span><br><span class="line">$ sudo apt-get install flex bison texinfo zip unzip zlib1g-dev gettext</span><br><span class="line">$ sudo apt-get install gperf libsdl-dev libesd0-dev</span><br><span class="line">$ sudo apt-get install g++ xz-utils</span><br><span class="line">$ sudo apt-get install subversion</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;需要注意的是在64位的系统上，还需要安装32位兼容的库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo apt-get install libc6-i386 lib32stdc++6 lib32z1</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/工具链/">工具链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/开发环境/">开发环境</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter2/Chapter2-2"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2-2/">2.2 设置交叉编译工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2-2/" class="article-date">
+	  <time datetime="2018-04-10T07:49:55.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>设置交叉编译工具</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Toolchain</span><br><span class="line">$ tar xvf gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux-gnueabihf.tar.xz</span><br><span class="line">$ <span class="keyword">export</span> PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux</span><br><span class="line">-gnueabihf/bin</span><br><span class="line">$ <span class="keyword">export</span> ARCH=arm</span><br><span class="line">$ <span class="keyword">export</span> CROSS_COMPILE=arm-linux-gnueabihf-</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;执行完“export”命令后输入arm按Tab键来检查是否设置成功，该设置只对当前终端有效，如需永久修改，请修改用户配置文件，例如修改<code>~/.profile</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.profile</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在行尾添加：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> ARCH=arm</span><br><span class="line"><span class="keyword">export</span> CROSS_COMPILE=arm-linux-gnueabihf-</span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/</span><br><span class="line">gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux-gnueabihf/bin</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.profile</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;测试环境变量：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$echo $ARCH</span><br><span class="line">arm</span><br><span class="line">$echo $CROSS_COMPILE</span><br><span class="line">arm-linux-gnueabihf-</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;交叉编译器的验证：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">arm-linux-gnueabihf-gcc -v</span><br><span class="line">$ arm-linux-gnueabihf-gcc -v</span><br><span class="line">Using built-in specs.</span><br><span class="line">COLLECT_GCC=arm-linux-gnueabihf-gcc</span><br><span class="line">……</span><br><span class="line">Thread model: posix</span><br><span class="line">gcc version <span class="number">5.3</span><span class="number">.1</span> <span class="number">20160113</span> (Linaro GCC <span class="number">5.3</span><span class="number">-2016.02</span>)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/工具链/">工具链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/开发环境/">开发环境</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3/">3. 构建系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3/" class="article-date">
+	  <time datetime="2018-04-10T07:48:59.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;Linux平台上有许多开源的嵌入式linux系统构建框架，这些框架极大地方便了开发者进行嵌入式系统的定制化构建，目前比较常见的有openWRT, Buildroot, Yocto, Arago等等。其中Buildroot功能强大，使用简单，而且采用了类似于linux kernel的配置和编译框架，所以受到广大嵌入式开发人员的欢迎。</p>
+<p>&emsp;&emsp;本节重点介绍使用Buildroot构建文件系统和编译u-boot, kernel镜像的方法，并从这三个部分入手，描述如何使用Buildroot构建一个适合MYD-AM335X系列开发板的嵌入式Linux系统。 在构建文件系统时，还简要介绍了如何通过Buildroot将QT5图形系统集成到文件系统中, 方便用户后续开发QT5的应用程序。</p>
+<p>&emsp;&emsp;TI 官方提供了使用Arago构建系统的方法和相应的文件系统镜像文件，也可以在这款开发板上运行。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Bulidroot/">Bulidroot</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-1"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-1/">3.1 Bootloader</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-1/" class="article-date">
+	  <time datetime="2018-04-10T07:48:57.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>编译U-Boot</strong><br>&emsp;&emsp;进入Bootloader目录，解压U-boot源码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Bootloader</span><br><span class="line">$ tar -jxvf myir-u-boot.tar.bz2</span><br><span class="line">$ cd myir-u-boot</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;不同的开发板对应不同的配置文件，配置文件位于myir-u-boot/configs/目录。</p>
 <table>
 <thead>
 <tr>
-<th>Board Type</th>
+<th>开发板</th>
+<th>编译选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYD-AM335X</td>
+<td>myd_c335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td>myd_j335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td>myd_y335x_defconfig</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;下面以MYD-AM335X开发板为例，说明u-boot的编译过程：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ make distclean</span><br><span class="line">$ make myd_c335x_defconfig</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;其中第二步make中的配置选项见上表,编译完成后，在u-boot目录下会生成MLO和u-boot.img文件。MYD-AM335X-Y和MYD-AM335X-J的编译和MYD-AM335X类似。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/u-boot/">u-boot</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-2"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-2/">3.2 编译Linux内核</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-2/" class="article-date">
+	  <time datetime="2018-04-10T07:48:55.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="编译Linux内核"><a href="#编译Linux内核" class="headerlink" title="编译Linux内核"></a>编译Linux内核</h2><p>&emsp;&emsp;进入Kernel目录，解压内核源码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Kernel</span><br><span class="line">$ tar -jxvf myir-kernel.tar.bz2</span><br><span class="line">$ cd myir-kernel</span><br></pre></td></tr></table></figure>
+<ul>
+<li>开始编译Kernel</li>
+</ul>
+<p>&emsp;&emsp;不同的开发板对应不同的配置文件，配置文件位于myir-kernel/arch/arm/configs/目录。</p>
+<table>
+<thead>
+<tr>
+<th>开发板</th>
+<th>编译选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYD-AM335X</td>
+<td>myd_c335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td>myd_j335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td>myd_y335x_defconfig</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;下面以MYD-AM335X开发板为例，说明kernel的编译过程：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ make distclean</span><br><span class="line">$ make myd_c335x_defconfig</span><br><span class="line">$ make zImage dtbs</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;其中第二个make中的配置选项见上表。编译完成后，会在arch/arm/boot目录下生成zImage文件,会在arch/arm/boot/dts目录下生成设备树的二进制.dtb文件。同一块开发板，适当修改DTS文件可以适应于不同的硬件配置，例如屏幕尺寸大小可以修改dts文件。MYD-AM335X-Y和MYD-AM335X-J的编译和MYD-AM335X类似。</p>
+<ul>
+<li>内核补丁文件</li>
+</ul>
+<p>&emsp;&emsp;上面配置中默认为7寸屏，256M NAND 256M DDR，可以通过<code>&lt;WORKDIR&gt;/Patches</code>中的补丁文件生成不同屏和NAND DDR的设备树文件，然后编译内核使用设备树文件即可。以下是相关补丁的列表说明：</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
 <th>MYD-AM335X</th>
 <th>MYD-AM335X-Y</th>
 <th>MYD-AM335X-J</th>
@@ -303,72 +930,126 @@ var themeMenus = {};
 </thead>
 <tbody>
 <tr>
-<td>CAN interface</td>
-<td>U16 7,8 Pin were connected to the same type of development board 7,8 Pin</td>
-<td>CON2 1,2 Pin were connected to the same type of development board 1,2 Pin</td>
-<td>Disconnect jumper cap JP7,Shorted JP4, J17 1,2 Pin were connected to the same type of development board 1,2 Pin</td>
+<td>HDMI补丁</td>
+<td>myd_c335x_hdmi_display.diff</td>
+<td>无扩展</td>
+<td>无扩展</td>
+</tr>
+<tr>
+<td>4.3寸屏补丁</td>
+<td>myd-am335x-lcd4.3.diff</td>
+<td>myd-am335x-y-lcd4.3.diff</td>
+<td>myd-am335x-j-lcd4.3.diff</td>
+</tr>
+<tr>
+<td>512M NAND 512M ddr补丁</td>
+<td>myd-am335x-512N512D.diff</td>
+<td>myd-am335x-y-512N512D.diff</td>
+<td>myd-am335x-j-512N512D.diff</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Software Preparation: </strong></p>
+<p>&emsp;&emsp;例如，MYD-AM335X-Y 512NAND 512 DDR 4.3寸屏打补丁：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ patch -p1 &lt; &lt;WORKDIR&gt;/Patches/myd-am335x-y-lcd4<span class="number">.3</span>.diff</span><br><span class="line"></span><br><span class="line">$ patch -p1 &lt; &lt;WORKDIR&gt;/Patches/myd-am335x-y<span class="number">-512</span>N512D.diff</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Linux Kernel 4.1.18</li>
-<li>can_test application</li>
-<li>ip link applicatoin</li>
+<li>编译设备树文件<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make dtbs</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>Board Type</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Operation node</td>
-<td>can1</td>
-<td>can1</td>
-<td>can0</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Test Steps:</strong></p>
-<ul>
-<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/can/can_test</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board, run <code>can_test</code> application as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># can_test --help</span><br><span class="line">Usage: can_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   can device name: can0</span><br><span class="line">-b | --baudrate baudrate   set baudrate, default baudrate:50000</span><br><span class="line">-l | --loop              operate circularly, default not operate circularly!</span><br><span class="line">-w | --write  frame     frame string with format ID#MESSAGE. such as: 123#112233445566</span><br><span class="line">-h | --help                Print this message</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ip link set can1 down</span><br><span class="line"># ip link set can1 type can bitrate 50000 triple-sampling on</span><br><span class="line"># ip link set can1 up</span><br></pre></td></tr></table></figure>
-<ul>
-<li>The previous processes are no need to be executed manually. During running <code>can_test</code>, it will be set automatically. One board is used as sender, the other is used as receiver, they communicate with can_test application as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">[ 5783.823623] c_can_platform 481cc000.can can0: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5786.888723] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5786.895565] NET: Registered protocol family 29</span><br><span class="line">[ 5786.952090] can: raw protocol (rev 20120528)</span><br><span class="line">====== write  frame: ======</span><br><span class="line"> frame_id = 0x123</span><br><span class="line"> frame_len = 6</span><br><span class="line"> frame_data = 0x11 0x22 0x33 0x44 0x55 0x66</span><br><span class="line">===========================</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Execute the following command at other board to receive data as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can1 -l</span><br><span class="line">[ 5888.821956] c_can_platform 481d0000.can can1: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5891.884726] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5891.898711] NET: Registered protocol family 29</span><br><span class="line">[ 5891.952878] can: raw protocol (rev 20120528)</span><br><span class="line">can1 0x123 [6] 0x11 0x22 0x33 0x44 0x55 0x66</span><br></pre></td></tr></table></figure>
-<ul>
-<li>-l option is used for operating circularly.</li>
-</ul>
+<p>&emsp;&emsp;并用arch/arm/boot/dts目录下的设备树文件去替换烧录的image中的设备树文件。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Kernel/">Kernel</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/">3.3 构建文件系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/" class="article-date">
+	  <time datetime="2018-04-10T07:48:53.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本节主要介绍使用Buildroot进行文件系统的制作。</p>
+<h2 id="准备编译buildroot"><a href="#准备编译buildroot" class="headerlink" title="准备编译buildroot"></a>准备编译buildroot</h2><p>&emsp;&emsp;拷贝出厂附带资料中的<em>04-Linux_Source/Filesystem/myir-buildroot.tar.gz</em>到本地开发主机，并解压到本地工作目录<workdir>(注意用本地主机上实际工作目录替换<workdir>)，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  $ ls -al &lt;WORKDIR&gt;/Filesystem/myir-buildroot</span><br><span class="line">arch   CHANGES           configs     dl    linux            output   support</span><br><span class="line">board  Config.in         COPYING     docs  Makefile         package  system</span><br><span class="line">boot   Config.in.legacy  DEVELOPERS  fs    Makefile.legacy  README   toolchain</span><br></pre></td></tr></table></figure></workdir></workdir></p>
+<p>&emsp;&emsp;关于<code>buildroot</code>的目录结构可以参照<a href="https://buildroot.org/downloads/manual/manual.html" target="_blank" rel="noopener">https://buildroot.org/downloads/manual/manual.html</a>.其中和<code>MYD-AM335X</code>系列开发板相关的部分主要位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_c335x</code>,<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_y335x</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_j335x</code>目录。</p>
+<h2 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h2><p>&emsp;&emsp;MYD-AM335X系列平台默认的配置文件位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/configs/</code>. 其中主要包含一些硬件测试相关的工具，用户也可以根据不同的应用场景需要编写自己的配置文件。先写入基本配置文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Filesystem/myir-buildroot/</span><br><span class="line">$ make myd_y335x_defconfig</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;再通过<code>make menuconfig</code>进入配置界面。然后可以跟内核配置一样，对当前的配置进行一些修改。下面以<code>MYD-AM335X-Y</code>平台为例，加以说明。</p>
 <blockquote>
-<p>Note: In case of the following error, please modify the value of “tx_queue_len” as below:</p>
+<p><strong>注意：使用Buildroot编译u-boot和kernel需要用户自行建好代码git仓库，然后用建好的代码git仓库路径替换下面bootloader和Kernel配置中的git路径，具体见下面的bootloader和Kernel的配置</strong></p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">  can raw socket write: No buffer space available</span><br><span class="line"></span><br><span class="line"># echo 1000 &gt; /sys/class/net/can0/tx_queue_len</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Exchange roles of the two boards, the result is the same.</li>
-</ul>
+<h3 id="交叉编译工具链"><a href="#交叉编译工具链" class="headerlink" title="交叉编译工具链"></a>交叉编译工具链</h3><p>&emsp;&emsp;Buildroot可以使用外部交叉编译工具链，也可以自行编译产生内部交叉编译工具链，本手册采用的是内部交叉编译工具链。编译完成之后位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin/</code>。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_toolchain.png" alt="图3-3-1 配置buildroot交叉编译工具链"></p>
+<h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><p>&emsp;&emsp;系统配置主要配置目标系统的主机名称，欢迎信息，Init子系统（busybox/systemv/systemd)和对应的设备管理子系统，这里还可以配置root的登陆密码，如下图所示为目标系统配置了root登陆密码<code>myirtech</code>。<br>如果不配置的话，密码为空。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_system_configuration.png" alt="图3-3-2 系统配置"></p>
+<h3 id="bootloader配置"><a href="#bootloader配置" class="headerlink" title="bootloader配置"></a>bootloader配置</h3><p>&emsp;&emsp;Bootloader配置主要配置bootloader的代码来源，以及代码的配置，编译，安装，如下图所示。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_bootloader.png" alt="图3-3-3 bootloader配置"></p>
+<p>&emsp;&emsp;图中采用的是git协议从内网的git服务器获取代码。用户需要自行建好代码git仓库，然后用建好的代码git仓库路径替换这里设置的路径。可以根据实际情况配置合适的代码获取方式，具体的配置方式也可以参考buildroot用户手册。<br>&emsp;&emsp;下面根据开发板附带资料中的代码，创建自己的git仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/</span><br><span class="line">$ tar zxvf myir-u-boot.tar.gz</span><br><span class="line">$ cd myir-u-boot</span><br><span class="line">$ git init</span><br><span class="line">$ git add . -f</span><br><span class="line">$ git commit -m &quot;Initial Version&quot; -a</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;修改位于 <workdir>/Filesystem/buildroot/configs/myd_y335x_defconfig 配置文件和<workdir>/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig ，将下面两项的内容改为如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BR2_TARGET_UBOOT_CUSTOM_REPO_URL=&quot;~/myir-u-boot/.git&quot;</span><br><span class="line">BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION=&quot;master&quot;</span><br></pre></td></tr></table></figure></workdir></workdir></p>
+<blockquote>
+<p>注意：修改了u-boot的代码库中代码之后，buildroot并不能自动重新获取和编译。需要手动删除<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/dl/uboot-master.tgz</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/build/uboot-master</code>目录。</p>
+</blockquote>
+<h3 id="Kernel配置"><a href="#Kernel配置" class="headerlink" title="Kernel配置"></a>Kernel配置</h3><p>&emsp;&emsp;Kernel的配置和bootloader类似，也是配置内核的代码来源，和kernel的配置，编译，安装，如下图所示。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_kernel.png" alt="图3-3-4 Kernel配置"></p>
+<p>&emsp;&emsp;图中采用的是git协议从内网的git服务器获取代码。用户需要自行建好代码git仓库，然后用建好的代码git仓库路径替换这里设置的路径。可以根据实际情况配置合适的代码获取方式，具体的配置方式也可以参考buildroot用户手册。<br>&emsp;&emsp;下面根据开发板附带资料中的代码，创建自己的git仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/</span><br><span class="line">$ tar zxvf myir-kernel.tar.gz</span><br><span class="line">$ cd myir-kernel</span><br><span class="line">$ git init</span><br><span class="line">$ git add . -f</span><br><span class="line">$ git commit -m &quot;Initial Version&quot; -a</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;修改位于 <workdir>/Filesystem/buildroot/configs/myd_y335x_defconfig 配置文件和<workdir>/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig ，将下面两项的内容改为如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BR2_TARGET_KERNEL_CUSTOM_REPO_URL=&quot;~/myir-kernel/.git&quot;</span><br><span class="line">BR2_TARGET_KERNEL_CUSTOM_REPO_VERSION=&quot;master&quot;</span><br></pre></td></tr></table></figure></workdir></workdir></p>
+<blockquote>
+<p>注意：修改了kernel的代码库中代码之后，buildroot并不能自动重新获取和编译。需要手动删除<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/dl/linux-master.tgz</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/build/linux-master</code>目录。</p>
+</blockquote>
+<h3 id="文件系统配置"><a href="#文件系统配置" class="headerlink" title="文件系统配置"></a>文件系统配置</h3><p>&emsp;&emsp;文件系统的配置最终决定了<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>目录下生成哪些格式的文件系统镜像，如下图所示。我们配置了ramdisk, EXT2/4以及UBIFS这几种文件系统镜像和rootfs.tar.gz根文件系统压缩包。<br>用户拿这个压缩包用于nfsroot文件系统加载，也可以生成其它格式的文件系统镜像。<br>除此之外，编译完成之后还在<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/sbin</code>目录下生成一些本地主机上的文件系统工具，如制作ubi文件系统的工具mkfs.ubifs, ubinize等。我们可以用这些工具重新制作基于rootfs.tar.gz<br>的UBIFS格式文件系统(注意用本地主机上实际工作目录替换<workdir>)。</workdir></p>
+<p>&emsp;&emsp;创建一个ubinize.cfg文件,内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ubifs]</span><br><span class="line">mode=ubi</span><br><span class="line">vol_id=0</span><br><span class="line">vol_type=dynamic</span><br><span class="line">vol_name=rootfs</span><br><span class="line">vol_alignment=1</span><br><span class="line">vol_flags=autoresize</span><br><span class="line">image=rootfs.ubifs</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;准备需要打包的根文件系统目录rootfs并打包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/sbin</span><br><span class="line">$ tar zxvf rootfs.tar.gz</span><br><span class="line">$ mkfs.ubifs -d rootfs -e 0x1f000 -c 2048 -m 0x800 -x lzo -F -o  rootfs.ubifs</span><br><span class="line">$ ubinize -o rootfs.ubi -m 0x800 -p 0x20000 -s 512 -m 2048 -O 2048 ubinize.cfg</span><br></pre></td></tr></table></figure></p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_filesystem.png" alt="图3-3-5 文件系统配置"></p>
+<h3 id="工具包配置"><a href="#工具包配置" class="headerlink" title="工具包配置"></a>工具包配置</h3><p>&emsp;&emsp;工具包的配置相对比较简单，但也是用户经常会改动的配置项。linux下一些常见的工具基本上都能够在这里找到。比如硬件测试相关的I2C-tools, spi-tools, can-utils等，网络相关的DHCP, TFTP, SSH等,<br>用户可以根据需要自行配制，也可以添加自己编写的其他工具包。关于如何添加自己的工具包，在buildroot中也有详细的介绍，参见<a href="https://buildroot.org/downloads/manual/manual.html#adding-packages" target="_blank" rel="noopener">https://buildroot.org/downloads/manual/manual.html#adding-packages</a>,这里不再赘述。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_target_packages.png" alt="图3-3-6 工具包配置"></p>
+<h2 id="开始构建"><a href="#开始构建" class="headerlink" title="开始构建"></a>开始构建</h2><p>&emsp;&emsp;Buildroot构建的过程类似于Linux Kernel的构建，只需要简单的命令就可以完成:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;编译过程中会生成一个output目录，最终生成的输出的文件位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>目录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ls -al output/images</span><br><span class="line">boot.vfat  myd_y335x.dtb  readme.txt   rootfs.cpio.gz     rootfs.ext2  rootfs.tar</span><br><span class="line">rootfs.ubi    sdcard.img  u-boot-spl.bin    uEnv.txt    MLO        ramdisk.gz</span><br><span class="line">rootfs.cpio  rootfs.cpio.uboot  rootfs.ext4  rootfs.tar.gz  rootfs.ubifs  u-boot.img</span><br><span class="line">uEnv_ramdisk.txt  zImage</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;output/images 目录下的输出文件基本上包含了bootloader, kernel,以及各种格式的文件系统镜像。这些文件在接下来的系统升级章节将会详细介绍。</p>
+<h2 id="Arago构建的文件系统"><a href="#Arago构建的文件系统" class="headerlink" title="Arago构建的文件系统"></a>Arago构建的文件系统</h2><p>&emsp;&emsp;在MYD-AM335X系列开发板支持基于Arago构建的文件系统镜像，具体的构建方法可以参考TI官网WIKI页面。<br><a href="http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK" target="_blank" rel="noopener">http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK</a>.</p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/CAN-BUS/">CAN BUS</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/rootfs/">rootfs</a></li></ul>
 
       
             
@@ -381,7 +1062,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-6"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-4"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -389,7 +1070,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-6/">4.6 Ethernet</a>
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-4/">3.4 编译QT</a>
     </h1>
   
 
@@ -397,49 +1078,54 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-6/" class="article-date">
-	  <time datetime="2018-04-10T07:47:47.000Z" itemprop="datePublished">April 10, 2018</time>
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-4/" class="article-date">
+	  <time datetime="2018-04-10T07:48:51.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;&emsp;本例程演示使用Linux API让开发板上的网口发送和接收数据，详情请参考源码。</p>
-<p><strong>测试硬件环境：</strong></p>
-<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+        <h2 id="编译QT"><a href="#编译QT" class="headerlink" title="编译QT"></a>编译QT</h2><p>&emsp;&emsp;QT的编译我们推荐使用Buildroot，Buildroot可以很容易地编译Qt5图形库，并且整合在文件系统中。同时，我们提供了配置文件，可以更方便地编译Qt5。</p>
+<p>&emsp;&emsp;进入上一节中解压好的myir-buildroot目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Filesystem/myir-buildroot</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;开始编译buildroot</p>
 <table>
 <thead>
 <tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
+<th>配置项</th>
+<th>含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>网口接口</td>
-<td>网线连接J5</td>
-<td>网线连接J5</td>
-<td>网线连接J5</td>
+<td>myd_c335x_defconfig</td>
+<td>MYD-AM335X不带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_c335x_qt5_defconfig</td>
+<td>MYD-AM335X带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_j335x_defconfig</td>
+<td>MYD-AM335X-J不带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_j335x_qt5_defconfig</td>
+<td>MYD-AM335X-J带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_y335x_defconfig</td>
+<td>MYD-AM335X-Y不带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_y335x_qt5_defconfig</td>
+<td>MYD-AM335X-Y带qt5运行环境的的Buildroot配置</td>
 </tr>
 </tbody>
 </table>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>server应用程序</li>
-<li>client应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/network</code>目录下的测试程序client至开发板/usr/bin目录，server拷贝至虚拟机。假设虚拟机的ip是192.168.30.114。</p>
-<p>&emsp;&emsp;配置开发板的ip：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 192.168.30.122 up</span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;配置好网络后，将开发板上eth0用网线连到PC，以虚拟机为服务器端，开发板为客户端，先在虚拟机上执行以下命令：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$./server <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;再在开发板执行以下命令可看到所发送的信息：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># ./client <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;同时可以看到虚拟机接收到开发板发送的数据：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ./server <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;以MYD-AM335X为例进行的带qt5运行时库的文件系统编译：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ make myd_c335x_qt5_defconfig</span><br><span class="line">$ make menuconfig  --buildroot中指定自己bootloader和kernle的git路径，同上小节。</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;等待编译完成后，Qt5会打包在位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>目录之下的文件系统镜像中。<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host</code>同样可作为Qt5开<br>发的SDK目录，其中包含了交叉编译工具, QT5应用程序构建工具qmake等，在后续章节中会详细介绍。</p>
 
       
     </div>
@@ -450,7 +1136,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Ethernet/">Ethernet</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QT5/">QT5</a></li></ul>
 
       
             
@@ -463,7 +1149,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-6"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -471,7 +1157,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-6/">4.6 Ethernet</a>
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4/">4. Linux应用程序</a>
     </h1>
   
 
@@ -479,112 +1165,23 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-6/" class="article-date">
-	  <time datetime="2018-04-10T07:47:47.000Z" itemprop="datePublished">April 10, 2018</time>
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4/" class="article-date">
+	  <time datetime="2018-04-10T07:47:59.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>This example demonstrates how to use Linux APIs to send and receive data from Network port, please refer to the source code for detail.</p>
-<p><strong>Hardware Preparation: </strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Board Type</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Network port interface</td>
-<td>Cable connection J5</td>
-<td>Cable connection J5</td>
-<td>Cable connection J5</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Software Preparation: </strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>server application</li>
-<li>client applicatoin</li>
-</ul>
-<p><strong>Test Steps:</strong></p>
-<p>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/network/client</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board,Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/network/server</code> to  ubuntu 12.04.Assume that the ubuntu12.04 ip is 192.168.30.114.</p>
-<p>Configure the development board ip：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 192.168.30.122 up</span><br></pre></td></tr></table></figure></p>
-<p>Configure the network, the development board eth0 connected to the PC with a network cable,to the virtual machine as the server, the development board for the client, first in the virtual machine to execute the following command:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$./server <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br></pre></td></tr></table></figure>
-<p>And then in the development board to execute the following command to see the information sent:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># ./client <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br><span class="line">send messages: <span class="number">1234567890</span> to <span class="number">192.168</span><span class="number">.30</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
-<p>At the same time you can see the virtual machine to receive the data sent by the development board:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ./server <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br><span class="line">received messages: <span class="number">1234567890</span>@ from <span class="number">192.168</span><span class="number">.30</span><span class="number">.122</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Ethernet/">Ethernet</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-7"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/">4.7 NAND Flash</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/" class="article-date">
-	  <time datetime="2018-04-10T07:47:45.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本例程演示如何使用Linux API擦除、写入和读取开发板上的NAND Flash，详情请参考源码。</p>
-<p><strong>测试硬件环境：</strong></p>
-<ul>
-<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
-<li>MYD-AM335x系列开发板一块</li>
-</ul>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>mtd_test 应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/mtd</code>目录下的测试程序mtd_test至开发板/usr/bin目录。在Linux终端输入如下命令可对nandflash进行擦除、写入和读取数据：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># ./mtd_test /dev/mtd7</span><br><span class="line"></span><br><span class="line">MTD Type: <span class="number">4</span></span><br><span class="line">MTD total size: <span class="number">131072</span> bytes</span><br><span class="line">MTD erase size: <span class="number">131072</span> bytes</span><br><span class="line">MTD write size: <span class="number">2048</span> bytes</span><br><span class="line"></span><br><span class="line">erase the last block at <span class="number">0</span></span><br><span class="line"></span><br><span class="line">erase done!</span><br><span class="line"></span><br><span class="line">writing <span class="number">16</span> bytes data to flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">write done!</span><br><span class="line"></span><br><span class="line">reading data from flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">read done!</span><br></pre></td></tr></table></figure>
+        <p>&emsp;&emsp;本节主要介绍设备驱动功能验证的一些方法，并提供一些基本的应用开发示例实现对设备的操作。</p>
+<p>&emsp;&emsp;MYD-AM335X系列提供了常用外设的演示程序，程序以及源码都位于<code>&lt;WORKDIR&gt;/Examples/</code>，请根据目录内的Makefile或README文件进行编译：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;确保环境变量按下面的示例设置完成:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/</span><br><span class="line">gcc-linaro-5.3-2016.02-x86_64_arm-linux-gnueabihf/bin</span><br><span class="line">$ export ARCH=arm</span><br><span class="line">$ export CROSS_COMPILE=arm-linux-gnueabihf-</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;编译完Buildroot之后，在myir-buildroot/output/host/usr/bin目录下也生成了一个交叉编译工具链，这里可以使用这个工具链替换上面linaro的工具链：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ export CROSS_COMPILE=arm-myir-linux-gnueabihf-</span><br><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;用户可以一次完成所有示例的编译，如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples/</span><br><span class="line">$ make OPTION=MYD-AM335X-SERIES</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;也可以一个一个的单独编译，例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples/&lt;APP_DIR&gt;</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;在开发板上运行程序时需要注意权限.如果无法执行请使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># chmod +x *</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -595,406 +1192,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/NAND-Flash/">NAND Flash</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-7"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/">4.7 NAND Flash</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/" class="article-date">
-	  <time datetime="2018-04-10T07:47:45.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This example demonstrates how to use the Linux API to erase, write, and read NAND Flash on the development board,please refer to the source code for detail.</p>
-<p><strong>Hardware Preparation: </strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
-<li>MYD-AM335X series development board.</li>
-</ul>
-<p><strong>Software Preparation: </strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>mtd_test application</li>
-</ul>
-<p><strong>Test Steps:</strong></p>
-<ul>
-<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/mtd/mtd_test</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board,Executing the following command to nandflash erase, write and read data:</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># ./mtd_test /dev/mtd7</span><br><span class="line"></span><br><span class="line">MTD Type: <span class="number">4</span></span><br><span class="line">MTD total size: <span class="number">131072</span> bytes</span><br><span class="line">MTD erase size: <span class="number">131072</span> bytes</span><br><span class="line">MTD write size: <span class="number">2048</span> bytes</span><br><span class="line"></span><br><span class="line">erase the last block at <span class="number">0</span></span><br><span class="line"></span><br><span class="line">erase done!</span><br><span class="line"></span><br><span class="line">writing <span class="number">16</span> bytes data to flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">write done!</span><br><span class="line"></span><br><span class="line">reading data from flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">read done!</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/NAND-Flash/">NAND Flash</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-8"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-8/">4.8 KeyPad</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-8/" class="article-date">
-	  <time datetime="2018-04-10T07:47:43.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This example demonstrates how to read the keypad event information by Linux user APIs, please refer to the source code for detail.</p>
-<p><strong>Hardware Preparation:</strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
-<li>MYD-AM335x series development board</li>
-</ul>
-<p><strong>Software Preparation: </strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>hexdump command</li>
-<li>keypad_test application</li>
-</ul>
-<p><strong>Test Steps: </strong></p>
-<ul>
-<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/keypad/keypad_test</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board, run <code>keypad_test</code> application as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 777 /usr/bin/keypad_test</span><br><span class="line">$ keypad_test -h</span><br><span class="line">Usage: keypad_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   keypad device name, default: /dev/input/event0</span><br><span class="line">-h | --help          Print this message</span><br></pre></td></tr></table></figure>
-<ul>
-<li>View the device nodes of MYD-AM335X keypad, the following information shows <code>K2</code> and <code>K3</code> keypads are corresponding to <code>/dev/input/event1</code>。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path/ event0   event1   mice     mouse0</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Test MYD-AM335X <code>K2</code> and <code>K3</code> keypads as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event1</span><br><span class="line">Event: Code = 115, Type = 1, Value=1                -- press K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0                -- release K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1                -- press K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=2</span><br><span class="line">Event: Code = 0, Type = 0, Value=1</span><br><span class="line">Event: Code = 114, Type = 1, Value=0                -- release K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>View the device nodes of MYD-AM335X-Y keypad, the following information shows <code>K3</code> and <code>K4</code> keypads are corresponding to <code>/dev/input/event3</code>，<code>K5</code> keypad is corresponding to <code>/dev/input/event2</code>.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path  event0   event1   event2   event3   mice     mouse0</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">beeper</span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"># cat /sys/class/input/event2/device/name</span><br><span class="line">tps65217_pwrbutton</span><br><span class="line"># cat /sys/class/input/event3/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Test MYD-AM335X-Y <code>K3</code> and <code>K4</code> keypads as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event3</span><br><span class="line">Event: Code = 115, Type = 1, Value=1                -- press K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0                -- release K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1                -- press K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=0                -- release K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Test MYD-AM335X-Y <code>K5</code> keypads as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event2</span><br><span class="line">Event: Code = 116, Type = 1, Value=1                -- press K5</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 116, Type = 1, Value=0                -- release K5</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>View the device nodes of MYD-AM335X-J keypad, the following information shows <code>K3</code> and <code>K4</code> keypads are corresponding to <code>/dev/input/event3</code>，<code>K2</code> keypad is corresponding to <code>/dev/input/event1</code>.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path  event0   event1   event2   event3   mice     mouse0   mouse1</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">tps65217_pwrbutton</span><br><span class="line"># cat /sys/class/input/event2/device/name</span><br><span class="line">ft5x06_ts</span><br><span class="line"># cat /sys/class/input/event3/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Test MYD-AM335X-J <code>K3</code> and <code>K4</code> keypads as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event3</span><br><span class="line">Event: Code = 115, Type = 1, Value=1            -- press K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0            -- release K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1            -- press K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=0            -- release K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Test MYD-AM335X-J <code>K2</code> keypads as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event1</span><br><span class="line">Event: Code = 116, Type = 1, Value=1            -- press K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 116, Type = 1, Value=0            -- release K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<p>Each keypad has a event code as show above. the code should be consistent with the value in device tree source.Users can use <code>hexdump</code> command to test keypads as below，The following to MYD-AM335X, for example, other types of KeyPad test similar.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># hexdump /dev/input/event1</span><br><span class="line">0000000 022b 0000 2a83 0005 0001 0073 0001 0000</span><br><span class="line">0000010 022b 0000 2a83 0005 0000 0000 0000 0000</span><br><span class="line">0000020 022b 0000 78b5 0007 0001 0073 0000 0000</span><br><span class="line">0000030 022b 0000 78b5 0007 0000 0000 0000 0000</span><br><span class="line"></span><br><span class="line">0000040 0231 0000 8c69 0001 0001 0072 0001 0000</span><br><span class="line">0000050 0231 0000 8c69 0001 0000 0000 0000 0000</span><br><span class="line">0000060 0231 0000 fc11 0003 0001 0072 0000 0000</span><br><span class="line">0000070 0231 0000 fc11 0003 0000 0000 0000 0000</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/KeyPad/">KeyPad</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-8"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-8/">4.8 KeyPad测试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-8/" class="article-date">
-	  <time datetime="2018-04-10T07:47:43.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本例程演示使用Linux User API读取按键信息，详情请参考源码。</p>
-<p><strong>测试硬件环境：</strong></p>
-<ul>
-<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
-<li>MYD-AM335x系列开发板一块</li>
-</ul>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>hexdump或keypad_test应用程序</li>
-</ul>
-<p><strong>测试过程:</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/keypad</code>中的可执行程序keypad_test拷贝至开发板/usr/bin/目录下, 执行该程序进行测试如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 777 /usr/bin/keypad_test</span><br><span class="line">$ keypad_test -h</span><br><span class="line">Usage: keypad_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   keypad device name, default: /dev/input/event0</span><br><span class="line">-h | --help          Print this message</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;查看MYD-AM335X按键设备对应的设备节点，可以发现K2,K3两个按键对应/dev/input/event1。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path/ event0   event1   mice     mouse0</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;测试MYD-AM335X K2和K3。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event1</span><br><span class="line">Event: Code = 115, Type = 1, Value=1                -- 按下K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0                -- 释放K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1                -- 按下K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=2</span><br><span class="line">Event: Code = 0, Type = 0, Value=1</span><br><span class="line">Event: Code = 114, Type = 1, Value=0                -- 释放K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;查看MYD-AM335X-Y按键设备对应的设备节点，可以发现K3,K4两个按键对应/dev/input/event3，K5对应/dev/input/event2。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path  event0   event1   event2   event3   mice     mouse0</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">beeper</span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"># cat /sys/class/input/event2/device/name</span><br><span class="line">tps65217_pwrbutton</span><br><span class="line"># cat /sys/class/input/event3/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;测试MYD-AM335X-Y K3和K4。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event3</span><br><span class="line">Event: Code = 115, Type = 1, Value=1                -- 按下K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0                -- 释放K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1                -- 按下K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=0                -- 释放K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;测试MYD-AM335X-Y K5。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event2</span><br><span class="line">Event: Code = 116, Type = 1, Value=1                -- 按下K5</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 116, Type = 1, Value=0                -- 释放K5</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;查看MYD-AM335X-J按键设备对应的设备节点，可以发现K3,K4两个按键对应/dev/input/event3，K2对应/dev/input/event1。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># ls /dev/input/</span><br><span class="line">by-path  event0   event1   event2   event3   mice     mouse0   mouse1</span><br><span class="line"></span><br><span class="line"># cat /sys/class/input/event0/device/name</span><br><span class="line">ti-tsc</span><br><span class="line"># cat /sys/class/input/event1/device/name</span><br><span class="line">tps65217_pwrbutton</span><br><span class="line"># cat /sys/class/input/event2/device/name</span><br><span class="line">ft5x06_ts</span><br><span class="line"># cat /sys/class/input/event3/device/name</span><br><span class="line">volume_keys@0</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;测试MYD-AM335X-J K3和K4。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event3</span><br><span class="line">Event: Code = 115, Type = 1, Value=1            -- 按下K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 115, Type = 1, Value=0            -- 释放K3</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=1            -- 按下K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 114, Type = 1, Value=0            -- 释放K4</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;测试MYD-AM335X-J K2。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># keypad_test -d /dev/input/event1</span><br><span class="line">Event: Code = 116, Type = 1, Value=1            -- 按下K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br><span class="line">Event: Code = 116, Type = 1, Value=0            -- 释放K2</span><br><span class="line">Event: Code = 0, Type = 0, Value=0</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;以上测试结果中返回的Event Code即为按键键值，和内核设备树中定义的键值必须一致。<br>&emsp;&emsp;用户也可以通过Buildroot文件系统中自带的hexdump程序进行按键的测试，下面以MYD-AM335X为例，其它版型的KeyPad测试情况类似。分别按K2,K3这两个按键。 其中输出信息中第7列中的0073和0072即为设备树中定义的按键键值115和114，其它信息含义请参阅hexdump说明。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># hexdump /dev/input/event1</span><br><span class="line">0000000 022b 0000 2a83 0005 0001 0073 0001 0000</span><br><span class="line">0000010 022b 0000 2a83 0005 0000 0000 0000 0000</span><br><span class="line">0000020 022b 0000 78b5 0007 0001 0073 0000 0000</span><br><span class="line">0000030 022b 0000 78b5 0007 0000 0000 0000 0000</span><br><span class="line"></span><br><span class="line">0000040 0231 0000 8c69 0001 0001 0072 0001 0000</span><br><span class="line">0000050 0231 0000 8c69 0001 0000 0000 0000 0000</span><br><span class="line">0000060 0231 0000 fc11 0003 0001 0072 0000 0000</span><br><span class="line">0000070 0231 0000 fc11 0003 0000 0000 0000 0000</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/KeyPad/">KeyPad</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-9"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-9/">4.9 GPIO-LED</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-9/" class="article-date">
-	  <time datetime="2018-04-10T07:47:41.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>On a embbeded Linux system, the LEDs are commonly controlled by sysfs interface.<br>This example demonstrates how to control the LEDs by sysfs with <code>echo</code> command or <code>led_test</code> application.</p>
-<p><strong>Hardware Preparation:</strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/">chapter2</a>.</li>
-<li>MYD-AM335x series development board</li>
-</ul>
-<p><strong>Software Preparation:</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>echo, led_test application</li>
-</ul>
-<p><strong>Test Steps: </strong></p>
-<ul>
-<li><p>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/led/led_test</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board.</p>
-</li>
-<li><p>View the device node of MYD-AM335X LED devices as below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2  myd:green:user3</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Control the MYD-AM335X LED by <code>echo</code> command as below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myc\:green\:user1/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myc\:green\:user1/brightness</span><br><span class="line">D39：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myd\:green\:user2/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myd\:green\:user2/brightness</span><br><span class="line">D40：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myd\:green\:user3/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myd\:green\:user3/brightness</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>View the device node of MYD-AM335X-Y LED devices as below:</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Control the MYD-AM335X-Y LED by <code>echo</code> command as below:</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line"><span class="meta">#echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line"><span class="meta">#echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line">D2：</span><br><span class="line"><span class="meta">#echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br><span class="line"><span class="meta">#echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>View the device node of MYD-AM335X-J LED devices as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Control the MYD-AM335X-J LED by <code>echo</code> command as below:</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line"><span class="meta"># echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line"><span class="meta"># echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line">D2：</span><br><span class="line"><span class="meta"># echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br><span class="line"><span class="meta"># echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>Control the LEDs by ‘led_test’ application as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># led_test -h</span><br><span class="line">Usage: led_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   led name myc:blue:cpu0</span><br><span class="line">-l | --light brightness   led brightness. 0~255 0: off.</span><br><span class="line">-h | --help                Print this message</span><br><span class="line"></span><br><span class="line"># led_test -d myc:green:user1 -l 0</span><br><span class="line">Set led myc:green:user1 off, brightness = 0</span><br><span class="line"># led_test -d myc:green:user1 -l 1</span><br><span class="line">Set led myc:green:user1 on, brightness = 1</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/GPIO-LED/">GPIO-LED</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-9"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-9/">4.9 GPIO-LED</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-9/" class="article-date">
-	  <time datetime="2018-04-10T07:47:41.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;Linux系统下，LED的控制主要是通过访问sysfs文件系统下文件节点实现的，本例程演示如何使用echo命令和led_test应用对LED进行控制，验证开发板上的LED驱动程序。</p>
-<p><strong>测试硬件环境：</strong></p>
-<ul>
-<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部。</li>
-<li>MYD-AM335x系列开发板一块</li>
-</ul>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>echo, led_test 应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/led</code>目录下的测试程序led_test至开发板/usr/bin目录。</p>
-<p>&emsp;&emsp;查看MYD-AM335X LED的设备节点。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2  myd:green:user3</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;用’echo’命令对MYD-AM335X LED进行控制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myc\:green\:user1/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myc\:green\:user1/brightness</span><br><span class="line">D39：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myd\:green\:user2/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myd\:green\:user2/brightness</span><br><span class="line">D40：</span><br><span class="line">#echo &quot;1&quot; &gt; /sys/class/leds/myd\:green\:user3/brightness</span><br><span class="line">#echo &quot;0&quot; &gt; /sys/class/leds/myd\:green\:user3/brightness</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;查看MYD-AM335X-Y LED的设备节点。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;用’echo’命令对MYD-AM335X-Y LED进行控制。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line"><span class="meta">#echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line"><span class="meta">#echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line">D2：</span><br><span class="line"><span class="meta">#echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br><span class="line"><span class="meta">#echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;查看MYD-AM335X-J LED的设备节点。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/class/leds</span><br><span class="line">myc:green:user1  myd:green:user2</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;用’echo’命令对MYD-AM335X-J LED进行控制。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D3：</span><br><span class="line"><span class="meta"># echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line"><span class="meta"># echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span></span><br><span class="line">D2：</span><br><span class="line"><span class="meta"># echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br><span class="line"><span class="meta"># echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;用’led_test’应用程序对LED进行控制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># led_test -h</span><br><span class="line">Usage: led_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   led name myc:blue:cpu0</span><br><span class="line">-l | --light brightness   led brightness. 0~255 0: off.</span><br><span class="line">-h | --help                Print this message</span><br><span class="line"></span><br><span class="line"># led_test -d myc:green:user1 -l 0</span><br><span class="line">Set led myc:green:user1 off, brightness = 0</span><br><span class="line"># led_test -d myc:green:user1 -l 1</span><br><span class="line">Set led myc:green:user1 on, brightness = 1</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;依照不同的板型更换对应的设备节点可以用led_test实现不同LED的控制。</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/GPIO-LED/">GPIO-LED</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/应用程序/">应用程序</a></li></ul>
 
       
             
@@ -1108,31 +1306,7 @@ var themeMenus = {};
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter1/Chapter1/">1. 软件资源介绍</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
             </div>
 
           </li>
@@ -1144,19 +1318,7 @@ var themeMenus = {};
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter1/Chapter1/">1. Software Resources</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
             </div>
 
           </li>
@@ -1168,7 +1330,43 @@ var themeMenus = {};
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2-1/">2.1 Install tools</a></h6>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2-2/">2.2 Setup GCC Toolchain</a></h6>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3/">3. Bulid System</a></h6>
+              <span>April 12, 2018</span>
             </div>
 
           </li>

@@ -1,0 +1,21 @@
+---
+title: 5.1 Install QtCreator
+date: 2018-04-10 15:46:57
+tags: [AM335X, QtCreator]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+On Ubuntu 64bit OS, customers can install QtCreator as shown below:
+
+```
+$ cd <WORKDIR>
+$ cp /media/cdrom/03-Tools/Qt/qt-creator-opensource-linux-x86_64-4.1.0.run .
+$ chmod a+x qt-creator-opensource-linux-x86_64-4.1.0.run
+$ sudo ./qt-creator-opensource-linux-x86_64-4.1.0.run
+```
+
+QtCreator will be installed on Ubuntu OS step by step automatically.

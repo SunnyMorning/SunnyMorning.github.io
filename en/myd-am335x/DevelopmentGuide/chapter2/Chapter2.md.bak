@@ -1,0 +1,42 @@
+---
+title: 2. Deploy development environment
+date: 2018-04-10 15:49:59
+tags: [AM335X, Cross Compiler]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+This section describes the tools and environment, tool chain settings, development environment validation.
+
+**PC development environment:** Ubuntu12.04/Ubuntu14.04/Ubuntu16.04 64bit Desktop
+
+**Cross compiler:** gcc5.3(Linaro GCC 2016.02)
+
+## Hardware debugging environment structures
+* MYD-AM335X Hardware debugging environment structures：
+
+Connect the debug serial port J12 to the PC,set the baudrate of serial port on host PC to 115,200-8-n-1. Specific as follows:
+![Figure 2-1 MYD-AM335X Hardware Debugging Interface](/en/myd-am335x/DevelopmentGuide/chapter2/2-1.png)
+
+* MYD-AM335X-Y Hardware debugging environment structures：
+
+Connect the debug serial port J10 to the PC,set the baudrate of serial port on host PC to 115,200-8-n-1. Specific as follows:
+![Figure 2-2 MYD-AM335X-Y Hardware Debugging Interface](/en/myd-am335x/DevelopmentGuide/chapter2/2-2.png)
+
+* MYD-AM335X-J Hardware debugging environment structures：
+
+Connect the debug serial port J3 to the PC,set the baudrate of serial port on host PC to 115,200-8-n-1. Specific as follows:
+![Figure 2-3 MYD-AM335X-J Hardware Debugging Interface](/en/myd-am335x/DevelopmentGuide/chapter2/2-3.png)
+
+## Create a working directory:
+Create a work directory and copy the resources from 04-Linux_Source of our release package to the work directory on ubuntu host PC，<WORKDIR> here is defined by customers according to their development environment.
+
+```c
+$ mkdir -p <WORKDIR>
+$ cp /media/cdrom/04-Linux_Source/* <WORKDIR> -rf
+$ ls  <WORKDIR>
+Bootloader/ Examples/  Filesystem/  Kernel/  Patches/ ToolChain/
+```

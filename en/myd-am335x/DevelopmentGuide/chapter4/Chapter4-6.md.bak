@@ -1,0 +1,70 @@
+---
+title: 4.6 Ethernet
+date: 2018-04-10 15:47:47
+tags: [AM335X, Ethernet]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+This example demonstrates how to use Linux APIs to send and receive data from Network port, please refer to the source code for detail.
+
+**Hardware Preparation: **
+  * Hardware debugging environment to see [chapter2](/en/myd-am335x/DevelopmentGuide/chapter2/chapter2/).
+
+
+  | Board Type | MYD-AM335X | MYD-AM335X-Y | MYD-AM335X-J |
+  | ----| ---- | ---- | ---- |
+  | Network port interface | Cable connection J5 | Cable connection J5 | Cable connection J5|
+
+
+**Software Preparation: **
+  * Linux Kernel 4.1.18
+  * server application
+  * client applicatoin
+
+**Test Steps:**
+
+Copy cross compiled `<WORKDIR>/Examples/network/client` to `/usr/bin` directory of the MYD-AM335x series development board,Copy cross compiled `<WORKDIR>/Examples/network/server` to  ubuntu 12.04.Assume that the ubuntu12.04 ip is 192.168.30.114.
+
+Configure the development board ip：
+```
+ifconfig eth0 192.168.30.122 up
+```
+Configure the network, the development board eth0 connected to the PC with a network cable,to the virtual machine as the server, the development board for the client, first in the virtual machine to execute the following command:
+
+```c
+$./server 192.168.30.122
+```
+
+And then in the development board to execute the following command to see the information sent:
+
+```c
+# ./client 192.168.30.114
+send messages: 1234567890 to 192.168.30.114
+send messages: 1234567890 to 192.168.30.114
+send messages: 1234567890 to 192.168.30.114
+send messages: 1234567890 to 192.168.30.114
+send messages: 1234567890 to 192.168.30.114
+send messages: 1234567890 to 192.168.30.114
+```
+At the same time you can see the virtual machine to receive the data sent by the development board:
+
+```c
+$ ./server 192.168.30.122
+received messages: 1234567890@ from 192.168.30.122
+received messages: 1234567890@ from 192.168.30.122
+received messages: 1234567890@ from 192.168.30.122
+received messages: 1234567890@ from 192.168.30.122
+received messages: 1234567890@ from 192.168.30.122
+received messages: 1234567890@ from 192.168.30.122
+```
+
+
+
+
+
+
+

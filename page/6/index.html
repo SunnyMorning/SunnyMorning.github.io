@@ -161,7 +161,7 @@ var themeMenus = {};
         
           <section id="main">
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter5/Chapter5-1"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-11"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -169,7 +169,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-1/">5.1 Install QtCreator</a>
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-11/">4.11 USB Host</a>
     </h1>
   
 
@@ -177,28 +177,266 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-1/" class="article-date">
-	  <time datetime="2018-04-10T07:46:57.000Z" itemprop="datePublished">April 10, 2018</time>
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-11/" class="article-date">
+	  <time datetime="2018-04-10T07:47:35.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>On Ubuntu 64bit OS, customers can install QtCreator as shown below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;</span><br><span class="line">$ cp /media/cdrom/03-Tools/Qt/qt-creator-opensource-linux-x86_64-4.1.0.run .</span><br><span class="line">$ chmod a+x qt-creator-opensource-linux-x86_64-4.1.0.run</span><br><span class="line">$ sudo ./qt-creator-opensource-linux-x86_64-4.1.0.run</span><br></pre></td></tr></table></figure>
-<p>QtCreator will be installed on Ubuntu OS step by step automatically.</p>
+        <p>&emsp;&emsp;本例程演示通过相关命令来验证USB Host驱动的可行性，实现读写U盘的功能。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
+<li>U盘一个</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USB Host接口</td>
+<td>J3或J4</td>
+<td>J19</td>
+<td>J27</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>mount, umount 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;将U盘连接到开发板USB Host接口，并且执行mount, umount，读写，插拔等操作。插入U盘至USB Host接口时内核提示信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># [  334.568567] usb 2-1.4: new high-speed USB device number 3 using musb-hdrc</span><br><span class="line">[  334.688922] usb 2-1.4: New USB device found, idVendor=1908, idProduct=0226</span><br><span class="line">[  334.696305] usb 2-1.4: New USB device strings: Mfr=0, Product=0, SerialNumber=0</span><br><span class="line">[  334.743502] usb-storage 2-1.4:1.0: USB Mass Storage device detected</span><br><span class="line">[  334.751563] scsi host0: usb-storage 2-1.4:1.0</span><br><span class="line">[  334.762053] usbcore: registered new interface driver usb-storage</span><br><span class="line">[  334.788766] cpu cpu0: clk_voltdm_notifier_handler: Failed to scale voltage(1100000)</span><br><span class="line">: -22</span><br><span class="line">[  334.797531] cpu cpu0: clk_voltdm_notifier_handler: Failed to scale voltage(950000)</span><br><span class="line">: -22</span><br><span class="line">[  334.806827] cpu cpu0: failed to set clock rate: -16</span><br><span class="line">[  334.812093] cpufreq: __target_index: Failed to change cpu frequency: -16</span><br><span class="line">[  335.759638] scsi 0:0:0:0: Direct-Access     Generic  Mass-Storage     1.11 PQ: 0</span><br><span class="line">ANSI: 2</span><br><span class="line">[  336.488565] sd 0:0:0:0: [sda] 15605760 512-byte logical blocks: (7.99 GB/7.44 GiB)</span><br><span class="line">[  336.497237] sd 0:0:0:0: [sda] Write Protect is off</span><br><span class="line">[  336.503459] sd 0:0:0:0: [sda] Mode Sense: 03 00 00 00</span><br><span class="line">[  336.509699] sd 0:0:0:0: [sda] No Caching mode page found</span><br><span class="line">[  336.515366] sd 0:0:0:0: [sda] Assuming drive cache: write through</span><br><span class="line">[  336.531208]  sda: sda1</span><br><span class="line">[  336.552003] sd 0:0:0:0: [sda] Attached SCSI removable disk</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;将U盘挂载到文件系统/mnt目录，并执行基本的查看，读写操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># mount /dev/sda1 /mnt</span><br><span class="line">[  429.892793] FAT-fs (sda1): Volume was not properly unmounted. Some data may be</span><br><span class="line">corrupt. Please run fsck.</span><br><span class="line"># cd /mnt</span><br><span class="line"># ls</span><br><span class="line">1.bmp                mtd                  rootfs.ubi</span><br><span class="line">MLO                  myd_c335x.dtb        spi</span><br><span class="line">audio                myir-linux-examples  u-boot.img</span><br><span class="line">audio1               network              zImage</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;拔下U盘，内核提示信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># [  493.899143] usb 2-1.4: USB disconnect, device number 3</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QtCreator/">QtCreator</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/USB-Host/">USB Host</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-12"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-12/">4.12 USB Device</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-12/" class="article-date">
+	  <time datetime="2018-04-10T07:47:33.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本实例演示通过相关命令来验证USB DEVICE驱动的可行性。使用USB数据线连接开发板的miniUSB接口与电脑端的USB接口，开发板实现一个读卡器功能。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
+<li>TF卡一个</li>
+<li>USB miniB to mini A 线一根</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MINI USB接口</td>
+<td>J2</td>
+<td>J3</td>
+<td>J3</td>
+</tr>
+<tr>
+<td>TF卡接口</td>
+<td>J17</td>
+<td>J12</td>
+<td>J19</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>modprobe 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong></p>
+<p>&emsp;&emsp;开发板上的系统起来后，使用USB mini B to USB A转接线连接开发板与电脑端，其中USB mini B接口连接开发板，USB A接口连接电脑端，插入TF卡,在开发板上运行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># modprobe g_mass_storage stall=0 file=/dev/mmcblk0p1 removable=1</span><br><span class="line">[  687.171803] udc musb-hdrc.0.auto: registering UDC driver [g_mass_storage]</span><br><span class="line">[  687.179455] Mass Storage Function, version: 2009/09/11</span><br><span class="line">[  687.184933] LUN: removable file: (no medium)</span><br><span class="line">[  687.192157] lun0: open backing file: /dev/mmcblk0p1</span><br><span class="line">[  687.197379] LUN: removable file: /dev/mmcblk0p1</span><br><span class="line">[  687.202952] Number of LUNs=1</span><br><span class="line">[  687.206057] g_mass_storage gadget: adding config #1 &apos;Linux File-Backed Storage&apos;</span><br><span class="line">/bf2a45cc</span><br><span class="line">[  687.215260] Number of LUNs=1</span><br><span class="line">[  687.219060] g_mass_storage gadget: I/O thread pid: 185</span><br><span class="line">[  687.224576] g_mass_storage gadget: adding &apos;Mass Storage Function&apos;/dc896b00 to</span><br><span class="line">config &apos;Linux File-Backed Storage&apos;/bf2a45cc</span><br><span class="line">[  687.236802] g_mass_storage gadget: cfg 1/bf2a45cc speeds: high full</span><br><span class="line">[  687.243534] g_mass_storage gadget:   interface 0 = Mass Storage Function/dc896b00</span><br><span class="line">[  687.252005] g_mass_storage gadget: Mass Storage Gadget, version: 2009/09/11</span><br><span class="line">[  687.259466] g_mass_storage gadget: userspace failed to provide iSerialNumber</span><br><span class="line">[  687.266948] g_mass_storage gadget: g_mass_storage ready</span><br><span class="line">[  687.273141] g_mass_storage musb-hdrc.0.auto: usb_gadget_udc_start</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;g_mass_storage 驱动加载成功之后， PC端会识别到一个可移动磁盘，磁盘内容正是TF上的内容，至此就实现了读卡器的功能。</p>
+<p>&emsp;&emsp;除此之外，通过加载不同的gadget模块驱动，开发板可以实现不同的功能，如g_ether实现RNDIS网卡的功能等等。这里不一一列举。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/USB-Device/">USB Device</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-13"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/">4.13 SDIO WiFi</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/" class="article-date">
+	  <time datetime="2018-04-10T07:47:31.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本实例演示通过相关命令来验证SDIO Wi-Fi驱动的可行性。开发板上集成了一块SDIO无线网卡，通过相关配置后实行无线连网的功能。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2/">部署开发环境</a>中的硬件调试环境搭建部分。</li>
+<li>MYD-AM335X-Y开发板一块</li>
+</ul>
+<blockquote>
+<p><strong>注意：MYD-AM335X和MYD-AM335X-J无板载SDIO，详情点击<a href="http://www.myir-tech.com/product/MY-WF004S.htm" target="_blank" rel="noopener">SDIO WiFi</a>。</strong></p>
+</blockquote>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>wpa_supplicant 应用程序</li>
+<li>wpa_cli 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;开发板上的系统起来后，在开发板上运行如下命令：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ifconfig eth0 down</span></span><br><span class="line"># wpa_supplicant -iwlan0 -Dwext -B -c /etc/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;使用wpa_cli配置网络：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># wpa_cli</span><br><span class="line">&gt; scan</span><br><span class="line">OK</span><br><span class="line">&gt; scan_r</span><br><span class="line">&gt; scan_r</span><br><span class="line">bssid / frequency / signal level / flags / ssid</span><br><span class="line"><span class="number">30</span>:fc:<span class="number">68</span>:<span class="number">9</span>a:e8:<span class="number">99</span>       <span class="number">2412</span>    <span class="number">-43</span>     [WPA-PSK-CCMP][WPA2-PSK-CCMP][ESS]</span><br><span class="line">MYIR_TECH</span><br><span class="line">&gt; remove_n all</span><br><span class="line">OK</span><br><span class="line">&gt; add_n</span><br><span class="line"><span class="number">0</span></span><br><span class="line">&gt; set_n <span class="number">0</span> ssid <span class="string">"MYIR_TECH"</span></span><br><span class="line">OK</span><br><span class="line">&gt; set_n <span class="number">0</span> psk <span class="string">"myir2016"</span></span><br><span class="line">OK</span><br><span class="line">&gt; enable_n <span class="number">0</span></span><br><span class="line">OK</span><br><span class="line">&gt; quit</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;通过DHCP获取IP地址：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># udhcpc -n -i wlan0</span></span><br><span class="line">udhcpc: started, v1<span class="number">.25</span><span class="number">.1</span></span><br><span class="line">udhcpc: sending discover</span><br><span class="line">udhcpc: sending select <span class="keyword">for</span> <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span></span><br><span class="line">udhcpc: lease of <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span> obtained, lease time <span class="number">3600</span></span><br><span class="line">deleting routers</span><br><span class="line">adding dns <span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line">adding dns <span class="number">201.104</span><span class="number">.111</span><span class="number">.114</span></span><br><span class="line">adding dns <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;通过ping server检查网络是否联通:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ping 192.168.30.137</span></span><br><span class="line">PING <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span> (<span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>): <span class="number">56</span> data bytes</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">0</span> ttl=<span class="number">64</span> time=<span class="number">75.532</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">1</span> ttl=<span class="number">64</span> time=<span class="number">4.074</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">2</span> ttl=<span class="number">64</span> time=<span class="number">3.461</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">3</span> ttl=<span class="number">64</span> time=<span class="number">12.684</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">4</span> ttl=<span class="number">64</span> time=<span class="number">11.986</span> ms</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SDIO-WiFi/">SDIO WiFi</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter5/Chapter5"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter5/Chapter5/">5. Qt开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter5/Chapter5/" class="article-date">
+	  <time datetime="2018-04-10T07:46:59.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;在<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/chapter3-3/">3.3节</a>中使用Buildroot构建系统时，我们得到了QT应用的构建工具qmake，可以用它来生成QT应用程序的Makefile和各种工程文件，然后通过交叉编译得到可执行的QT应用程序。<br>&emsp;&emsp;如果开发大型的应用，还需要用到专门的集成开发环境QtCreator。在我们产品发布资料中<em>03-Tools</em>目录下提供了一个Ubuntu 64位系统下的QtCreator安装包qt-creator-opensource-linux-x86_64-4.1.0.run。<br>&emsp;&emsp;下面的章节将会介绍集成开发环境QtCreator的安装，配置和开发的过程，并使用QtCreator创建一个简单的演示程序在MYD-AM335X 系列开发板上运行。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QT5/">QT5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QtCreator/">QtCreator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/开发环境/">开发环境</a></li></ul>
 
       
             
@@ -326,78 +564,6 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter5/Chapter5-2"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-2/">5.2 Config QtCreator</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-2/" class="article-date">
-	  <time datetime="2018-04-10T07:46:55.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>Config Build&amp;Run Environment:</li>
-</ul>
-<p>Open QtCreator, choose <code>Tools</code>-&gt;<code>Options</code>, then the <code>Build &amp; Run</code> dialog popups<code>.
-Please choose the</code>Compilers` tab to set compiler for QtCreator as shown below:</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_1.png" alt="Figure 5-2-1 Settings of Compiler"></p>
-<p>Press <code>Add</code> button at the right side of this dialog, choose <code>Custom</code> in the dropdown list, and then set <code>Name</code>, <code>Compiler path</code>, <code>Make path</code> 和 <code>ABI</code> as shown below.<br>After complete, press the <code>Apply</code> button to save.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_2.png" alt="Figure 5-2-2 Add Compiler for QtCreator"></p>
-<p>At the same dialog, choose <code>Qt Version</code> Tab to add qmake, at the right side of this dialog, press <code>Add</code> button, then a new dialog popups,<br>please choose the qmake tools described at <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin/</code>. After complete, press <code>Open</code> to set qmake, and then <code>Apply</code> to save.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_3.png" alt="Figure 5-2-3 Choose Qmake"></p>
-<p>In the <code>Build&amp;Run</code> window, continue to choose <code>Kits</code> tab, and at the right side of this dialog, press <code>Add</code> button, then add settings of running environment for QT5 application. In the <code>Sysroot</code> editbox, write the path of cross compile toolchain, in the <code>Compiler</code> and <code>Qt Version</code> editboxs, write the settings being set before, set <code>Debugger</code> to <code>None</code>, set <code>CMake Tools</code> to default as shown below:</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_4.png" alt="Figure 5-2-4 Add Kits for QtCreator"></p>
-<ul>
-<li>Create Helloworld Project:</li>
-</ul>
-<p>In the main menu of QtCreate, choose <code>File</code>-&gt;<code>New File or Project</code>, and in the popup dialog, choose <code>Application</code>-&gt;<code>Qt Widgets Application</code> as shown below:</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_5.png" alt="Figure 5-2-5 Create a QT Widgets Application"></p>
-<p>After pressing <code>Choose...</code> button, the <code>Qt Widgets Application</code> settings dialog popups, please set the name and path of the project as shown below in <code>Name</code> and <code>Create in</code> editboxs as shown below:</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_6.png" alt="Figure 5-2-6 Set the Name and Path of the Project"></p>
-<p>Press <code>Next</code> button and choose the setting for <code>Kits</code> as below:</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_7.png" alt="Figure 5-2-7 Set Kits for the Project"></p>
-<p>Choose the base class of the project as shown below:</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_8.png" alt="Figure 5-2-8 Choose Base Class"></p>
-<p>Press <code>Finish</code> button to create and save the project.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_9.png" alt="Figure 5-2-9  Finish Creating a New Project"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QtCreator/">QtCreator</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
     <article id="post-myd-am335x/DevelopmentGuide/chapter5/Chapter5-3"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -445,65 +611,6 @@ Please choose the</code>Compilers` tab to set compiler for QtCreator as shown be
       
   <span class="ico-tags"></span>
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/工具链/">工具链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/开发环境/">开发环境</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter5/Chapter5-3"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-3/">5.3 Build QT Application</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-3/" class="article-date">
-	  <time datetime="2018-04-10T07:46:53.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>In the previous section, a QT5 project named as <code>helloworld</code> has been created.<br>It is shown in the project manage of QtCreator as below:</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_3_1.png" alt="Figure 5-3-1 Project Manager of QtCreator"></p>
-<p>Double click the <code>mainwindow.ui</code> at the left side to open the <code>Design</code> view for designing a UI for helloworld project visually.<br>Please drag a <code>Label</code> widget to the center of the mainwindow from the widgets list, double click the label and input `Hello, world!”.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_3_2.png" alt="Figure 5-3-2 UI Design View"></p>
-<p>After complete, choose <code>Build</code>-&gt;<code>Build Project</code> in the main menu of QtCreator to build the helloworld project.<br>Some log information outputs to the <code>Compile Output</code> sub window during compiling, in case of any erros and warning, please fix them and build again.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_3_3.png" alt="Figure 5-3-3 Build Project"></p>
-<p>After building,  a binary format QT5 application is generated at <em>~/build-helloworld-myir_dev_kit-Debug/</em>, please use <code>file</code> command to check it and<br>make sure it can work on ARM embedded Linux system as below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file helloworld</span><br><span class="line">helloworld: ELF 32-bit LSB executable, ARM, version 1 (GNU/Linux), dynamically linked</span><br><span class="line"> (uses shared libs), for GNU/Linux 4.1.0, not stripped</span><br></pre></td></tr></table></figure>
-<p>Finaly, please copy the binary format application <code>helloworld</code> to <code>/usr/bin</code> directory of MYD-AM335X series development board and execute as below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># helloworld  --platform linuxfb:fb=/dev/fb0</span><br></pre></td></tr></table></figure>
-<p>A Window with a <code>Hello,World!</code> text label displays on the LCD screen as below:</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_3_4.png" alt="Figure 5-3-4 Execute QT5 Application"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/QT-Application/">QT Application</a></li></ul>
 
       
             
@@ -697,202 +804,6 @@ Please choose the</code>Compilers` tab to set compiler for QtCreator as shown be
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter6/Chapter6"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter6/Chapter6/">6. Update System</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter6/Chapter6/" class="article-date">
-	  <time datetime="2018-04-10T07:45:59.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This section introduces the Linux system tf card boot, NAND Flash burn,NFS ROOT file system mount.<br>CD image file description：</p>
-<table>
-<thead>
-<tr>
-<th>File Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MLO</td>
-<td>First stage bootloader（SPL)</td>
-</tr>
-<tr>
-<td>u-boot.img</td>
-<td>Second stage bootloader</td>
-</tr>
-<tr>
-<td>uEnv.txt</td>
-<td>Default environment variables for U-boot</td>
-</tr>
-<tr>
-<td>uEnv_ramdisk.txt</td>
-<td>Environment variables for boot ramdisk images on TF/SD card,Need to be renamed to uEnv.txt</td>
-</tr>
-<tr>
-<td>zImage</td>
-<td>Kernel image</td>
-</tr>
-<tr>
-<td>myd_c335x.dtb</td>
-<td>Device tree binary for MYD-AM335X</td>
-</tr>
-<tr>
-<td>myd_y335x.dtb</td>
-<td>Device tree binary for MYD-AM335X-Y</td>
-</tr>
-<tr>
-<td>myd_j335x.dtb</td>
-<td>Device tree binary for MYD-AM335X-J</td>
-</tr>
-<tr>
-<td>rootfs.tar.gz</td>
-<td>ramdisk filesystem compressed by gzip</td>
-</tr>
-<tr>
-<td>rootfs.ubi</td>
-<td>UBIFS filesystem image</td>
-</tr>
-<tr>
-<td>ramdisk.gz</td>
-<td>ramdisk filesystem compressed by gzip</td>
-</tr>
-<tr>
-<td>sdcard.img</td>
-<td>TF/SD/EMMC disk image</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Note: Startup of the MYD-AM335X Before starting the development board, note the connection of the JP8 jumper, connect JP8-1 and JP8-2 will boot system from SD Card, JP8-2 and JP8-3 will boot system from NandFlash. To effect JP8’S connection modification, please repower up the board after setting the jumpers. MYD-AM335X-Y uses JP1, MYD-AM335X-J uses JP6.</strong></p>
-</blockquote>
-<p>There are four boot modes for <code>MYD-AM335X</code> series development board to run embedded Linux system:</p>
-<ol>
-<li>Boot from TF/SD card(EXT4 file system).</li>
-<li>Boot from TF/SD card(Ramdisk file system).</li>
-<li>Boot from NAND Flash（Ubi file system).</li>
-<li>Boot from Ethernet（NFS root for debug）.</li>
-</ol>
-<h2 id="Boot-from-TF-SD-card-EXT4-file-system"><a href="#Boot-from-TF-SD-card-EXT4-file-system" class="headerlink" title="Boot from TF/SD card(EXT4 file system)"></a>Boot from TF/SD card(EXT4 file system)</h2><blockquote>
-<p><strong>Note: Writing <code>sdcard.img</code> will format the TF card, please backup important files.</strong></p>
-</blockquote>
-<p>After building Buildroot, a TF/SD card image file named as <code>sdcard.img</code> is generated at <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>.<br>The ‘sdcard.img’ consists of two partitions, one is FAT partition contains <code>MLO</code>, <code>u-boot.img</code>, <code>zImage</code>, <code>uEnv.txt</code> and device tree binary files for MYD-AM335x series development board, the other partition is EXT4 partition, it will be used as the root partition of Linux.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter6/6_1.png" alt="Figure 6-1  Write `sdcard.img` to TF/SD card with `win32diskimager`"></p>
-<ul>
-<li>Put a TF card into the card reader, and connect the card reader to Windows host PC.</li>
-<li>Write <code>sdcard.img</code> to the TF card with win32diskimager.exe as shown in Figure 6-1 above.</li>
-<li>After writing, power off the MYD-AM335x series development board, put the TF card to its TF slot(J19), set the board to boot from TF/SD card by J5.</li>
-<li>Power on the MYD-AM335x series development board, it will boot from TF card and mount the second partition of the TF card as root file system.</li>
-</ul>
-<h2 id="Boot-from-TF-SD-card-Ramdisk-file-system"><a href="#Boot-from-TF-SD-card-Ramdisk-file-system" class="headerlink" title="Boot from TF/SD card(Ramdisk file system)"></a>Boot from TF/SD card(Ramdisk file system)</h2><blockquote>
-<p><strong>Note: HP USB Disk Storage Format Tool will clear original partitions of the TF card. To save the partitions, please use the formatting software provided by the computer system.</strong></p>
-</blockquote>
-<ul>
-<li><p>Format TF card<br>Please use “HP USB Disk Storage Format Tool 2.0.6” from CD directory “03-Tools” to format TF card.</p>
-<p>  1.Insert MMC/SD card into the card reader ,then connect the reader with the computer.</p>
-<p>  2.Open the HP USB Disk Storage Format Tool, the following steps will show in detail:</p>
-</li>
-</ul>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter6/6_2.png" alt="Figure 6-2 Formate TF Card with `HP USB Disk Storage Format Tool 2.0.6`"></p>
-<pre><code>3.Select “FAT32”
-
-4.Click “Start”.
-
-5.When the formatting process is completed, click “OK”.
-</code></pre><ul>
-<li>Update the images.</li>
-</ul>
-<p>Copy all files under directory “02-Images\Linux-image” from the CD to the TF card. Then insert the TF card to the slot on the development board, Connect the corresponding board to set the start mode of the jumper cap 1-2 Pin, power on the board again,Enter root login.</p>
-<h2 id="Boot-from-NAND-Flash（ubi-file-system"><a href="#Boot-from-NAND-Flash（ubi-file-system" class="headerlink" title="Boot from NAND Flash（ubi file system)"></a>Boot from NAND Flash（ubi file system)</h2><p>Update of NAND boot image needs the aid of u-boot. Whether or not NAND Flash has data, the u-boot booted through TF card can be used to update NAND Flash images.</p>
-<ul>
-<li><p>Preparation</p>
-<p>  1.Format the TF card to FAT or FAT32 file system by “HP USB Disk Storage Format Tool 2.0.6” from directory “03-Tools/” of CD.</p>
-<p>  2.Copy “MLO”, “u-boot.img”, “zImage”,”myd_*335x.dtb” and “rootfs.ubi” image files under directory “02-Images\Linux-image” to the TF card from the CD.</p>
-</li>
-<li><p>Update</p>
-<p>  Insert the TF card with the system images into the development board, Connect the corresponding board to set the boot mode of the jumper cap 1-2 pin, power on and boot it. Press any key on the PC keyboard to enter the u-boot according to the following prompts:</p>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">U-Boot <span class="number">2016.05</span> (Jan <span class="number">09</span> <span class="number">2017</span> - <span class="number">19</span>:<span class="number">37</span>:<span class="number">43</span> +<span class="number">0800</span>)</span><br><span class="line"></span><br><span class="line">       Watchdog enabled</span><br><span class="line">I2C:   ready</span><br><span class="line">DRAM:  <span class="number">512</span> MiB</span><br><span class="line">NAND:  <span class="number">512</span> MiB</span><br><span class="line">MMC:   OMAP SD/MMC: <span class="number">0</span>, OMAP SD/MMC: <span class="number">1</span></span><br><span class="line">*** Warning - bad CRC, <span class="keyword">using</span> <span class="keyword">default</span> environment</span><br><span class="line"></span><br><span class="line">Net:   cpsw</span><br><span class="line">Press SPACE to <span class="built_in">abort</span> autoboot in <span class="number">2</span> seconds</span><br><span class="line">MYIR&gt;#</span><br></pre></td></tr></table></figure>
-<pre><code>* After entering the u-boot command line, input “run updatesys” from the PC keyboard to start automatic updating process:
-</code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">MYIR&gt;<span class="meta"># run updatesys</span></span><br><span class="line"></span><br><span class="line">NAND erase.chip: device <span class="number">0</span> whole chip</span><br><span class="line">Erasing at <span class="number">0x1ffe0000</span> -- <span class="number">100</span>% complete.</span><br><span class="line">OK</span><br><span class="line"><span class="keyword">switch</span> to partitions #<span class="number">0</span>, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">reading MLO</span><br><span class="line"><span class="number">55092</span> bytes read in <span class="number">10</span> ms (<span class="number">5.3</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0x0</span>, size <span class="number">0xd734</span></span><br><span class="line"> <span class="number">55092</span> bytes written: OK</span><br><span class="line">reading myd_c335x.dtb</span><br><span class="line"><span class="number">39229</span> bytes read in <span class="number">10</span> ms (<span class="number">3.7</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0x80000</span>, size <span class="number">0x993d</span></span><br><span class="line"> <span class="number">39229</span> bytes written: OK</span><br><span class="line">reading u-boot.img</span><br><span class="line"><span class="number">321300</span> bytes read in <span class="number">34</span> ms (<span class="number">9</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0xc0000</span>, size <span class="number">0x4e714</span></span><br><span class="line"> <span class="number">321300</span> bytes written: OK</span><br><span class="line">reading zImage</span><br><span class="line"><span class="number">4480016</span> bytes read in <span class="number">396</span> ms (<span class="number">10.8</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0x200000</span>, size <span class="number">0x445c10</span></span><br><span class="line"> <span class="number">4480016</span> bytes written: OK</span><br><span class="line">reading rootfs.ubi</span><br><span class="line"><span class="number">24248320</span> bytes read in <span class="number">2111</span> ms (<span class="number">11</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0xa00000</span>, size <span class="number">0x1720000</span></span><br><span class="line"> <span class="number">24248320</span> bytes written: OK</span><br><span class="line">MYIR&gt;#</span><br></pre></td></tr></table></figure>
-<p>After the system is updated, it will automatically u-boot the command line mode，Power off the TF card, connect the corresponding board to set the boot mode of the jumper cap 2-3 pin,To the development board to restart the power can be started from the Nand Flash, enter the root login.</p>
-<h2 id="Boot-from-Ethernet（NFS-root-for-debug）"><a href="#Boot-from-Ethernet（NFS-root-for-debug）" class="headerlink" title="Boot from Ethernet（NFS root for debug）"></a>Boot from Ethernet（NFS root for debug）</h2><p>After building Buildroot, a compressed package named as <code>rootfs.tar.gz</code> is generated at <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>.<br>This package can be used to work as NFS root for MYD-AM335X series development board.  In order to boot from ethernet, TFTP and NFS services should be installed and configed as below:</p>
-<p><strong>Install TFTP Service</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install tftp-hpa tftpd-hpa</span><br></pre></td></tr></table></figure>
-<p><strong>Config TFTP Service</strong></p>
-<p>Create a work directory for TFTP, open the configuration file for TFTP as shown below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p  &lt;WORKDIR&gt;/tftpboot</span><br><span class="line">$ chmod 777 &lt;WORKDIR&gt;/tftpboot</span><br><span class="line">$ sudo vi /etc/default/tftpd-hpa</span><br></pre></td></tr></table></figure>
-<p>Add or modify the parameters as shown below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TFTP_DIRECTORY=&quot;&lt;WORKDIR&gt;/tftpboot&quot;</span><br><span class="line">TFTP_OPTIONS=&quot;-l -c -s&quot;</span><br></pre></td></tr></table></figure>
-<p><strong>Restart TFTP Service</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service tftpd-hpa restart</span><br></pre></td></tr></table></figure>
-<p>Copy the <code>MLO</code>, <code>u-boot.img</code>, <code>zImage</code>, <code>ramdisk.gz</code> and device tree binary files to the work directory of TFTP service,<br>then users can load these image files to the RAM of MYD-AM335X series development board by TFTP in U-boot console, it is shown below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;# help tftpboot</span><br><span class="line">tftpboot - boot image via network using TFTP protocol</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line">tftpboot [loadAddress] [[hostIPaddr:]bootfilename]</span><br><span class="line">&gt;# tftpboot $&#123;loadaddr&#125; 192.168.1.111:zImage</span><br></pre></td></tr></table></figure>
-<p><strong>Install NFS Service</strong></p>
-<p>NFS(Network File System) is a file system can be mounted remotely through network. A directory on NFS server can be used as the root file system<br>of an embedded Linux system. The installation and configuration of NFS service are described below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nfs-kernel-server</span><br></pre></td></tr></table></figure>
-<p><strong>Config NFS Service</strong></p>
-<p>Edit the <code>/etc/exports</code> file of NFS server, and export a directory at the end of file:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/exports</span><br></pre></td></tr></table></figure>
-<p>Add or modify the directory to be exported , such as <code>/home/myir/rootfs</code> has been added as below:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/myir/rootfs *(rw,nohide,insecure,no_subtree_check,async,no_root_squash)</span><br></pre></td></tr></table></figure>
-<p><strong>Restart NFS service</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /home/myir/rootfs</span><br><span class="line">$ sudo tar zxvf  &lt;WORKDIR&gt;/images/rootfs.tar.gz</span><br><span class="line">$ sudo service nfs-kernel-server restart</span><br></pre></td></tr></table></figure>
-<p><strong>Verify NFS service on NFS server</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mount -t nfs 127.0.0.1:/home/myir/rootfs /mnt</span><br></pre></td></tr></table></figure>
-<p><strong>Mount the NFS ROOT filesystem</strong></p>
-<p>If NFS service works well, <code>/home/myir/rootfs</code> will be mounted at <code>/mnt</code> with NFS , and then the NFS server is available for MYD-AM335x series development board.Power Up Modification Startup Mode The jumper cap is started for the nandflash mode，Nandflash must have uboot，The factory has been burned.<br>Copy the zImage and dtb files to the <workdir>/tftpboot directory, as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp &lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images/zImage &lt;WORKDIR&gt;/tftpboot</span><br><span class="line">cp &lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images/myd_c335x.dtb &lt;WORKDIR&gt;/tftpboot</span><br></pre></td></tr></table></figure></workdir></p>
-<p>Decompression rootfs.tar.gz to the /home/myir/rootfs directory as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/myir/rootfs</span><br><span class="line">sudo tar -xvf &lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images/rootfs.tar.gz ./</span><br></pre></td></tr></table></figure></p>
-<p>For example, the IP address of the NFS server is set to <code>192.168.1.111</code>,the IP address of the development board U-boot is set to <code>192.168.1.112</code>,as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;# setenv ipaddr 192.168.1.112</span><br><span class="line">&gt;# setenv serverip 192.168.1.111</span><br></pre></td></tr></table></figure></p>
-<p>Verify the ethernet connection by <code>ping</code> command in U-boot console:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ping 192.168.1.111</span><br></pre></td></tr></table></figure></p>
-<p>Set the development board nfs mount directory and device tree file name, as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;# setenv rootpath /home/myir/rootfs    -- Extract the rootfs.tar.gz to the nfs directory</span><br><span class="line">&gt;# setenv fdtfile myd_c335x.dtb</span><br><span class="line">&gt;# echo $fdtfile                        -- Check if the fdtfile name is correct</span><br></pre></td></tr></table></figure></p>
-<p>Save the relevant environment variables,as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;# saveenv</span><br></pre></td></tr></table></figure></p>
-<p>Under the U-Boot console, execute the netboot command to start the mounted NFS ROOT file system as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;# run netboot</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>Note:Ping serverip normal, run runboot after tftp failure, please check the server side tftp service is normal, as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tftp 192.168.1.111</span><br><span class="line">tftp&gt; get myd_c335x.dtb</span><br><span class="line">tftp&gt; quit                                  --quit tftp</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>If it fails, restart tftp service, as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service tftpd-hpa restart</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Update-System/">Update System</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -994,31 +905,7 @@ Please choose the</code>Compilers` tab to set compiler for QtCreator as shown be
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter1/Chapter1/">1. 软件资源介绍</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
             </div>
 
           </li>
@@ -1030,19 +917,7 @@ Please choose the</code>Compilers` tab to set compiler for QtCreator as shown be
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter1/Chapter1/">1. Software Resources</a></h6>
-              <span>April 10, 2018</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
             </div>
 
           </li>
@@ -1054,7 +929,43 @@ Please choose the</code>Compilers` tab to set compiler for QtCreator as shown be
             
 
               <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
-              <span>April 10, 2018</span>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2-1/">2.1 Install tools</a></h6>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2-2/">2.2 Setup GCC Toolchain</a></h6>
+              <span>April 12, 2018</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3/">3. Bulid System</a></h6>
+              <span>April 12, 2018</span>
             </div>
 
           </li>

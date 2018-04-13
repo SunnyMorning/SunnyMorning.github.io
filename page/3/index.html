@@ -169,62 +169,6 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4/">4. Linux应用程序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4/" class="article-date">
-	  <time datetime="2018-04-10T07:47:59.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本节主要介绍设备驱动功能验证的一些方法，并提供一些基本的应用开发示例实现对设备的操作。</p>
-<p>&emsp;&emsp;MYD-AM335X系列提供了常用外设的演示程序，程序以及源码都位于<code>&lt;WORKDIR&gt;/Examples/</code>，请根据目录内的Makefile或README文件进行编译：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;确保环境变量按下面的示例设置完成:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/</span><br><span class="line">gcc-linaro-5.3-2016.02-x86_64_arm-linux-gnueabihf/bin</span><br><span class="line">$ export ARCH=arm</span><br><span class="line">$ export CROSS_COMPILE=arm-linux-gnueabihf-</span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;编译完Buildroot之后，在myir-buildroot/output/host/usr/bin目录下也生成了一个交叉编译工具链，这里可以使用这个工具链替换上面linaro的工具链：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ export CROSS_COMPILE=arm-myir-linux-gnueabihf-</span><br><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin</span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;用户可以一次完成所有示例的编译，如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples/</span><br><span class="line">$ make OPTION=MYD-AM335X-SERIES</span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;也可以一个一个的单独编译，例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples/&lt;APP_DIR&gt;</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;在开发板上运行程序时需要注意权限.如果无法执行请使用如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># chmod +x *</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/应用程序/">应用程序</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4/">4. Linux Applications Development</a>
     </h1>
   
@@ -272,7 +216,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-1"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -280,7 +224,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-1/">4.1 LCD</a>
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4/">4. Linux应用程序</a>
     </h1>
   
 
@@ -288,50 +232,23 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-1/" class="article-date">
-	  <time datetime="2018-04-10T07:47:57.000Z" itemprop="datePublished">April 10, 2018</time>
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4/" class="article-date">
+	  <time datetime="2018-04-10T07:47:59.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;&emsp;本例程通过对Linux的FrameBuffer操作，实现LCD的彩色画点，画线，以及区域填充的测试。 也可以使用Buildroot文件系统自带的fbv程序显示图片。</p>
-<p><strong>测试硬件环境：</strong></p>
-<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
-<table>
-<thead>
-<tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LCD屏接口</td>
-<td>(MY-TFT070CV2) 7寸电容屏连接J8</td>
-<td>(MY-TFT070CV2) 7寸电容屏连接J7</td>
-<td>(MY-TFT070CV2) 7寸电容屏连接J8</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>注意：本例程中所用的7寸电容屏资料参见<a href="http://www.myir-tech.com/product/my-tft070cv2.htm" target="_blank" rel="noopener">LCD 屏</a>。</strong></p>
-</blockquote>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>framebuffer_test 应用程序</li>
-<li>fbv应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/framebuffer</code>目录下的测试程序framebuffer_test至开发板/usr/bin目录。在Linux终端输入如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/framebuffer_test</span><br><span class="line"># framebuffer_test -h</span><br><span class="line">Usage: framebuffer_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Available options:</span><br><span class="line">-d | --device name   framebuffer device name, default: /dev/fb0</span><br><span class="line">-h | --help          Print this message</span><br><span class="line"></span><br><span class="line"># framebuffer_test -d /dev/fb0</span><br><span class="line">xres:800 &gt;&gt;&gt; yres:480 &gt;&gt;&gt; bpp:32&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;运行程序后，终端显示屏幕信息，LCD屏幕会先后出现多种背景色，然后进行彩色画点，画线，以及区域填充的测试。</p>
-<p>&emsp;&emsp;重启开发板后，将一个24位颜色深度，分辨率800X480的BMP图像拷贝到开发板/media/, 用fbv测试图片显示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># fbv</span><br><span class="line">Usage: fbv [options] image1 image2 image3 ...</span><br><span class="line"></span><br><span class="line">Available options:</span><br><span class="line"> --help        | -h : Show this help</span><br><span class="line"> --alpha       | -a : Use the alpha channel (if applicable)</span><br><span class="line"> --dontclear   | -c : Do not clear the screen before and after displaying the image</span><br><span class="line"> --donthide    | -u : Do not hide the cursor before and after displaying the image</span><br><span class="line"> --noinfo      | -i : Supress image information</span><br><span class="line"> --stretch     | -f : Strech (using a simple resizing routine) the image to fit onto </span><br><span class="line">                      screen if necessary</span><br><span class="line"> --colorstretch| -k : Strech (using a &apos;color average&apos; resizing routine) the image to</span><br><span class="line">                      fit onto screen if necessary</span><br><span class="line"> --enlarge     | -e : Enlarge the image to fit the whole screen if necessary</span><br><span class="line"> --ignore-aspect| -r : Ignore the image aspect while resizing</span><br><span class="line"> --delay &lt;d&gt;   | -s &lt;delay&gt; : Slideshow, &apos;delay&apos; is the slideshow delay in tenths of</span><br><span class="line">                      seconds.</span><br><span class="line"></span><br><span class="line">Keys:</span><br><span class="line"> r            : Redraw the image</span><br><span class="line"> a, d, w, x   : Pan the image</span><br><span class="line"> f            : Toggle resizing on/off</span><br><span class="line"> k            : Toggle resizing quality</span><br><span class="line"> e            : Toggle enlarging on/off</span><br><span class="line"> i            : Toggle respecting the image aspect on/off</span><br><span class="line"> n            : Rotate the image 90 degrees left</span><br><span class="line"> m            : Rotate the image 90 degrees right</span><br><span class="line"> p            : Disable all transformations</span><br><span class="line">Copyright (C) 2000 - 2004 Mateusz Golicz, Tomasz Sterna.</span><br><span class="line">Error: Required argument missing.</span><br><span class="line"></span><br><span class="line"># fbv /meida/800-480.bmp</span><br><span class="line">fbv - The Framebuffer Viewer</span><br><span class="line">/media/800-480.bmp</span><br><span class="line">800 x 480</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;程序执行完毕，图片完整显示在LCD上。</p>
+        <p>&emsp;&emsp;本节主要介绍设备驱动功能验证的一些方法，并提供一些基本的应用开发示例实现对设备的操作。</p>
+<p>&emsp;&emsp;MYD-AM335X系列提供了常用外设的演示程序，程序以及源码都位于<code>&lt;WORKDIR&gt;/Examples/</code>，请根据目录内的Makefile或README文件进行编译：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;确保环境变量按下面的示例设置完成:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/</span><br><span class="line">gcc-linaro-5.3-2016.02-x86_64_arm-linux-gnueabihf/bin</span><br><span class="line">$ export ARCH=arm</span><br><span class="line">$ export CROSS_COMPILE=arm-linux-gnueabihf-</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;编译完Buildroot之后，在myir-buildroot/output/host/usr/bin目录下也生成了一个交叉编译工具链，这里可以使用这个工具链替换上面linaro的工具链：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ export CROSS_COMPILE=arm-myir-linux-gnueabihf-</span><br><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;用户可以一次完成所有示例的编译，如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples/</span><br><span class="line">$ make OPTION=MYD-AM335X-SERIES</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;也可以一个一个的单独编译，例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Examples/&lt;APP_DIR&gt;</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;在开发板上运行程序时需要注意权限.如果无法执行请使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># chmod +x *</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -342,7 +259,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/FrameBuffer/">FrameBuffer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/LCD/">LCD</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/应用程序/">应用程序</a></li></ul>
 
       
             
@@ -429,6 +346,89 @@ var themeMenus = {};
       
 	<span class="ico-folder"></span>
     <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/FrameBuffer/">FrameBuffer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/LCD/">LCD</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-1"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-1/">4.1 LCD</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-1/" class="article-date">
+	  <time datetime="2018-04-10T07:47:57.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程通过对Linux的FrameBuffer操作，实现LCD的彩色画点，画线，以及区域填充的测试。 也可以使用Buildroot文件系统自带的fbv程序显示图片。</p>
+<p><strong>测试硬件环境：</strong></p>
+<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LCD屏接口</td>
+<td>(MY-TFT070CV2) 7寸电容屏连接J8</td>
+<td>(MY-TFT070CV2) 7寸电容屏连接J7</td>
+<td>(MY-TFT070CV2) 7寸电容屏连接J8</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意：本例程中所用的7寸电容屏资料参见<a href="http://www.myir-tech.com/product/my-tft070cv2.htm" target="_blank" rel="noopener">LCD 屏</a>。</strong></p>
+</blockquote>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>framebuffer_test 应用程序</li>
+<li>fbv应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/framebuffer</code>目录下的测试程序framebuffer_test至开发板/usr/bin目录。在Linux终端输入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/framebuffer_test</span><br><span class="line"># framebuffer_test -h</span><br><span class="line">Usage: framebuffer_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Available options:</span><br><span class="line">-d | --device name   framebuffer device name, default: /dev/fb0</span><br><span class="line">-h | --help          Print this message</span><br><span class="line"></span><br><span class="line"># framebuffer_test -d /dev/fb0</span><br><span class="line">xres:800 &gt;&gt;&gt; yres:480 &gt;&gt;&gt; bpp:32&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;运行程序后，终端显示屏幕信息，LCD屏幕会先后出现多种背景色，然后进行彩色画点，画线，以及区域填充的测试。</p>
+<p>&emsp;&emsp;重启开发板后，将一个24位颜色深度，分辨率800X480的BMP图像拷贝到开发板/media/, 用fbv测试图片显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># fbv</span><br><span class="line">Usage: fbv [options] image1 image2 image3 ...</span><br><span class="line"></span><br><span class="line">Available options:</span><br><span class="line"> --help        | -h : Show this help</span><br><span class="line"> --alpha       | -a : Use the alpha channel (if applicable)</span><br><span class="line"> --dontclear   | -c : Do not clear the screen before and after displaying the image</span><br><span class="line"> --donthide    | -u : Do not hide the cursor before and after displaying the image</span><br><span class="line"> --noinfo      | -i : Supress image information</span><br><span class="line"> --stretch     | -f : Strech (using a simple resizing routine) the image to fit onto </span><br><span class="line">                      screen if necessary</span><br><span class="line"> --colorstretch| -k : Strech (using a &apos;color average&apos; resizing routine) the image to</span><br><span class="line">                      fit onto screen if necessary</span><br><span class="line"> --enlarge     | -e : Enlarge the image to fit the whole screen if necessary</span><br><span class="line"> --ignore-aspect| -r : Ignore the image aspect while resizing</span><br><span class="line"> --delay &lt;d&gt;   | -s &lt;delay&gt; : Slideshow, &apos;delay&apos; is the slideshow delay in tenths of</span><br><span class="line">                      seconds.</span><br><span class="line"></span><br><span class="line">Keys:</span><br><span class="line"> r            : Redraw the image</span><br><span class="line"> a, d, w, x   : Pan the image</span><br><span class="line"> f            : Toggle resizing on/off</span><br><span class="line"> k            : Toggle resizing quality</span><br><span class="line"> e            : Toggle enlarging on/off</span><br><span class="line"> i            : Toggle respecting the image aspect on/off</span><br><span class="line"> n            : Rotate the image 90 degrees left</span><br><span class="line"> m            : Rotate the image 90 degrees right</span><br><span class="line"> p            : Disable all transformations</span><br><span class="line">Copyright (C) 2000 - 2004 Mateusz Golicz, Tomasz Sterna.</span><br><span class="line">Error: Required argument missing.</span><br><span class="line"></span><br><span class="line"># fbv /meida/800-480.bmp</span><br><span class="line">fbv - The Framebuffer Viewer</span><br><span class="line">/media/800-480.bmp</span><br><span class="line">800 x 480</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;程序执行完毕，图片完整显示在LCD上。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
@@ -622,6 +622,100 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-3/">4.3 RTC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-3/" class="article-date">
+	  <time datetime="2018-04-10T07:47:53.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This example demonstrates how to use Linux API to read and write real time on RTC，please refer to the source code for detail.<br>Users can also test the RTC with <code>date</code> and <code>hwclock</code> command built with Buildroot.</p>
+<p><strong>Hardware Preparation:</strong></p>
+<ul>
+<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2">chapter2</a>.</li>
+<li>CR1220 3V button cell</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Board Type</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CR1220 button cell</td>
+<td>J1</td>
+<td>J2</td>
+<td>J23</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Software Preparation: </strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>date, hwclock command</li>
+<li>rtc_test application</li>
+</ul>
+<p><strong>Test Steps: </strong></p>
+<ul>
+<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/rtc/rtc_test</code> to <code>/usr/bin</code> directory of the MYD-AM335X seriesdevelopment board, run <code>rtc_test</code> application as below:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/rtc_test</span><br><span class="line"># rtc_test -h</span><br><span class="line">Usage: rtc_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   rtc device name, default: /dev/rtc0</span><br><span class="line">-w | --write  time   time string with format MMDDhhmm[CCYY][.ss]. </span><br><span class="line">                     such as: 111817582016.18</span><br><span class="line">-h | --help          Print this message</span><br><span class="line"></span><br><span class="line"># rtc_test -d /dev/rtc -w 111817582016.18</span><br><span class="line">date/time is updated to:  18-11-2016, 17:58:18.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Power off the development board, wait for a while, power on again and read the rtc time by <code>rtc_test</code> as below:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># rtc_test -d /dev/rtc</span><br><span class="line"></span><br><span class="line">  Current RTC date/time is 18-11-2016, 18:04:32.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Users can also use date and hwclock command to test RTC as below:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># date  081518002016.30        -- Set the system time to August 15, 2016 18:00:30</span><br><span class="line">Mon Aug 15 18:00:30 UTC 2016</span><br><span class="line"># date</span><br><span class="line">Mon Aug 15 18:00:38 UTC 2016</span><br><span class="line"># hwclock -w /dev/rtc          -- Write the system time to rtc</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Power off the development board, wait for a while, power on again and read the rtc time by hwclock as below:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># hwclock -r /dev/rtc</span><br><span class="line">Mon Aug 15 18:11:08 2016  0.000000 seconds</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/RTC/">RTC</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-3/">4.3 RTC</a>
     </h1>
   
@@ -698,7 +792,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-3"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-4"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -706,7 +800,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-3/">4.3 RTC</a>
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-4/">4.4 RS485</a>
     </h1>
   
 
@@ -714,24 +808,21 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-3/" class="article-date">
-	  <time datetime="2018-04-10T07:47:53.000Z" itemprop="datePublished">April 10, 2018</time>
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-4/" class="article-date">
+	  <time datetime="2018-04-10T07:47:51.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>This example demonstrates how to use Linux API to read and write real time on RTC，please refer to the source code for detail.<br>Users can also test the RTC with <code>date</code> and <code>hwclock</code> command built with Buildroot.</p>
-<p><strong>Hardware Preparation:</strong></p>
-<ul>
-<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2">chapter2</a>.</li>
-<li>CR1220 3V button cell</li>
-</ul>
+        <p>&emsp;&emsp;本例程演示MYD-AM335X系列同类型2块开发板如何使用Linux API配置开发板上的RS485并使其发送和接收数据，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong></p>
+<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
 <table>
 <thead>
 <tr>
-<th>Board Type</th>
+<th>板型</th>
 <th>MYD-AM335X</th>
 <th>MYD-AM335X-Y</th>
 <th>MYD-AM335X-J</th>
@@ -739,47 +830,54 @@ var themeMenus = {};
 </thead>
 <tbody>
 <tr>
-<td>CR1220 button cell</td>
-<td>J1</td>
-<td>J2</td>
-<td>J23</td>
+<td>RS485接口</td>
+<td>U16的4，5脚分别连接同类型开发板的4，5脚</td>
+<td>CON2的5，4脚分别连接同类型开发板的5，4脚</td>
+<td>短接JP2和JP3，断开JP5和JP7，J18的1，2，4，5脚分别连接同类型开发板的1，2，4，5脚</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Software Preparation: </strong></p>
+<p><strong>测试软件环境：</strong></p>
 <ul>
 <li>Linux Kernel 4.1.18</li>
-<li>date, hwclock command</li>
-<li>rtc_test application</li>
+<li>tty_test 应用程序</li>
 </ul>
-<p><strong>Test Steps: </strong></p>
-<ul>
-<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/rtc/rtc_test</code> to <code>/usr/bin</code> directory of the MYD-AM335X seriesdevelopment board, run <code>rtc_test</code> application as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/rtc_test</span><br><span class="line"># rtc_test -h</span><br><span class="line">Usage: rtc_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   rtc device name, default: /dev/rtc0</span><br><span class="line">-w | --write  time   time string with format MMDDhhmm[CCYY][.ss]. </span><br><span class="line">                     such as: 111817582016.18</span><br><span class="line">-h | --help          Print this message</span><br><span class="line"></span><br><span class="line"># rtc_test -d /dev/rtc -w 111817582016.18</span><br><span class="line">date/time is updated to:  18-11-2016, 17:58:18.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Power off the development board, wait for a while, power on again and read the rtc time by <code>rtc_test</code> as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># rtc_test -d /dev/rtc</span><br><span class="line"></span><br><span class="line">  Current RTC date/time is 18-11-2016, 18:04:32.</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Users can also use date and hwclock command to test RTC as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># date  081518002016.30        -- Set the system time to August 15, 2016 18:00:30</span><br><span class="line">Mon Aug 15 18:00:30 UTC 2016</span><br><span class="line"># date</span><br><span class="line">Mon Aug 15 18:00:38 UTC 2016</span><br><span class="line"># hwclock -w /dev/rtc          -- Write the system time to rtc</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Power off the development board, wait for a while, power on again and read the rtc time by hwclock as below:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># hwclock -r /dev/rtc</span><br><span class="line">Mon Aug 15 18:11:08 2016  0.000000 seconds</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设备节点</td>
+<td>ttyO1</td>
+<td>ttyO2</td>
+<td>ttyO2 ttyO3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/tty</code>中的可执行程序tty_test拷贝至开发板/usr/bin/目录下，执行<code>tty_test -h</code>, 查看测试程序帮助信息，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -h</span><br><span class="line">Usage: tty_test [options]</span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   tty device name, default: /dev/tty0</span><br><span class="line">-m | --mode  mode   operate mode. 0: RS232, 1: RS485  default mode: 0</span><br><span class="line">-f | --flow  	 			 flow control</span><br><span class="line">-b | --baudrate baudrate  set baudrate, default baudrate: 115200</span><br><span class="line">-l | --loop   	  	 operate circularly</span><br><span class="line">-w | --write  frame	 frame string. such as: 0123456789</span><br><span class="line">-h | --help          Print this message</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;两块开发板一个作为发送端另一个作为接收端，先在一块开发板执行以下命令发送数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -d /dev/ttyO1 -b 9600 -w &quot;123456789&quot; -m 1 -l</span><br><span class="line">SEND:123456789</span><br><span class="line">SEND:123456789</span><br><span class="line">SEND:123456789</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;再在另一开发板执行以下命令接收数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -d /dev/ttyO2 -b 9600 -m 1  -l</span><br><span class="line">RECV:1, total:1</span><br><span class="line">RECV:2, total:1</span><br><span class="line">RECV:3, total:1</span><br><span class="line">RECV:4, total:1</span><br><span class="line">RECV:5, total:1</span><br><span class="line">RECV:6, total:1</span><br><span class="line">RECV:7, total:1</span><br><span class="line">RECV:8, total:1</span><br><span class="line">RECV:9, total:1</span><br><span class="line">RECV:1, total:1</span><br><span class="line">RECV:2, total:1</span><br><span class="line">RECV:3, total:1</span><br><span class="line">RECV:4, total:1</span><br><span class="line">RECV:5, total:1</span><br><span class="line">RECV:6, total:1</span><br><span class="line">RECV:7, total:1</span><br><span class="line">RECV:8, total:1</span><br><span class="line">RECV:9, total:1</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;两块板互换一下角色，结果一样，不再赘述。</p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/RTC/">RTC</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/RS485/">RS485</a></li></ul>
 
       
             
@@ -901,104 +999,6 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-4"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-4/">4.4 RS485</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-4/" class="article-date">
-	  <time datetime="2018-04-10T07:47:51.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本例程演示MYD-AM335X系列同类型2块开发板如何使用Linux API配置开发板上的RS485并使其发送和接收数据，详情请参考源码。</p>
-<p><strong>测试硬件环境：</strong></p>
-<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
-<table>
-<thead>
-<tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RS485接口</td>
-<td>U16的4，5脚分别连接同类型开发板的4，5脚</td>
-<td>CON2的5，4脚分别连接同类型开发板的5，4脚</td>
-<td>短接JP2和JP3，断开JP5和JP7，J18的1，2，4，5脚分别连接同类型开发板的1，2，4，5脚</td>
-</tr>
-</tbody>
-</table>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>tty_test 应用程序</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>设备节点</td>
-<td>ttyO1</td>
-<td>ttyO2</td>
-<td>ttyO2 ttyO3</td>
-</tr>
-</tbody>
-</table>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/tty</code>中的可执行程序tty_test拷贝至开发板/usr/bin/目录下，执行<code>tty_test -h</code>, 查看测试程序帮助信息，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -h</span><br><span class="line">Usage: tty_test [options]</span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   tty device name, default: /dev/tty0</span><br><span class="line">-m | --mode  mode   operate mode. 0: RS232, 1: RS485  default mode: 0</span><br><span class="line">-f | --flow  	 			 flow control</span><br><span class="line">-b | --baudrate baudrate  set baudrate, default baudrate: 115200</span><br><span class="line">-l | --loop   	  	 operate circularly</span><br><span class="line">-w | --write  frame	 frame string. such as: 0123456789</span><br><span class="line">-h | --help          Print this message</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;两块开发板一个作为发送端另一个作为接收端，先在一块开发板执行以下命令发送数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -d /dev/ttyO1 -b 9600 -w &quot;123456789&quot; -m 1 -l</span><br><span class="line">SEND:123456789</span><br><span class="line">SEND:123456789</span><br><span class="line">SEND:123456789</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;再在另一开发板执行以下命令接收数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># tty_test -d /dev/ttyO2 -b 9600 -m 1  -l</span><br><span class="line">RECV:1, total:1</span><br><span class="line">RECV:2, total:1</span><br><span class="line">RECV:3, total:1</span><br><span class="line">RECV:4, total:1</span><br><span class="line">RECV:5, total:1</span><br><span class="line">RECV:6, total:1</span><br><span class="line">RECV:7, total:1</span><br><span class="line">RECV:8, total:1</span><br><span class="line">RECV:9, total:1</span><br><span class="line">RECV:1, total:1</span><br><span class="line">RECV:2, total:1</span><br><span class="line">RECV:3, total:1</span><br><span class="line">RECV:4, total:1</span><br><span class="line">RECV:5, total:1</span><br><span class="line">RECV:6, total:1</span><br><span class="line">RECV:7, total:1</span><br><span class="line">RECV:8, total:1</span><br><span class="line">RECV:9, total:1</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;两块板互换一下角色，结果一样，不再赘述。</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/RS485/">RS485</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -1099,7 +1099,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1111,7 +1111,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
+              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1147,7 +1147,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
+              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1159,7 +1159,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
               <span>April 10, 2018</span>
             </div>
 

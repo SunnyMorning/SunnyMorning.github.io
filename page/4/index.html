@@ -169,6 +169,108 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/">4.5 CAN BUS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/" class="article-date">
+	  <time datetime="2018-04-10T07:47:49.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示MYD-AM335X系列同类型2块开发板使用Linux API让开发板上的CAN实现点对点发送和接收数据，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong></p>
+<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAN接口</td>
+<td>U16的7，8脚分别连接同类型开发板的7，8脚</td>
+<td>CON2的1，2脚分别连接同类型开发板的1，2脚</td>
+<td>断开跳线帽JP7，短接JP4，J17的1，2脚分别连接同类型开发板的1，2脚</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>can_test 应用程序</li>
+<li>ip link应用程序</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作节点</td>
+<td>can1</td>
+<td>can1</td>
+<td>can0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/can</code>中的可执行程序can_test拷贝至开发板/usr/bin/, 分别将两块开发板上的can1通信波特率都设置位50Kbps，并使能can0设备, 如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># can_test --help</span><br><span class="line">Usage: can_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   can device name: can0</span><br><span class="line">-b | --baudrate baudrate   set baudrate, default baudrate:50000</span><br><span class="line">-l | --loop              operate circularly, default not operate circularly!</span><br><span class="line">-w | --write  frame     frame string with format ID#MESSAGE. such as: 123#112233445566</span><br><span class="line">-h | --help                Print this message</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ip link set can1 down</span><br><span class="line"># ip link set can1 type can bitrate 50000 triple-sampling on</span><br><span class="line"># ip link set can1 up</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上述设置波特率的命令在can_test程序初始化时已经执行，不需再次手动执行。两块开发板一个作为发送端另一个作为接收端，先在一块开发板执行以下命令发送数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">[ 5783.823623] c_can_platform 481cc000.can can0: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5786.888723] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5786.895565] NET: Registered protocol family 29</span><br><span class="line">[ 5786.952090] can: raw protocol (rev 20120528)</span><br><span class="line">====== write  frame: ======</span><br><span class="line"> frame_id = 0x123</span><br><span class="line"> frame_len = 6</span><br><span class="line"> frame_data = 0x11 0x22 0x33 0x44 0x55 0x66</span><br><span class="line">===========================</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;再在另一开发板执行以下命令接收数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can1 -l</span><br><span class="line">[ 5888.821956] c_can_platform 481d0000.can can1: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5891.884726] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5891.898711] NET: Registered protocol family 29</span><br><span class="line">[ 5891.952878] can: raw protocol (rev 20120528)</span><br><span class="line">can1 0x123 [6] 0x11 0x22 0x33 0x44 0x55 0x66</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;如果使用-l参数，则会循环执行读写操作，两块板互换一下角色，结果一样，不再赘述。注意, 如果程序运行过程中出现下述错误，可以修改tx_queue_len， 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">  can raw socket write: No buffer space available</span><br><span class="line"></span><br><span class="line"># echo 1000 &gt; /sys/class/net/can0/tx_queue_len</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;两块板互换一下角色，结果一样，不再赘述。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/CAN-BUS/">CAN BUS</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-5"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/">4.5 CAN BUS</a>
     </h1>
   
@@ -263,108 +365,6 @@ var themeMenus = {};
       
 	<span class="ico-folder"></span>
     <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/CAN-BUS/">CAN BUS</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-5"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/">4.5 CAN BUS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5/" class="article-date">
-	  <time datetime="2018-04-10T07:47:49.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本例程演示MYD-AM335X系列同类型2块开发板使用Linux API让开发板上的CAN实现点对点发送和接收数据，详情请参考源码。</p>
-<p><strong>测试硬件环境：</strong></p>
-<p>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
-<table>
-<thead>
-<tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CAN接口</td>
-<td>U16的7，8脚分别连接同类型开发板的7，8脚</td>
-<td>CON2的1，2脚分别连接同类型开发板的1，2脚</td>
-<td>断开跳线帽JP7，短接JP4，J17的1，2脚分别连接同类型开发板的1，2脚</td>
-</tr>
-</tbody>
-</table>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>can_test 应用程序</li>
-<li>ip link应用程序</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>操作节点</td>
-<td>can1</td>
-<td>can1</td>
-<td>can0</td>
-</tr>
-</tbody>
-</table>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;将目录<code>&lt;WORKDIR&gt;/Examples/can</code>中的可执行程序can_test拷贝至开发板/usr/bin/, 分别将两块开发板上的can1通信波特率都设置位50Kbps，并使能can0设备, 如下所示:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># can_test --help</span><br><span class="line">Usage: can_test [options]</span><br><span class="line"></span><br><span class="line">Version 1.0</span><br><span class="line">Options:</span><br><span class="line">-d | --device name   can device name: can0</span><br><span class="line">-b | --baudrate baudrate   set baudrate, default baudrate:50000</span><br><span class="line">-l | --loop              operate circularly, default not operate circularly!</span><br><span class="line">-w | --write  frame     frame string with format ID#MESSAGE. such as: 123#112233445566</span><br><span class="line">-h | --help                Print this message</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ip link set can1 down</span><br><span class="line"># ip link set can1 type can bitrate 50000 triple-sampling on</span><br><span class="line"># ip link set can1 up</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;上述设置波特率的命令在can_test程序初始化时已经执行，不需再次手动执行。两块开发板一个作为发送端另一个作为接收端，先在一块开发板执行以下命令发送数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">[ 5783.823623] c_can_platform 481cc000.can can0: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5786.888723] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5786.895565] NET: Registered protocol family 29</span><br><span class="line">[ 5786.952090] can: raw protocol (rev 20120528)</span><br><span class="line">====== write  frame: ======</span><br><span class="line"> frame_id = 0x123</span><br><span class="line"> frame_len = 6</span><br><span class="line"> frame_data = 0x11 0x22 0x33 0x44 0x55 0x66</span><br><span class="line">===========================</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;再在另一开发板执行以下命令接收数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># chmod 777 /usr/bin/can_test</span><br><span class="line"># can_test -d can1 -l</span><br><span class="line">[ 5888.821956] c_can_platform 481d0000.can can1: setting BTR=1c1d BRPE=0000</span><br><span class="line">[ 5891.884726] can: controller area network core (rev 20120528 abi 9)</span><br><span class="line">[ 5891.898711] NET: Registered protocol family 29</span><br><span class="line">[ 5891.952878] can: raw protocol (rev 20120528)</span><br><span class="line">can1 0x123 [6] 0x11 0x22 0x33 0x44 0x55 0x66</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;如果使用-l参数，则会循环执行读写操作，两块板互换一下角色，结果一样，不再赘述。注意, 如果程序运行过程中出现下述错误，可以修改tx_queue_len， 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># can_test -d can0 -w 123#112233445566</span><br><span class="line">  can raw socket write: No buffer space available</span><br><span class="line"></span><br><span class="line"># echo 1000 &gt; /sys/class/net/can0/tx_queue_len</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;两块板互换一下角色，结果一样，不再赘述。</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
@@ -556,6 +556,66 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/">4.7 NAND Flash</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/" class="article-date">
+	  <time datetime="2018-04-10T07:47:45.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示如何使用Linux API擦除、写入和读取开发板上的NAND Flash，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</li>
+<li>MYD-AM335x系列开发板一块</li>
+</ul>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>mtd_test 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/mtd</code>目录下的测试程序mtd_test至开发板/usr/bin目录。在Linux终端输入如下命令可对nandflash进行擦除、写入和读取数据：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># ./mtd_test /dev/mtd7</span><br><span class="line"></span><br><span class="line">MTD Type: <span class="number">4</span></span><br><span class="line">MTD total size: <span class="number">131072</span> bytes</span><br><span class="line">MTD erase size: <span class="number">131072</span> bytes</span><br><span class="line">MTD write size: <span class="number">2048</span> bytes</span><br><span class="line"></span><br><span class="line">erase the last block at <span class="number">0</span></span><br><span class="line"></span><br><span class="line">erase done!</span><br><span class="line"></span><br><span class="line">writing <span class="number">16</span> bytes data to flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">write done!</span><br><span class="line"></span><br><span class="line">reading data from flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">read done!</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/NAND-Flash/">NAND Flash</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-7"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/">4.7 NAND Flash</a>
     </h1>
   
@@ -595,66 +655,6 @@ var themeMenus = {};
       
 	<span class="ico-folder"></span>
     <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/NAND-Flash/">NAND Flash</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-7"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/">4.7 NAND Flash</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7/" class="article-date">
-	  <time datetime="2018-04-10T07:47:45.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本例程演示如何使用Linux API擦除、写入和读取开发板上的NAND Flash，详情请参考源码。</p>
-<p><strong>测试硬件环境：</strong></p>
-<ul>
-<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</li>
-<li>MYD-AM335x系列开发板一块</li>
-</ul>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>mtd_test 应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/mtd</code>目录下的测试程序mtd_test至开发板/usr/bin目录。在Linux终端输入如下命令可对nandflash进行擦除、写入和读取数据：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># ./mtd_test /dev/mtd7</span><br><span class="line"></span><br><span class="line">MTD Type: <span class="number">4</span></span><br><span class="line">MTD total size: <span class="number">131072</span> bytes</span><br><span class="line">MTD erase size: <span class="number">131072</span> bytes</span><br><span class="line">MTD write size: <span class="number">2048</span> bytes</span><br><span class="line"></span><br><span class="line">erase the last block at <span class="number">0</span></span><br><span class="line"></span><br><span class="line">erase done!</span><br><span class="line"></span><br><span class="line">writing <span class="number">16</span> bytes data to flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">write done!</span><br><span class="line"></span><br><span class="line">reading data from flash...</span><br><span class="line"><span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span></span><br><span class="line">read done!</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
@@ -1107,7 +1107,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1119,7 +1119,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
+              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1155,7 +1155,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
+              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1167,7 +1167,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
               <span>April 10, 2018</span>
             </div>
 

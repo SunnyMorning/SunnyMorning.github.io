@@ -169,6 +169,79 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-10/">4.10 Audio</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-10/" class="article-date">
+	  <time datetime="2018-04-10T07:47:39.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本例程演示如何使用Linux API控制音频的输入与输出，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong><br>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audio接口</td>
+<td>音频输入J11，耳机连接J10</td>
+<td>音频输入J9，耳机连接J8</td>
+<td>音频输入J10，耳机连接J9</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>audio_test 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/audio</code>目录下的测试程序audio_test至开发板/usr/bin目录。将耳机插到音频输出口，音频输入到音频输入口，在Linux终端输入如下命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># audio_test</span><br><span class="line">rate <span class="built_in">set</span> to <span class="number">21999</span>, expected <span class="number">22000</span></span><br><span class="line">Init capture successfully, rate: <span class="number">21999</span>, period_size: <span class="number">128</span></span><br><span class="line">rate <span class="built_in">set</span> to <span class="number">21998</span>, expected <span class="number">21999</span></span><br><span class="line">Period size: <span class="number">128</span> frames, buffer size: <span class="number">256</span> bytes</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Audio/">Audio</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-10"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-10/">4.10 Audio</a>
     </h1>
   
@@ -225,79 +298,6 @@ var themeMenus = {};
       
 	<span class="ico-folder"></span>
     <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Audio/">Audio</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-10"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-10/">4.10 Audio</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-10/" class="article-date">
-	  <time datetime="2018-04-10T07:47:39.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本例程演示如何使用Linux API控制音频的输入与输出，详情请参考源码。</p>
-<p><strong>测试硬件环境：</strong><br>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
-<table>
-<thead>
-<tr>
-<th>板型</th>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audio接口</td>
-<td>音频输入J11，耳机连接J10</td>
-<td>音频输入J9，耳机连接J8</td>
-<td>音频输入J10，耳机连接J9</td>
-</tr>
-</tbody>
-</table>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>audio_test 应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/audio</code>目录下的测试程序audio_test至开发板/usr/bin目录。将耳机插到音频输出口，音频输入到音频输入口，在Linux终端输入如下命令：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># audio_test</span><br><span class="line">rate <span class="built_in">set</span> to <span class="number">21999</span>, expected <span class="number">22000</span></span><br><span class="line">Init capture successfully, rate: <span class="number">21999</span>, period_size: <span class="number">128</span></span><br><span class="line">rate <span class="built_in">set</span> to <span class="number">21998</span>, expected <span class="number">21999</span></span><br><span class="line">Period size: <span class="number">128</span> frames, buffer size: <span class="number">256</span> bytes</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
@@ -675,76 +675,6 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/">4.13 SDIO WiFi</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/" class="article-date">
-	  <time datetime="2018-04-10T07:47:31.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;本实例演示通过相关命令来验证SDIO Wi-Fi驱动的可行性。开发板上集成了一块SDIO无线网卡，通过相关配置后实行无线连网的功能。</p>
-<p><strong>测试硬件环境：</strong></p>
-<ul>
-<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</li>
-<li>MYD-AM335X-Y开发板一块</li>
-</ul>
-<blockquote>
-<p><strong>注意：MYD-AM335X和MYD-AM335X-J无板载SDIO，详情点击<a href="http://www.myir-tech.com/product/MY-WF004S.htm" target="_blank" rel="noopener">SDIO WiFi</a>。</strong></p>
-</blockquote>
-<p><strong>测试软件环境：</strong></p>
-<ul>
-<li>Linux Kernel 4.1.18</li>
-<li>wpa_supplicant 应用程序</li>
-<li>wpa_cli 应用程序</li>
-</ul>
-<p><strong>测试过程：</strong><br>&emsp;&emsp;开发板上的系统起来后，在开发板上运行如下命令：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ifconfig eth0 down</span></span><br><span class="line"># wpa_supplicant -iwlan0 -Dwext -B -c /etc/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;使用wpa_cli配置网络：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># wpa_cli</span><br><span class="line">&gt; scan</span><br><span class="line">OK</span><br><span class="line">&gt; scan_r</span><br><span class="line">&gt; scan_r</span><br><span class="line">bssid / frequency / signal level / flags / ssid</span><br><span class="line"><span class="number">30</span>:fc:<span class="number">68</span>:<span class="number">9</span>a:e8:<span class="number">99</span>       <span class="number">2412</span>    <span class="number">-43</span>     [WPA-PSK-CCMP][WPA2-PSK-CCMP][ESS]</span><br><span class="line">MYIR_TECH</span><br><span class="line">&gt; remove_n all</span><br><span class="line">OK</span><br><span class="line">&gt; add_n</span><br><span class="line"><span class="number">0</span></span><br><span class="line">&gt; set_n <span class="number">0</span> ssid <span class="string">"MYIR_TECH"</span></span><br><span class="line">OK</span><br><span class="line">&gt; set_n <span class="number">0</span> psk <span class="string">"myir2016"</span></span><br><span class="line">OK</span><br><span class="line">&gt; enable_n <span class="number">0</span></span><br><span class="line">OK</span><br><span class="line">&gt; quit</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;通过DHCP获取IP地址：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># udhcpc -n -i wlan0</span></span><br><span class="line">udhcpc: started, v1<span class="number">.25</span><span class="number">.1</span></span><br><span class="line">udhcpc: sending discover</span><br><span class="line">udhcpc: sending select <span class="keyword">for</span> <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span></span><br><span class="line">udhcpc: lease of <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span> obtained, lease time <span class="number">3600</span></span><br><span class="line">deleting routers</span><br><span class="line">adding dns <span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line">adding dns <span class="number">201.104</span><span class="number">.111</span><span class="number">.114</span></span><br><span class="line">adding dns <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;通过ping server检查网络是否联通:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ping 192.168.30.137</span></span><br><span class="line">PING <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span> (<span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>): <span class="number">56</span> data bytes</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">0</span> ttl=<span class="number">64</span> time=<span class="number">75.532</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">1</span> ttl=<span class="number">64</span> time=<span class="number">4.074</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">2</span> ttl=<span class="number">64</span> time=<span class="number">3.461</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">3</span> ttl=<span class="number">64</span> time=<span class="number">12.684</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">4</span> ttl=<span class="number">64</span> time=<span class="number">11.986</span> ms</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SDIO-WiFi/">SDIO WiFi</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-13"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/">4.13 SDIO WiFi</a>
     </h1>
   
@@ -800,6 +730,76 @@ var themeMenus = {};
       
 	<span class="ico-folder"></span>
     <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/SDIO-WiFi/">SDIO WiFi</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter4/Chapter4-13"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/">4.13 SDIO WiFi</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13/" class="article-date">
+	  <time datetime="2018-04-10T07:47:31.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本实例演示通过相关命令来验证SDIO Wi-Fi驱动的可行性。开发板上集成了一块SDIO无线网卡，通过相关配置后实行无线连网的功能。</p>
+<p><strong>测试硬件环境：</strong></p>
+<ul>
+<li>硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</li>
+<li>MYD-AM335X-Y开发板一块</li>
+</ul>
+<blockquote>
+<p><strong>注意：MYD-AM335X和MYD-AM335X-J无板载SDIO，详情点击<a href="http://www.myir-tech.com/product/MY-WF004S.htm" target="_blank" rel="noopener">SDIO WiFi</a>。</strong></p>
+</blockquote>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>wpa_supplicant 应用程序</li>
+<li>wpa_cli 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;开发板上的系统起来后，在开发板上运行如下命令：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ifconfig eth0 down</span></span><br><span class="line"># wpa_supplicant -iwlan0 -Dwext -B -c /etc/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;使用wpa_cli配置网络：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># wpa_cli</span><br><span class="line">&gt; scan</span><br><span class="line">OK</span><br><span class="line">&gt; scan_r</span><br><span class="line">&gt; scan_r</span><br><span class="line">bssid / frequency / signal level / flags / ssid</span><br><span class="line"><span class="number">30</span>:fc:<span class="number">68</span>:<span class="number">9</span>a:e8:<span class="number">99</span>       <span class="number">2412</span>    <span class="number">-43</span>     [WPA-PSK-CCMP][WPA2-PSK-CCMP][ESS]</span><br><span class="line">MYIR_TECH</span><br><span class="line">&gt; remove_n all</span><br><span class="line">OK</span><br><span class="line">&gt; add_n</span><br><span class="line"><span class="number">0</span></span><br><span class="line">&gt; set_n <span class="number">0</span> ssid <span class="string">"MYIR_TECH"</span></span><br><span class="line">OK</span><br><span class="line">&gt; set_n <span class="number">0</span> psk <span class="string">"myir2016"</span></span><br><span class="line">OK</span><br><span class="line">&gt; enable_n <span class="number">0</span></span><br><span class="line">OK</span><br><span class="line">&gt; quit</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;通过DHCP获取IP地址：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># udhcpc -n -i wlan0</span></span><br><span class="line">udhcpc: started, v1<span class="number">.25</span><span class="number">.1</span></span><br><span class="line">udhcpc: sending discover</span><br><span class="line">udhcpc: sending select <span class="keyword">for</span> <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span></span><br><span class="line">udhcpc: lease of <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span> obtained, lease time <span class="number">3600</span></span><br><span class="line">deleting routers</span><br><span class="line">adding dns <span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line">adding dns <span class="number">201.104</span><span class="number">.111</span><span class="number">.114</span></span><br><span class="line">adding dns <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;通过ping server检查网络是否联通:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ping 192.168.30.137</span></span><br><span class="line">PING <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span> (<span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>): <span class="number">56</span> data bytes</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">0</span> ttl=<span class="number">64</span> time=<span class="number">75.532</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">1</span> ttl=<span class="number">64</span> time=<span class="number">4.074</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">2</span> ttl=<span class="number">64</span> time=<span class="number">3.461</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">3</span> ttl=<span class="number">64</span> time=<span class="number">12.684</span> ms</span><br><span class="line"><span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">4</span> ttl=<span class="number">64</span> time=<span class="number">11.986</span> ms</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
@@ -1013,7 +1013,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1025,7 +1025,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
+              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1061,7 +1061,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
+              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1073,7 +1073,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
               <span>April 10, 2018</span>
             </div>
 

@@ -169,6 +169,56 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3/">3. 构建系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3/" class="article-date">
+	  <time datetime="2018-04-10T07:48:59.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;Linux平台上有许多开源的嵌入式linux系统构建框架，这些框架极大地方便了开发者进行嵌入式系统的定制化构建，目前比较常见的有openWRT, Buildroot, Yocto, Arago等等。其中Buildroot功能强大，使用简单，而且采用了类似于linux kernel的配置和编译框架，所以受到广大嵌入式开发人员的欢迎。</p>
+<p>&emsp;&emsp;本节重点介绍使用Buildroot构建文件系统和编译u-boot, kernel镜像的方法，并从这三个部分入手，描述如何使用Buildroot构建一个适合MYD-AM335X系列开发板的嵌入式Linux系统。 在构建文件系统时，还简要介绍了如何通过Buildroot将QT5图形系统集成到文件系统中, 方便用户后续开发QT5的应用程序。</p>
+<p>&emsp;&emsp;TI 官方提供了使用Arago构建系统的方法和相应的文件系统镜像文件，也可以在这款开发板上运行。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Bulidroot/">Bulidroot</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3/">3. Bulid System</a>
     </h1>
   
@@ -211,7 +261,7 @@ var themeMenus = {};
 <!-- Table of Contents -->
 
   
-    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-1"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -219,7 +269,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3/">3. 构建系统</a>
+      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-1/">3.1 Bootloader</a>
     </h1>
   
 
@@ -227,17 +277,41 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3/" class="article-date">
-	  <time datetime="2018-04-10T07:48:59.000Z" itemprop="datePublished">April 10, 2018</time>
+	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-1/" class="article-date">
+	  <time datetime="2018-04-10T07:48:57.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;&emsp;Linux平台上有许多开源的嵌入式linux系统构建框架，这些框架极大地方便了开发者进行嵌入式系统的定制化构建，目前比较常见的有openWRT, Buildroot, Yocto, Arago等等。其中Buildroot功能强大，使用简单，而且采用了类似于linux kernel的配置和编译框架，所以受到广大嵌入式开发人员的欢迎。</p>
-<p>&emsp;&emsp;本节重点介绍使用Buildroot构建文件系统和编译u-boot, kernel镜像的方法，并从这三个部分入手，描述如何使用Buildroot构建一个适合MYD-AM335X系列开发板的嵌入式Linux系统。 在构建文件系统时，还简要介绍了如何通过Buildroot将QT5图形系统集成到文件系统中, 方便用户后续开发QT5的应用程序。</p>
-<p>&emsp;&emsp;TI 官方提供了使用Arago构建系统的方法和相应的文件系统镜像文件，也可以在这款开发板上运行。</p>
+        <p><strong>编译U-Boot</strong><br>&emsp;&emsp;进入Bootloader目录，解压U-boot源码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Bootloader</span><br><span class="line">$ tar -jxvf myir-u-boot.tar.bz2</span><br><span class="line">$ cd myir-u-boot</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;不同的开发板对应不同的配置文件，配置文件位于myir-u-boot/configs/目录。</p>
+<table>
+<thead>
+<tr>
+<th>开发板</th>
+<th>编译选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYD-AM335X</td>
+<td>myd_c335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td>myd_j335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td>myd_y335x_defconfig</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;下面以MYD-AM335X开发板为例，说明u-boot的编译过程：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ make distclean</span><br><span class="line">$ make myd_c335x_defconfig</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;其中第二步make中的配置选项见上表,编译完成后，在u-boot目录下会生成MLO和u-boot.img文件。MYD-AM335X-Y和MYD-AM335X-J的编译和MYD-AM335X类似。</p>
 
       
     </div>
@@ -248,7 +322,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Bulidroot/">Bulidroot</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/u-boot/">u-boot</a></li></ul>
 
       
             
@@ -322,80 +396,6 @@ var themeMenus = {};
       
 	<span class="ico-folder"></span>
     <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/u-boot/">u-boot</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-1"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-1/">3.1 Bootloader</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-1/" class="article-date">
-	  <time datetime="2018-04-10T07:48:57.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>编译U-Boot</strong><br>&emsp;&emsp;进入Bootloader目录，解压U-boot源码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Bootloader</span><br><span class="line">$ tar -jxvf myir-u-boot.tar.bz2</span><br><span class="line">$ cd myir-u-boot</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;不同的开发板对应不同的配置文件，配置文件位于myir-u-boot/configs/目录。</p>
-<table>
-<thead>
-<tr>
-<th>开发板</th>
-<th>编译选项</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MYD-AM335X</td>
-<td>myd_c335x_defconfig</td>
-</tr>
-<tr>
-<td>MYD-AM335X-Y</td>
-<td>myd_j335x_defconfig</td>
-</tr>
-<tr>
-<td>MYD-AM335X-J</td>
-<td>myd_y335x_defconfig</td>
-</tr>
-</tbody>
-</table>
-<p>&emsp;&emsp;下面以MYD-AM335X开发板为例，说明u-boot的编译过程：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ make distclean</span><br><span class="line">$ make myd_c335x_defconfig</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;其中第二步make中的配置选项见上表,编译完成后，在u-boot目录下会生成MLO和u-boot.img文件。MYD-AM335X-Y和MYD-AM335X-J的编译和MYD-AM335X类似。</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
@@ -649,89 +649,6 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/">3.3 Build Filesystem</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/" class="article-date">
-	  <time datetime="2018-04-10T07:48:53.000Z" itemprop="datePublished">April 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>This section covers the buiding of filesystem with Buildroot.</p>
-<h2 id="Preparation-before-Building-Buildroot"><a href="#Preparation-before-Building-Buildroot" class="headerlink" title="Preparation before Building Buildroot"></a>Preparation before Building Buildroot</h2><blockquote>
-<p>Note1: After modifying source code of Kernel or U-boot, Buildroot can not update and build it automatically. Customers should commit it to the master branch of their local git repo manually. </p>
-</blockquote>
-<blockquote>
-<p>Note2: If the source code of Kernel is updated, before building Buildroot again, customers should remove the package “myir-buildroot/dl/linux-master.tar.gz” and the “myir-buildroot/output/build/linux-master” and “myirbuildroot\output\build\linux-headers-master” directories manually. The same to rebuilding of U-boot.</p>
-</blockquote>
-<blockquote>
-<p>Note3：Before building u-boot and kernel with buildroot, users need to create their own git repository for u-boot and kernel, then replace the git path in the configuration files.</p>
-</blockquote>
-<p>Copy the Buildroot source package customized by MYIR Tech from <em>04-Linux_Source/Filesystem/myir-buildroot.tar.gz</em> of our release package to work directory and uncompress it. The content of myir-buildroot.tar.gz is shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al &lt;WORKDIR&gt;/Filesystem/myir-buildroot</span><br><span class="line">arch   CHANGES           configs     dl    linux            output   support</span><br><span class="line">board  Config.in         COPYING     docs  Makefile         package  system</span><br><span class="line">boot   Config.in.legacy  DEVELOPERS  fs    Makefile.legacy  README   toolchain</span><br></pre></td></tr></table></figure></p>
-<p>For more details about the file structure of <code>Buildroot</code>, please refer to Buildroot manual <a href="https://buildroot.org/downloads/manual/manual.html" target="_blank" rel="noopener">https://buildroot.org/downloads/manual/manual.html</a>.The board support files for <code>MYD AM335X</code> series development boards are located at <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_c335x</code>,<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_y335x</code>,<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_j335x</code></p>
-<h2 id="Buildroot-Configuration"><a href="#Buildroot-Configuration" class="headerlink" title="Buildroot Configuration"></a>Buildroot Configuration</h2><p>The configuration files for Buildroot are all located at <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/configs/</code>.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd myir-buildroot</span><br><span class="line">$ make clean</span><br><span class="line">$ make myd_y335x_defconfig</span><br></pre></td></tr></table></figure></p>
-<p>Customers change the configuration by its kernel-like menuconfig.The main configuration for <code>MYD-AM335X-Y</code> development board are listed below.</p>
-<h3 id="Configuration-for-Cross-Compiler"><a href="#Configuration-for-Cross-Compiler" class="headerlink" title="Configuration for Cross Compiler:"></a>Configuration for Cross Compiler:</h3><p>Buildroot can use internal cross compile toolchain generated by Buildroot itself, it can also use external cross compile toolchain. In this document, we choose the internal cross compile toochain, it will be generated and stored to <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin/</code> after compiling.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_toolchain.png" alt="Figure 3-3-1 Configuration for Cross Compiler"></p>
-<h3 id="Configuration-for-System"><a href="#Configuration-for-System" class="headerlink" title="Configuration for System:"></a>Configuration for System:</h3><p>The configuration for system includes the name of the target system, the welcome message, the init subsystem(busybox/systemV/systemd) and device manage system,<br>customers can also set the password for root user by configuration. For MYD-AM335X-Y development board, the password for root is set to <code>MYIRTECH</code> as default, it is shown below.<br>If customers do not need to set password, they no need to config the password.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_system_configuration.png" alt="Figure 3-3-2 Configuration for System"></p>
-<h3 id="Configuration-for-Bootloader"><a href="#Configuration-for-Bootloader" class="headerlink" title="Configuration for Bootloader:"></a>Configuration for Bootloader:</h3><p>The configuration for Bootloader includes the URL of the source code of U-boot, the U-boot configuration file name, the output images of U-boot and so on. They are shown in Figure 3-3-3 below.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_bootloader.png" alt="Figure 3-3-3 Configuration for Bootloader"><br>We fetch the source code of U-boot with git from local repository. Users need to build their own git repository, they can also use other protocols or even local directory. For other protocols, please refer to the Buildroot manual.<br>Create a U-boot git repository from <code>myir-u-boot.tar.gz</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/</span><br><span class="line">$ tar zxvf myir-u-boot.tar.gz</span><br><span class="line">$ cd myir-u-boot</span><br><span class="line">$ git init</span><br><span class="line">$ git add . -f</span><br><span class="line">$ git commit -m &quot;Initial Version&quot; -a</span><br></pre></td></tr></table></figure></p>
-<p>And then modify and replace the two items of the configuration files located at <code>&lt;WORKDIR&gt;/Filesystem/buildroot/configs/myd_y335x_defconfig</code> and <code>&lt;WORKDIR&gt;/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig</code>, as shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BR2_TARGET_UBOOT_CUSTOM_REPO_URL=&quot;~/myir-u-boot/.git&quot;</span><br><span class="line">BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION=&quot;master&quot;</span><br></pre></td></tr></table></figure></p>
-<h3 id="Configuration-for-Kernel"><a href="#Configuration-for-Kernel" class="headerlink" title="Configuration for Kernel:"></a>Configuration for Kernel:</h3><p>The configuration of Kernel is similar to bootloader.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_kernel.png" alt="Figure 3-3-4 Configuration for Kernel"><br>We fetch the source code of Kernel with git from local repository. Users need to build their own git repository, they can also use other protocols or even local directory. For other protocols, please refer to the Buildroot manual.<br>Create a kernel git repository from <code>myir-kernel.tar.gz</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/</span><br><span class="line">$ tar zxvf myir-kernel.tar.gz</span><br><span class="line">$ cd myir-u-boot</span><br><span class="line">$ git init</span><br><span class="line">$ git add . -f</span><br><span class="line">$ git commit -m &quot;Initial Version&quot; -a</span><br></pre></td></tr></table></figure></p>
-<p>And then modify and replace the two items of the configuration files located at <code>&lt;WORKDIR&gt;/Filesystem/buildroot/configs/myd_y335x_defconfig</code> and <code>&lt;WORKDIR&gt;/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig</code>, as shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BR2_TARGET_KERNEL_CUSTOM_REPO_URL=&quot;~/myir-kernel/.git&quot;</span><br><span class="line">BR2_TARGET_KERNEL_CUSTOM_REPO_VERSION=&quot;master&quot;</span><br></pre></td></tr></table></figure></p>
-<h3 id="Configuration-for-Filesystem"><a href="#Configuration-for-Filesystem" class="headerlink" title="Configuration for Filesystem:"></a>Configuration for Filesystem:</h3><p>The configuration for filesystem determines what filesystem images are generated in <em>myir-buildroot/output/images/</em> directory after compiling, If we choose <code>ramdisk</code> in the configuration, we will get a ramdisk filesystem image. EXT2/4, UBIFS, and rootfs tar package can also be create if they are choosed in configuration.</p>
-<p>By the way, the rootfs.tar.gz can be uncompressed and used as the nfsroot directory, it can also be made to other formats of filesystem images by host mtd-utils.</p>
-<p>For example, we can create UBIFS filesystem image without building Buildroot again after doing some modification for rootfs.Firstly, we create a file <code>ubinize.cfg</code> as shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ubifs]</span><br><span class="line">mode=ubi</span><br><span class="line">vol_id=0</span><br><span class="line">vol_type=dynamic</span><br><span class="line">vol_name=rootfs</span><br><span class="line">vol_alignment=1</span><br><span class="line">vol_flags=autoresize</span><br><span class="line">image=rootfs.ubifs</span><br></pre></td></tr></table></figure></p>
-<p>Then, make a UBIFS image with UBIFS tools by the following processes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/sbin</span><br><span class="line">$ tar zxvf rootfs.tar.gz</span><br><span class="line">$ mkfs.ubifs -d rootfs -e 0x1f000 -c 2048 -m 0x800 -x lzo -F -o  rootfs.ubifs</span><br><span class="line">$ ubinize -o rootfs.ubi -m 0x800 -p 0x20000 -s 512 -m 2048 -O 2048 ubinize.cfg</span><br></pre></td></tr></table></figure></p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_filesystem.png" alt="Figure 3-3-5 Configuration for Filesystem"></p>
-<h3 id="Configuration-for-Target-Packages"><a href="#Configuration-for-Target-Packages" class="headerlink" title="Configuration for Target Packages:"></a>Configuration for Target Packages:</h3><p>The configuration for target packages is easier, but it is changed more frequently. Customers can choose some hardware tools, such as I2C-tools, spi-tools, can-utils and so on, build them into the filesystem images for debugging. Some network utils, such as DHCP, TFTP, SSH and so on, can aslo be choosed and built into the filesystem images for production.</p>
-<p>Most commonly used tools are included in the target packages of Buildroot. Customers can also write new target packages and integrate them to Buildroot, please refer to <a href="https://buildroot.org/downloads/manual/manual.html#adding-packages" target="_blank" rel="noopener">https://buildroot.org/downloads/manual/manual.html#adding-packages</a> for details.</p>
-<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_target_packages.png" alt="Figure 3-3-6 Configuration for Target Packages"></p>
-<h2 id="Build-Buildroot"><a href="#Build-Buildroot" class="headerlink" title="Build Buildroot"></a>Build Buildroot</h2><p>Customers can build Buildroot just like building kernel as shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
-<p>An output directory is generated during compilation，The resulting output file is located in the <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>directory.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ls -al output/images</span><br><span class="line">boot.vfat  myd_y335x.dtb  readme.txt   rootfs.cpio.gz     rootfs.ext2  rootfs.tar</span><br><span class="line">rootfs.ubi    sdcard.img  u-boot-spl.bin    uEnv.txt    MLO        ramdisk.gz</span><br><span class="line">rootfs.cpio  rootfs.cpio.uboot  rootfs.ext4  rootfs.tar.gz  rootfs.ubifs  u-boot.img</span><br><span class="line">uEnv_ramdisk.txt  zImage</span><br></pre></td></tr></table></figure></p>
-<p>The bootloader, kernel and all kinds of filesystem images are generated all in one step, they will be introduced in the subsequent section.</p>
-<h2 id="Filesystem-Built-by-Arago"><a href="#Filesystem-Built-by-Arago" class="headerlink" title="Filesystem Built by Arago"></a>Filesystem Built by Arago</h2><p>Customers can also run an demo filesystem image created with Arago on a MYD-AM335X series development board, it was created by TI, please refer to the WIKI page on TI’s website.<br><a href="http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK" target="_blank" rel="noopener">http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK</a>.</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/rootfs/">rootfs</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-3"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
       <a class="article-title" href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/">3.3 构建文件系统</a>
     </h1>
   
@@ -791,6 +708,89 @@ var themeMenus = {};
       
 	<span class="ico-folder"></span>
     <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/rootfs/">rootfs</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/">3.3 Build Filesystem</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/" class="article-date">
+	  <time datetime="2018-04-10T07:48:53.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This section covers the buiding of filesystem with Buildroot.</p>
+<h2 id="Preparation-before-Building-Buildroot"><a href="#Preparation-before-Building-Buildroot" class="headerlink" title="Preparation before Building Buildroot"></a>Preparation before Building Buildroot</h2><blockquote>
+<p>Note1: After modifying source code of Kernel or U-boot, Buildroot can not update and build it automatically. Customers should commit it to the master branch of their local git repo manually. </p>
+</blockquote>
+<blockquote>
+<p>Note2: If the source code of Kernel is updated, before building Buildroot again, customers should remove the package “myir-buildroot/dl/linux-master.tar.gz” and the “myir-buildroot/output/build/linux-master” and “myirbuildroot\output\build\linux-headers-master” directories manually. The same to rebuilding of U-boot.</p>
+</blockquote>
+<blockquote>
+<p>Note3：Before building u-boot and kernel with buildroot, users need to create their own git repository for u-boot and kernel, then replace the git path in the configuration files.</p>
+</blockquote>
+<p>Copy the Buildroot source package customized by MYIR Tech from <em>04-Linux_Source/Filesystem/myir-buildroot.tar.gz</em> of our release package to work directory and uncompress it. The content of myir-buildroot.tar.gz is shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al &lt;WORKDIR&gt;/Filesystem/myir-buildroot</span><br><span class="line">arch   CHANGES           configs     dl    linux            output   support</span><br><span class="line">board  Config.in         COPYING     docs  Makefile         package  system</span><br><span class="line">boot   Config.in.legacy  DEVELOPERS  fs    Makefile.legacy  README   toolchain</span><br></pre></td></tr></table></figure></p>
+<p>For more details about the file structure of <code>Buildroot</code>, please refer to Buildroot manual <a href="https://buildroot.org/downloads/manual/manual.html" target="_blank" rel="noopener">https://buildroot.org/downloads/manual/manual.html</a>.The board support files for <code>MYD AM335X</code> series development boards are located at <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_c335x</code>,<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_y335x</code>,<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_j335x</code></p>
+<h2 id="Buildroot-Configuration"><a href="#Buildroot-Configuration" class="headerlink" title="Buildroot Configuration"></a>Buildroot Configuration</h2><p>The configuration files for Buildroot are all located at <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/configs/</code>.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd myir-buildroot</span><br><span class="line">$ make clean</span><br><span class="line">$ make myd_y335x_defconfig</span><br></pre></td></tr></table></figure></p>
+<p>Customers change the configuration by its kernel-like menuconfig.The main configuration for <code>MYD-AM335X-Y</code> development board are listed below.</p>
+<h3 id="Configuration-for-Cross-Compiler"><a href="#Configuration-for-Cross-Compiler" class="headerlink" title="Configuration for Cross Compiler:"></a>Configuration for Cross Compiler:</h3><p>Buildroot can use internal cross compile toolchain generated by Buildroot itself, it can also use external cross compile toolchain. In this document, we choose the internal cross compile toochain, it will be generated and stored to <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin/</code> after compiling.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_toolchain.png" alt="Figure 3-3-1 Configuration for Cross Compiler"></p>
+<h3 id="Configuration-for-System"><a href="#Configuration-for-System" class="headerlink" title="Configuration for System:"></a>Configuration for System:</h3><p>The configuration for system includes the name of the target system, the welcome message, the init subsystem(busybox/systemV/systemd) and device manage system,<br>customers can also set the password for root user by configuration. For MYD-AM335X-Y development board, the password for root is set to <code>MYIRTECH</code> as default, it is shown below.<br>If customers do not need to set password, they no need to config the password.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_system_configuration.png" alt="Figure 3-3-2 Configuration for System"></p>
+<h3 id="Configuration-for-Bootloader"><a href="#Configuration-for-Bootloader" class="headerlink" title="Configuration for Bootloader:"></a>Configuration for Bootloader:</h3><p>The configuration for Bootloader includes the URL of the source code of U-boot, the U-boot configuration file name, the output images of U-boot and so on. They are shown in Figure 3-3-3 below.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_bootloader.png" alt="Figure 3-3-3 Configuration for Bootloader"><br>We fetch the source code of U-boot with git from local repository. Users need to build their own git repository, they can also use other protocols or even local directory. For other protocols, please refer to the Buildroot manual.<br>Create a U-boot git repository from <code>myir-u-boot.tar.gz</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/</span><br><span class="line">$ tar zxvf myir-u-boot.tar.gz</span><br><span class="line">$ cd myir-u-boot</span><br><span class="line">$ git init</span><br><span class="line">$ git add . -f</span><br><span class="line">$ git commit -m &quot;Initial Version&quot; -a</span><br></pre></td></tr></table></figure></p>
+<p>And then modify and replace the two items of the configuration files located at <code>&lt;WORKDIR&gt;/Filesystem/buildroot/configs/myd_y335x_defconfig</code> and <code>&lt;WORKDIR&gt;/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig</code>, as shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BR2_TARGET_UBOOT_CUSTOM_REPO_URL=&quot;~/myir-u-boot/.git&quot;</span><br><span class="line">BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION=&quot;master&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Configuration-for-Kernel"><a href="#Configuration-for-Kernel" class="headerlink" title="Configuration for Kernel:"></a>Configuration for Kernel:</h3><p>The configuration of Kernel is similar to bootloader.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_kernel.png" alt="Figure 3-3-4 Configuration for Kernel"><br>We fetch the source code of Kernel with git from local repository. Users need to build their own git repository, they can also use other protocols or even local directory. For other protocols, please refer to the Buildroot manual.<br>Create a kernel git repository from <code>myir-kernel.tar.gz</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/</span><br><span class="line">$ tar zxvf myir-kernel.tar.gz</span><br><span class="line">$ cd myir-u-boot</span><br><span class="line">$ git init</span><br><span class="line">$ git add . -f</span><br><span class="line">$ git commit -m &quot;Initial Version&quot; -a</span><br></pre></td></tr></table></figure></p>
+<p>And then modify and replace the two items of the configuration files located at <code>&lt;WORKDIR&gt;/Filesystem/buildroot/configs/myd_y335x_defconfig</code> and <code>&lt;WORKDIR&gt;/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig</code>, as shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BR2_TARGET_KERNEL_CUSTOM_REPO_URL=&quot;~/myir-kernel/.git&quot;</span><br><span class="line">BR2_TARGET_KERNEL_CUSTOM_REPO_VERSION=&quot;master&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Configuration-for-Filesystem"><a href="#Configuration-for-Filesystem" class="headerlink" title="Configuration for Filesystem:"></a>Configuration for Filesystem:</h3><p>The configuration for filesystem determines what filesystem images are generated in <em>myir-buildroot/output/images/</em> directory after compiling, If we choose <code>ramdisk</code> in the configuration, we will get a ramdisk filesystem image. EXT2/4, UBIFS, and rootfs tar package can also be create if they are choosed in configuration.</p>
+<p>By the way, the rootfs.tar.gz can be uncompressed and used as the nfsroot directory, it can also be made to other formats of filesystem images by host mtd-utils.</p>
+<p>For example, we can create UBIFS filesystem image without building Buildroot again after doing some modification for rootfs.Firstly, we create a file <code>ubinize.cfg</code> as shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ubifs]</span><br><span class="line">mode=ubi</span><br><span class="line">vol_id=0</span><br><span class="line">vol_type=dynamic</span><br><span class="line">vol_name=rootfs</span><br><span class="line">vol_alignment=1</span><br><span class="line">vol_flags=autoresize</span><br><span class="line">image=rootfs.ubifs</span><br></pre></td></tr></table></figure></p>
+<p>Then, make a UBIFS image with UBIFS tools by the following processes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/sbin</span><br><span class="line">$ tar zxvf rootfs.tar.gz</span><br><span class="line">$ mkfs.ubifs -d rootfs -e 0x1f000 -c 2048 -m 0x800 -x lzo -F -o  rootfs.ubifs</span><br><span class="line">$ ubinize -o rootfs.ubi -m 0x800 -p 0x20000 -s 512 -m 2048 -O 2048 ubinize.cfg</span><br></pre></td></tr></table></figure></p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_filesystem.png" alt="Figure 3-3-5 Configuration for Filesystem"></p>
+<h3 id="Configuration-for-Target-Packages"><a href="#Configuration-for-Target-Packages" class="headerlink" title="Configuration for Target Packages:"></a>Configuration for Target Packages:</h3><p>The configuration for target packages is easier, but it is changed more frequently. Customers can choose some hardware tools, such as I2C-tools, spi-tools, can-utils and so on, build them into the filesystem images for debugging. Some network utils, such as DHCP, TFTP, SSH and so on, can aslo be choosed and built into the filesystem images for production.</p>
+<p>Most commonly used tools are included in the target packages of Buildroot. Customers can also write new target packages and integrate them to Buildroot, please refer to <a href="https://buildroot.org/downloads/manual/manual.html#adding-packages" target="_blank" rel="noopener">https://buildroot.org/downloads/manual/manual.html#adding-packages</a> for details.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_target_packages.png" alt="Figure 3-3-6 Configuration for Target Packages"></p>
+<h2 id="Build-Buildroot"><a href="#Build-Buildroot" class="headerlink" title="Build Buildroot"></a>Build Buildroot</h2><p>Customers can build Buildroot just like building kernel as shown below:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
+<p>An output directory is generated during compilation，The resulting output file is located in the <code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>directory.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ls -al output/images</span><br><span class="line">boot.vfat  myd_y335x.dtb  readme.txt   rootfs.cpio.gz     rootfs.ext2  rootfs.tar</span><br><span class="line">rootfs.ubi    sdcard.img  u-boot-spl.bin    uEnv.txt    MLO        ramdisk.gz</span><br><span class="line">rootfs.cpio  rootfs.cpio.uboot  rootfs.ext4  rootfs.tar.gz  rootfs.ubifs  u-boot.img</span><br><span class="line">uEnv_ramdisk.txt  zImage</span><br></pre></td></tr></table></figure></p>
+<p>The bootloader, kernel and all kinds of filesystem images are generated all in one step, they will be introduced in the subsequent section.</p>
+<h2 id="Filesystem-Built-by-Arago"><a href="#Filesystem-Built-by-Arago" class="headerlink" title="Filesystem Built by Arago"></a>Filesystem Built by Arago</h2><p>Customers can also run an demo filesystem image created with Arago on a MYD-AM335X series development board, it was created by TI, please refer to the WIKI page on TI’s website.<br><a href="http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK" target="_blank" rel="noopener">http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK</a>.</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
 
       
   <span class="ico-tags"></span>
@@ -1083,7 +1083,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1095,7 +1095,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18 Development Guide</a></h6>
+              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/">MYD-AM335X-Linux-4.1.18开发手册</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1131,7 +1131,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
+              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
               <span>April 10, 2018</span>
             </div>
 
@@ -1143,7 +1143,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="../../zh-CN/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. 部署开发环境</a></h6>
+              <h6 style="margin: 0;"><a href="../../en/myd-am335x/DevelopmentGuide/chapter2/Chapter2/">2. Deploy development environment</a></h6>
               <span>April 10, 2018</span>
             </div>
 

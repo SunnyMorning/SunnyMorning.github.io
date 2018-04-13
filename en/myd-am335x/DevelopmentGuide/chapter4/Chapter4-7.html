@@ -1,0 +1,43 @@
+<hr>
+<p>title: 4.7 NAND Flash<br>date: 2018-04-10 15:47:45<br>tags: [AM335X, NAND Flash]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>This example demonstrates how to use the Linux API to erase, write, and read NAND Flash on the development board,please refer to the source code for detail.</p>
+<p><strong>Hardware Preparation: </strong></p>
+<ul>
+<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2">chapter2</a>.</li>
+<li>MYD-AM335X series development board.</li>
+</ul>
+<p><strong>Software Preparation: </strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>mtd_test application</li>
+</ul>
+<p><strong>Test Steps:</strong></p>
+<ul>
+<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/mtd/mtd_test</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board,Executing the following command to nandflash erase, write and read data:</li>
+</ul>
+<pre><code class="c"># ./mtd_test /dev/mtd7
+
+MTD Type: <span class="number">4</span>
+MTD total size: <span class="number">131072</span> bytes
+MTD erase size: <span class="number">131072</span> bytes
+MTD write size: <span class="number">2048</span> bytes
+
+erase the last block at <span class="number">0</span>
+
+erase done!
+
+writing <span class="number">16</span> bytes data to flash...
+<span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span>
+write done!
+
+reading data from flash...
+<span class="number">0x00</span> <span class="number">0x01</span> <span class="number">0x02</span> <span class="number">0x03</span> <span class="number">0x04</span> <span class="number">0x05</span> <span class="number">0x06</span> <span class="number">0x07</span> <span class="number">0x08</span> <span class="number">0x09</span> <span class="number">0x0a</span> <span class="number">0x0b</span> <span class="number">0x0c</span> <span class="number">0x0d</span> <span class="number">0x0e</span> <span class="number">0x0f</span>
+read done!
+</code></pre>

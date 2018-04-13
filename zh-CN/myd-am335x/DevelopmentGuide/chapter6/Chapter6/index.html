@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="../../../../../js/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>6. linux 系统更新 | SunnyMorning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="AM335X系统更新" />
+  
+  
+  
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;本小节主要介绍Linux系统的不同启动方式，包括tf卡启动，NAND Flash烧录与启动，NFS ROOT文件系统挂载。在此之前先看看光盘中已经编译好的镜像文件：    文件名 描述     MLO 一级引导（SPL）   u-boot.img MMC启动u-boot镜像   uEnv.txt 默认环境变量   uEnv_ramdisk.txt ramdisk启动默认环境">
+<meta name="keywords" content="AM335X,系统更新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6. Linux 系统更新">
+<meta property="og:url" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter6/Chapter6/index.html">
+<meta property="og:site_name" content="SunnyMorning">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本小节主要介绍Linux系统的不同启动方式，包括tf卡启动，NAND Flash烧录与启动，NFS ROOT文件系统挂载。在此之前先看看光盘中已经编译好的镜像文件：    文件名 描述     MLO 一级引导（SPL）   u-boot.img MMC启动u-boot镜像   uEnv.txt 默认环境变量   uEnv_ramdisk.txt ramdisk启动默认环境">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter6/6_1.png">
+<meta property="og:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter6/6_2.png">
+<meta property="og:updated_time" content="2018-04-13T01:45:44.216Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6. Linux 系统更新">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本小节主要介绍Linux系统的不同启动方式，包括tf卡启动，NAND Flash烧录与启动，NFS ROOT文件系统挂载。在此之前先看看光盘中已经编译好的镜像文件：    文件名 描述     MLO 一级引导（SPL）   u-boot.img MMC启动u-boot镜像   uEnv.txt 默认环境变量   uEnv_ramdisk.txt ramdisk启动默认环境">
+<meta name="twitter:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter6/6_1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="SunnyMorning" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="../../../../../css/style.css">
+
+  <script src="../../../../../js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../../../../css/my.css">
+  <!-- Google Adsense -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["../../../../../index.html"] = "首页"; 
+
+  themeMenus["../../../../../archives"] = "归档"; 
+
+  themeMenus["../../../../../categories"] = "分类"; 
+
+  themeMenus["../../../../../tags"] = "标签"; 
+
+  themeMenus["../../../../../about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="SunnyMorning" rel="home"> SunnyMorning </a>
+            
+          </h1>
+
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../index.html">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-myd-am335x/DevelopmentGuide/chapter6/Chapter6" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      6. Linux 系统更新
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="" class="article-date">
+	  <time datetime="2018-04-10T07:45:59.000Z" itemprop="datePublished">四月 10, 2018</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本小节主要介绍Linux系统的不同启动方式，包括tf卡启动，NAND Flash烧录与启动，NFS ROOT文件系统挂载。在此之前先看看光盘中已经编译好的镜像文件：</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MLO</td>
+<td>一级引导（SPL）</td>
+</tr>
+<tr>
+<td>u-boot.img</td>
+<td>MMC启动u-boot镜像</td>
+</tr>
+<tr>
+<td>uEnv.txt</td>
+<td>默认环境变量</td>
+</tr>
+<tr>
+<td>uEnv_ramdisk.txt</td>
+<td>ramdisk启动默认环境变量，使用时需要重命名为uEnv.txt</td>
+</tr>
+<tr>
+<td>zImage</td>
+<td>内核镜像</td>
+</tr>
+<tr>
+<td>myd_c335x.dtb</td>
+<td>MYD-AM335X设备树</td>
+</tr>
+<tr>
+<td>myd_y335x.dtb</td>
+<td>MYD-AM335X-Y设备树</td>
+</tr>
+<tr>
+<td>myd_j335x.dtb</td>
+<td>MYD-AM335X-J设备树</td>
+</tr>
+<tr>
+<td>rootfs.tar.gz</td>
+<td>根文件系统目录压缩包</td>
+</tr>
+<tr>
+<td>rootfs.ubi</td>
+<td>ubi根文件系统镜像</td>
+</tr>
+<tr>
+<td>ramdisk.gz</td>
+<td>ramdisk启动文件系统</td>
+</tr>
+<tr>
+<td>sdcard.img</td>
+<td>sdcard启动盘镜像，直接通过win32diskimager写入TF卡即可</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意：MYD-AM335X的启动开发板之前需要注意JP8跳线的连接，连接JP8的1-2脚时将会从SD卡启动系统，连接JP8的2-3脚时将会从NandFlash启动系统。改变JP8跳线的连接之后需要给开发板重新上电启动才能生效。MYD-AM335X-Y设置启动模式的跳线为JP1，MYD-AM335X-J设置启动模式的跳线为JP6。</strong></p>
+</blockquote>
+<p>&emsp;&emsp;<code>MYD-AM335X</code>系列开发板目前提供了多种系统引导加载方案。</p>
+<ul>
+<li>方案1: TF卡启动(EXT4文件系统).</li>
+<li>方案2: TF卡启动(Ramdisk文件系统).</li>
+<li>方案3: NAND Flash启动（ubi文件系统).</li>
+<li>方案4: NFS ROOT文件系统（主要用于文件系统调试）.</li>
+</ul>
+<h1 id="TF卡启动-EXT4文件系统"><a href="#TF卡启动-EXT4文件系统" class="headerlink" title="TF卡启动(EXT4文件系统)"></a>TF卡启动(EXT4文件系统)</h1><blockquote>
+<p><strong>注意：烧写过程会清除TF/SD卡原有内容，请注意备份。</strong></p>
+</blockquote>
+<p>&emsp;&emsp;Buildroot编译完成之后生成sdcard.img，它是整个TF卡的磁盘镜像文件，其中包含两个分区，分区一为FAT格式，包含了MLO, u-boot.img, zImage和设备树，uEnv.txt等文件;分区二为EXT4格式，为该启动模式下的根文件系统。  </p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter6/6_1.png" alt="图6-1  使用win32diskimager烧写sdcard.img">  </p>
+<ul>
+<li>把TF卡插入USB读卡器，然后将读卡器跟windows主机连接。</li>
+<li>使用win32diskimager.exe烧写sdcard.img到TF卡上，如图6-1所示。</li>
+<li>烧写完成之后，将TF卡插入开发板TF卡槽，设置为TF卡启动模式，上电即可从TF卡引导启动，并加载位于TF卡上的EXT4根文件系统。</li>
+</ul>
+<h1 id="TF卡启动-Ramdisk文件系统"><a href="#TF卡启动-Ramdisk文件系统" class="headerlink" title="TF卡启动(Ramdisk文件系统)"></a>TF卡启动(Ramdisk文件系统)</h1><blockquote>
+<p><strong>注意：HP USB Disk Storage Format Tool会将清除TF卡的分区。若需要保留分区，请使用电脑系统自带的格式软件。</strong></p>
+</blockquote>
+<ul>
+<li>TF卡格式化<br>(请使用光盘目录03-Tools目录下的HP USB Disk Storage Format Tool 2.0.6工具来格式化TF卡。)<br>  1.把MMC/SD卡插入USB读卡器，然后将读卡器跟电脑连接<br>  2.打开HP USB Disk Storage Format Tool，出现类似提示如下：</li>
+</ul>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter6/6_2.png" alt="图6-2 格式化TF卡"></p>
+<pre><code>3.选择“FAT32”系统格式
+4.勾选Quick format（可选）
+5.点击“Start”
+6.等待格式化完成，点击“OK”
+</code></pre><ul>
+<li>映像更新</li>
+</ul>
+<p>&emsp;&emsp;将02-Images\Linux-image目录下的所有文件拷贝到TF卡上，备份uEnv.txt并重命名uEnv_ramdisk.txt为uEnv.txt，然后将TF卡插入到开发板上的SD卡插槽，连接对应板子设置启动方式的跳线帽的1-2脚，上电重启开发板，输入账户名<code>root</code>登录。</p>
+<h1 id="NAND-Flash启动（ubi文件系统"><a href="#NAND-Flash启动（ubi文件系统" class="headerlink" title="NAND Flash启动（ubi文件系统)"></a>NAND Flash启动（ubi文件系统)</h1><p>&emsp;&emsp;Nand启动映像的更新需要借助于u-boot来完成。不管NAND Flash是否有数据，都可以利用TF卡启动的u-boot对NAND Flash更新映像。</p>
+<ul>
+<li><p>准备</p>
+<p>  1.用光盘目录03-Tools目录下的HP USB Disk Storage Format Tool 2.0.6工具将TF卡格式化为FAT或FAT32文件系统</p>
+<p>  2.将光盘目录02-Images\Linux-image目录下的映像文件拷贝到TF卡中  </p>
+</li>
+<li><p>更新</p>
+</li>
+</ul>
+<p>&emsp;&emsp;将带有系统映象的TF卡插入开发板，连接对应板子设置启动方式的跳线帽的1-2脚，上电启动，在u-boot 的提示读秒处，按下键盘上任意键进入u-boot：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">U-Boot <span class="number">2016.05</span> (Jan <span class="number">09</span> <span class="number">2017</span> - <span class="number">19</span>:<span class="number">37</span>:<span class="number">43</span> +<span class="number">0800</span>)</span><br><span class="line"></span><br><span class="line">       Watchdog enabled</span><br><span class="line">I2C:   ready</span><br><span class="line">DRAM:  <span class="number">512</span> MiB</span><br><span class="line">NAND:  <span class="number">512</span> MiB</span><br><span class="line">MMC:   OMAP SD/MMC: <span class="number">0</span>, OMAP SD/MMC: <span class="number">1</span></span><br><span class="line">*** Warning - bad CRC, <span class="keyword">using</span> <span class="keyword">default</span> environment</span><br><span class="line"></span><br><span class="line">Net:   cpsw</span><br><span class="line">Press SPACE to <span class="built_in">abort</span> autoboot in <span class="number">2</span> seconds</span><br><span class="line">MYIR&gt;#</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;进入u-boot命令行后，在命令行上输入“run updatesys”，开始自动更新系统：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">MYIR&gt;<span class="meta"># run updatesys</span></span><br><span class="line"></span><br><span class="line">NAND erase.chip: device <span class="number">0</span> whole chip</span><br><span class="line">Erasing at <span class="number">0x1ffe0000</span> -- <span class="number">100</span>% complete.</span><br><span class="line">OK</span><br><span class="line"><span class="keyword">switch</span> to partitions #<span class="number">0</span>, OK</span><br><span class="line">mmc0 is current device</span><br><span class="line">reading MLO</span><br><span class="line"><span class="number">55092</span> bytes read in <span class="number">10</span> ms (<span class="number">5.3</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0x0</span>, size <span class="number">0xd734</span></span><br><span class="line"> <span class="number">55092</span> bytes written: OK</span><br><span class="line">reading myd_c335x.dtb</span><br><span class="line"><span class="number">39229</span> bytes read in <span class="number">10</span> ms (<span class="number">3.7</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0x80000</span>, size <span class="number">0x993d</span></span><br><span class="line"> <span class="number">39229</span> bytes written: OK</span><br><span class="line">reading u-boot.img</span><br><span class="line"><span class="number">321300</span> bytes read in <span class="number">34</span> ms (<span class="number">9</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0xc0000</span>, size <span class="number">0x4e714</span></span><br><span class="line"> <span class="number">321300</span> bytes written: OK</span><br><span class="line">reading zImage</span><br><span class="line"><span class="number">4480016</span> bytes read in <span class="number">396</span> ms (<span class="number">10.8</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0x200000</span>, size <span class="number">0x445c10</span></span><br><span class="line"> <span class="number">4480016</span> bytes written: OK</span><br><span class="line">reading rootfs.ubi</span><br><span class="line"><span class="number">24248320</span> bytes read in <span class="number">2111</span> ms (<span class="number">11</span> MiB/s)</span><br><span class="line"></span><br><span class="line">NAND write: device <span class="number">0</span> offset <span class="number">0xa00000</span>, size <span class="number">0x1720000</span></span><br><span class="line"> <span class="number">24248320</span> bytes written: OK</span><br><span class="line">MYIR&gt;#</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;系统更新完后，会自动u-boot的命令行模式，断电拨出TF卡，连接对应板子设置启动方式的跳线帽的2-3脚，给开发板重新上电后即可从Nand Flash启动，输入帐户名<code>root</code>登录。</p>
+<h1 id="NFS-ROOT文件系统（主要用于文件系统调试）"><a href="#NFS-ROOT文件系统（主要用于文件系统调试）" class="headerlink" title="NFS ROOT文件系统（主要用于文件系统调试）"></a>NFS ROOT文件系统（主要用于文件系统调试）</h1><p>&emsp;&emsp;Buildroot编译完成之后生成的rootfs.tar.gz，可以解压之后放到NFS服务器上作为NFS ROOT文件系统进行加载，便于文件系统的调试。<br>&emsp;&emsp;使用NFS ROOT方式启动，首先需要配置TFTP和NFS服务，下面以ubuntu系统为例加以说明。</p>
+<p><strong>安装TFTP服务端</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install tftp-hpa tftpd-hpa</span><br></pre></td></tr></table></figure>
+<p><strong>配置TFTP服务</strong></p>
+<p>&emsp;&emsp;创建TFTP服务器工作目录,并打开TFTP服务配置文件,如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p &lt;WORKDIR&gt;/tftpboot</span><br><span class="line">$ chmod 777 &lt;WORKDIR&gt;/tftpboot</span><br><span class="line">$ sudo vi /etc/default/tftpd-hpa</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;修改或添加以下字段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TFTP_DIRECTORY=&quot;&lt;WORKDIR&gt;/tftpboot&quot;</span><br><span class="line">TFTP_OPTIONS=&quot;-l -c -s&quot;</span><br></pre></td></tr></table></figure></p>
+<p><strong>重启TFTP服务</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service tftpd-hpa restart</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;将出厂镜像或者自行编译的MLO, u-boot.img, zImage和设备树文件以及ramdisk.gz等拷贝到TFTP服务器的<code>&lt;WORKDIR&gt;/tftpboot</code>目录，在U-Boot命令行，即可以使用tftpboot命令加载TFTP服务器上<code>&lt;WORKDIR&gt;/tftpboot</code>目录下的文件,例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;# help tftpboot</span><br><span class="line">tftpboot - boot image via network using TFTP protocol</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line">tftpboot [loadAddress] [[hostIPaddr:]bootfilename]</span><br><span class="line">&gt;# tftpboot $&#123;loadaddr&#125; 192.168.1.111:zImage</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装NFS服务</strong></p>
+<p>&emsp;&emsp;NFS即网络文件系统，允许主机直接通过网络实现文件系统挂载，还可以在Linux系统启动的时候将NFS服务器上的目录挂载为开发板的根文件系统。下面以ubuntu文件系统为例，介绍NFS服务的安装和配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nfs-kernel-server</span><br></pre></td></tr></table></figure></p>
+<p><strong>配置NFS服务</strong></p>
+<p>&emsp;&emsp;编辑/etc/exports文件，添加NFS服务导出的工作目录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/exports</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;添加NFS ROOT根文件系统目录，下面以/home/myir/rootfs为例，将其添加到/etc/exports文件中, 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/myir/rootfs *(rw,nohide,insecure,no_subtree_check,async,no_root_squash)</span><br></pre></td></tr></table></figure></p>
+<p><strong>重启NFS服务</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /home/myir/rootfs</span><br><span class="line">$ sudo tar zxvf  &lt;WORKDIR&gt;/images/rootfs.tar.gz</span><br><span class="line">$ sudo service nfs-kernel-server restart</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;在NFS服务器本机上测试NFS服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mount -t nfs 127.0.0.1:/home/myir/rootfs /mnt</span><br></pre></td></tr></table></figure></p>
+<p><strong>挂载NFS ROOT文件系统</strong></p>
+<p>&emsp;&emsp;若本机NFS挂载成功，接下来将开发板和NFS服务器接入到同一网络，在开发板上挂载NFS ROOT文件系统。<br>&emsp;&emsp;先断电，然后修改启动方式跳线帽为nandflash方式启动，nandflash上必须要先烧写uboot。拷贝zImage和dtb文件到<workdir>/tftpboot目录，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp &lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images/zImage &lt;WORKDIR&gt;/tftpboot</span><br><span class="line">cp &lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images/myd_c335x.dtb &lt;WORKDIR&gt;/tftpboot</span><br></pre></td></tr></table></figure></workdir></p>
+<p>&emsp;&emsp;解压rootfs.tar.gz到/home/myir/rootfs目录，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/myir/rootfs</span><br><span class="line">sudo tar -xvf &lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images/rootfs.tar.gz ./</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;例如，NFS服务器IP为192.168.1.111.在U-boot中设置开发板IP为192.168.1.112, 如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;# setenv ipaddr 192.168.1.112</span><br><span class="line">&gt;# setenv serverip 192.168.1.111</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;在U-boot中使用ping命令测试开发板与NFS服务器是否连通:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ping 192.168.1.111</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;设置开发板nfs挂载目录和设备树文件名，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;# setenv rootpath /home/myir/rootfs   -- 使用该方式前将rootfs.tar.gz解压到该nfs目录</span><br><span class="line">&gt;# setenv fdtfile myd_c335x.dtb        -- 这里以MYD-AM335X板为例，使用不同的板型要用对应的dtb文件</span><br><span class="line">&gt;# echo $fdtfile                       -- 查看fdtfile名称是否正确</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;保存相关环境变量.如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;# saveenv</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;U-Boot控制台下执行netboot命令，启动挂载的NFS ROOT文件系统，如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;# run netboot</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;如果ping serverip正常，但运行run netboot时tftp失败，请检查server端tftp service是否正常，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tftp 192.168.1.111</span><br><span class="line">tftp&gt; get myd_c335x.dtb</span><br><span class="line">tftp&gt; quit                                  -- 退出tftp</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;如果失败，重启tftp service，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service tftpd-hpa restart</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../../tags/系统更新/">系统更新</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+<script src="../../../../../js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/gallery/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/gallery/AliPayQR.jpg'
+});
+</script>
+      
+            
+      
+        
+  <!-- Gitment START! Deploy by Z4HD -->
+	<div id="comments"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+	var gitment = new Gitment({
+		id: 'http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter6/Chapter6/',
+		owner: 'SunnyGeGe',
+		repo: 'gitment-comments',
+		oauth: {
+			client_id: '30ecccaa1c32f51a9a60',
+			client_secret: '81981c6f91be41322a19d51e1dccbd4648910b3f',
+		},
+	})
+	gitment.render('comments')
+	</script>
+	<!-- Gitment 自定义样式表 -->
+	<link rel="stylesheet" href="../../../../../css/comment-gitment.css">
+	<!-- Gitment END! -->
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../../../../../en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          5.3 Build QT Application
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../../../../en/myd-am335x/DevelopmentGuide/chapter6/Chapter6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">6. Update System</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TF卡启动-EXT4文件系统"><span class="nav-number">1.</span> <span class="nav-text">TF卡启动(EXT4文件系统)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TF卡启动-Ramdisk文件系统"><span class="nav-number">2.</span> <span class="nav-text">TF卡启动(Ramdisk文件系统)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NAND-Flash启动（ubi文件系统"><span class="nav-number">3.</span> <span class="nav-text">NAND Flash启动（ubi文件系统)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS-ROOT文件系统（主要用于文件系统调试）"><span class="nav-number">4.</span> <span class="nav-text">NFS ROOT文件系统（主要用于文件系统调试）</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2018 SunnyMorning All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="../../../../../js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="../../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../../categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="../../../../../tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="../../../../../about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="../../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../../../js/scripts.js"></script>
+<script src="../../../../../js/bootstrap.js"></script>
+<script src="../../../../../js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

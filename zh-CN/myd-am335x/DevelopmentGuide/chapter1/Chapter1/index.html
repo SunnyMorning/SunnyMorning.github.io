@@ -5,7 +5,7 @@
 
   <!-- PACE Progress Bar START -->
   
-    <script src="../../js/pace.min.js"></script>
+    <script src="../../../../../js/pace.min.js"></script>
     <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
   
   
@@ -13,28 +13,26 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>myd-am335x-linux-4.1.18开发手册 | SunnyMorning</title>
+  <title>1. 软件资源介绍 | SunnyMorning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="AM335XLinux" />
+  <meta name="keywords" content="AM335X" />
   
   
   
   
-  <meta name="description" content="前言    &amp;emsp;&amp;emsp;本小节概述文档所覆盖的范围，包含的内容，适合的读者，文档版本历史记录，适用的硬件版本。本文主要讲述在MYD-AM335X系列开发板上安装运行Linux系统，以及嵌入式Linux驱动和应用程序的开发流程。其中包括开发环境的搭建、源码编译、Linux应用程序的实例分析、映像的下载。本文档适合有一定开发经验的嵌入式linux开发工程师。  版本历史">
-<meta name="keywords" content="AM335X,Linux">
+  <meta name="description" content="&amp;emsp;&amp;emsp;本小节以表格的形式描述MYD-AM335X系列开发板的软件资源。  表 1-1软件资源列表        类别 名称 描述 源码 MYD-AM335X MYD-AM335X-Y MYD-AM335X-J     Boot U-boot 引导程序，负责系统初始化和引导内核 YES √ √ √   内核 Linux 4.1.18 专为MYD-AM335X系列的硬件制定的Linu">
+<meta name="keywords" content="AM335X">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MYD-AM335X-Linux-4.1.18开发手册">
-<meta property="og:url" content="http://sunnymorning.github.io/zh-CN/myd-am335x/index.html">
+<meta property="og:title" content="1. 软件资源介绍">
+<meta property="og:url" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter1/Chapter1/index.html">
 <meta property="og:site_name" content="SunnyMorning">
-<meta property="og:description" content="前言    &amp;emsp;&amp;emsp;本小节概述文档所覆盖的范围，包含的内容，适合的读者，文档版本历史记录，适用的硬件版本。本文主要讲述在MYD-AM335X系列开发板上安装运行Linux系统，以及嵌入式Linux驱动和应用程序的开发流程。其中包括开发环境的搭建、源码编译、Linux应用程序的实例分析、映像的下载。本文档适合有一定开发经验的嵌入式linux开发工程师。  版本历史">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本小节以表格的形式描述MYD-AM335X系列开发板的软件资源。  表 1-1软件资源列表        类别 名称 描述 源码 MYD-AM335X MYD-AM335X-Y MYD-AM335X-J     Boot U-boot 引导程序，负责系统初始化和引导内核 YES √ √ √   内核 Linux 4.1.18 专为MYD-AM335X系列的硬件制定的Linu">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/zh-CN/myd-am335x/cover.jpg">
-<meta property="og:updated_time" content="2018-04-11T03:13:13.025Z">
+<meta property="og:updated_time" content="2018-04-13T05:56:36.902Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MYD-AM335X-Linux-4.1.18开发手册">
-<meta name="twitter:description" content="前言    &amp;emsp;&amp;emsp;本小节概述文档所覆盖的范围，包含的内容，适合的读者，文档版本历史记录，适用的硬件版本。本文主要讲述在MYD-AM335X系列开发板上安装运行Linux系统，以及嵌入式Linux驱动和应用程序的开发流程。其中包括开发环境的搭建、源码编译、Linux应用程序的实例分析、映像的下载。本文档适合有一定开发经验的嵌入式linux开发工程师。  版本历史">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/zh-CN/myd-am335x/cover.jpg">
+<meta name="twitter:title" content="1. 软件资源介绍">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本小节以表格的形式描述MYD-AM335X系列开发板的软件资源。  表 1-1软件资源列表        类别 名称 描述 源码 MYD-AM335X MYD-AM335X-Y MYD-AM335X-J     Boot U-boot 引导程序，负责系统初始化和引导内核 YES √ √ √   内核 Linux 4.1.18 专为MYD-AM335X系列的硬件制定的Linu">
   
     <link rel="alternate" href="/atom.xml" title="SunnyMorning" type="application/atom+xml">
   
@@ -52,9 +50,9 @@
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
     
   <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../../../../css/style.css">
 
-  <script src="../../js/jquery-3.1.1.min.js"></script>
+  <script src="../../../../../js/jquery-3.1.1.min.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" >
@@ -65,7 +63,7 @@
   
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../../css/my.css">
+  <link rel="stylesheet" href="../../../../../css/my.css">
   <!-- Google Adsense -->
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
@@ -79,15 +77,15 @@
 <script>
 var themeMenus = {};
 
-  themeMenus["../../index.html"] = "首页"; 
+  themeMenus["../../../../../index.html"] = "首页"; 
 
-  themeMenus["../../archives"] = "归档"; 
+  themeMenus["../../../../../archives"] = "归档"; 
 
-  themeMenus["../../categories"] = "分类"; 
+  themeMenus["../../../../../categories"] = "分类"; 
 
-  themeMenus["../../tags"] = "标签"; 
+  themeMenus["../../../../../tags"] = "标签"; 
 
-  themeMenus["../../about"] = "关于"; 
+  themeMenus["../../../../../about"] = "关于"; 
 
 </script>
 
@@ -114,15 +112,15 @@ var themeMenus = {};
 
               <ul id="main-nav" class="nmenu sf-js-enabled">
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../index.html">首页</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../index.html">首页</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../archives">归档</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../archives">归档</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../categories">分类</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../categories">分类</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../tags">标签</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../tags">标签</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../about">关于</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../about">关于</a> </li>
                     
               </ul>
             </div>
@@ -168,7 +166,7 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-myd-am335x" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-myd-am335x/DevelopmentGuide/chapter1/Chapter1" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -176,7 +174,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      MYD-AM335X-Linux-4.1.18开发手册
+      1. 软件资源介绍
     </h1>
   
 
@@ -185,7 +183,7 @@ var themeMenus = {};
     <div class="article-meta">
       
 	Posted on <a href="" class="article-date">
-	  <time datetime="2018-04-10T07:46:36.000Z" itemprop="datePublished">四月 10, 2018</time>
+	  <time datetime="2018-04-10T07:50:59.000Z" itemprop="datePublished">四月 10, 2018</time>
 	</a>
 
       
@@ -196,51 +194,9 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
-<div>
-<img src="https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/zh-CN/myd-am335x/cover.jpg" ,alt="first" ,="" width="200" height="300">
-</div>
-
-
-<p><strong> 前言 </strong>  </p>
-<p>&emsp;&emsp;本小节概述文档所覆盖的范围，包含的内容，适合的读者，文档版本历史记录，适用的硬件版本。<br>本文主要讲述在MYD-AM335X系列开发板上安装运行Linux系统，以及嵌入式Linux驱动和应用程序的开发流程。其中包括开发环境的搭建、源码编译、Linux应用程序的实例分析、映像的下载。<br>本文档适合有一定开发经验的嵌入式linux开发工程师。</p>
-<p><strong> 版本历史 </strong>  </p>
-<table>
-<thead>
-<tr>
-<th>版本号</th>
-<th>描述</th>
-<th>时间</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>V1.0</td>
-<td>初始版本</td>
-<td>2016.10.26</td>
-</tr>
-</tbody>
-</table>
-<p><strong> 硬件版本 </strong>  </p>
-<table>
-<thead>
-<tr>
-<th>MYD-AM335X</th>
-<th>MYD-AM335X-Y</th>
-<th>MYD-AM335X-J</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>插针板</td>
-<td>邮票孔</td>
-<td>金手指</td>
-</tr>
-</tbody>
-</table>
-<p>本文档仅适用以上三个版本的硬件</p>
-<h1 id="软件资源介绍"><a href="#软件资源介绍" class="headerlink" title="软件资源介绍"></a>软件资源介绍</h1><p>本小节表格描述MYD-AM335X系列的软件资源。</p>
-<p>表 1-1软件资源列表</p>
+        <p>&emsp;&emsp;本小节以表格的形式描述MYD-AM335X系列开发板的软件资源。<br>
+<div align="center"> 表 1-1软件资源列表 </div>
+  </p>
 <table>
 <thead>
 <tr>
@@ -255,7 +211,7 @@ var themeMenus = {};
 </thead>
 <tbody>
 <tr>
-<td>Bootloader</td>
+<td>Boot</td>
 <td>U-boot</td>
 <td>引导程序，负责系统初始化和引导内核</td>
 <td>YES</td>
@@ -553,35 +509,67 @@ var themeMenus = {};
 </tr>
 </tbody>
 </table>
- 
-<!--
-{% blockquote [author[, source]] [link] [source_link_title] %}
-content
-{% endblockquote %}
+<hr>
 
-{% raw %}
+<div align="center"> 表 1-2 软件下载链接.</div>
+  
+<table>
+<thead>
+<tr>
+<th>产品</th>
+<th>下载</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYD-AM335X</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X-Y/public/MYD-AM335X_Y_V04_20150609.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X-Y/public/MYD-AM335X_Y_V04_20150609.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X-Y/public/MYD-AM335X-Y_V20_20170522.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X-Y/public/MYD-AM335X-Y_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X-J/public/MYD-AM335X_J_V10_20151027.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X-J/public/MYD-AM335X_J_V10_20151027.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://down.myir-tech.com/MYD-AM335X-J/public/MYD-AM335X-J_V20_20170522.iso" target="_blank" rel="noopener">http://down.myir-tech.com/MYD-AM335X-J/public/MYD-AM335X-J_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
+</tr>
+</tbody>
+</table>
 
-<img src="https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/gallery/AliPayQR.jpg",alt="first", width=200 height=10>
-
-{% endraw%}
-{% asset_img AliPayQR.jpg This is an example image %}
-<p>–&gt;<br></p>
--->
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../categories/中文版/TI/AM335X/">AM335X</a>
+    <a class="article-category-link" href="../../../../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Linux/">Linux</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../../tags/AM335X/">AM335X</a></li></ul>
 
       
         <div id="donation_div"></div>
 
-<script src="../../js/vdonate.js"></script>
+<script src="../../../../../js/vdonate.js"></script>
 <script>
 var a = new Donate({
   title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
@@ -601,7 +589,7 @@ var a = new Donate({
 	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 	<script>
 	var gitment = new Gitment({
-		id: 'http://sunnymorning.github.io/zh-CN/myd-am335x/',
+		id: 'http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter1/Chapter1/',
 		owner: 'SunnyGeGe',
 		repo: 'gitment-comments',
 		oauth: {
@@ -612,7 +600,7 @@ var a = new Donate({
 	gitment.render('comments')
 	</script>
 	<!-- Gitment 自定义样式表 -->
-	<link rel="stylesheet" href="../../css/comment-gitment.css">
+	<link rel="stylesheet" href="../../../../../css/comment-gitment.css">
 	<!-- Gitment END! -->
 
 
@@ -623,15 +611,20 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="../../en/myd-am335x/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../../../../../en/myd-am335x/DevelopmentGuide/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          MYD AM335X Linux Development Guide
+          MYD-AM335X-Linux-4.1.18 Development Guide
         
       </div>
     </a>
   
+  
+    <a href="../../../../../en/myd-am335x/DevelopmentGuide/chapter1/Chapter1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">1. Software Resources</div>
+    </a>
   
 </nav>
 
@@ -644,7 +637,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#软件资源介绍"><span class="nav-number">1.</span> <span class="nav-text">软件资源介绍</span></a></li></ol>
+      <ol class="nav">无</ol>
     
     </div>
   </aside>
@@ -664,9 +657,6 @@ var a = new Donate({
             </span>
           
       </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
-      </div>
   </div>
 </footer>
 
@@ -680,19 +670,20 @@ var a = new Donate({
 </script>
 
 <!-- Custome JS -->
-<script src="../../js/my.js"></script>
+<script src="../../../../../js/my.js"></script>
+
     </div>
     <!-- <nav id="mobile-nav">
   
-    <a href="../../index.html" class="mobile-nav-link">Home</a>
+    <a href="../../../../../index.html" class="mobile-nav-link">Home</a>
   
-    <a href="../../archives" class="mobile-nav-link">Archives</a>
+    <a href="../../../../../archives" class="mobile-nav-link">Archives</a>
   
-    <a href="../../categories" class="mobile-nav-link">Categories</a>
+    <a href="../../../../../categories" class="mobile-nav-link">Categories</a>
   
-    <a href="../../tags" class="mobile-nav-link">Tags</a>
+    <a href="../../../../../tags" class="mobile-nav-link">Tags</a>
   
-    <a href="../../about" class="mobile-nav-link">About</a>
+    <a href="../../../../../about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -729,13 +720,13 @@ var a = new Donate({
 </script>
 
 
-  <link rel="stylesheet" href="../../fancybox/jquery.fancybox.css">
-  <script src="../../fancybox/jquery.fancybox.pack.js"></script>
+  <link rel="stylesheet" href="../../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../../fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="../../js/scripts.js"></script>
-<script src="../../js/bootstrap.js"></script>
-<script src="../../js/main.js"></script>
+<script src="../../../../../js/scripts.js"></script>
+<script src="../../../../../js/bootstrap.js"></script>
+<script src="../../../../../js/main.js"></script>
 
 
 

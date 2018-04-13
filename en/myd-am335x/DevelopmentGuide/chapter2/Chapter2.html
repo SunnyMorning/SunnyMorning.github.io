@@ -1,0 +1,30 @@
+<hr>
+<p>title: 2. Deploy development environment<br>date: 2018-04-10 15:49:59<br>tags: [AM335X, Cross Compiler]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>This section describes the tools and environment, tool chain settings, development environment validation.</p>
+<p><strong>PC development environment:</strong> Ubuntu12.04/Ubuntu14.04/Ubuntu16.04 64bit Desktop</p>
+<p><strong>Cross compiler:</strong> gcc5.3(Linaro GCC 2016.02)</p>
+<h2 id="Hardware-debugging-environment-structures"><a href="#Hardware-debugging-environment-structures" class="headerlink" title="Hardware debugging environment structures"></a>Hardware debugging environment structures</h2><ul>
+<li>MYD-AM335X Hardware debugging environment structures：</li>
+</ul>
+<p>Connect the debug serial port J12 to the PC,set the baudrate of serial port on host PC to 115,200-8-n-1. Specific as follows:<br><img src="/en/myd-am335x/DevelopmentGuide/chapter2/2-1.png" alt="Figure 2-1 MYD-AM335X Hardware Debugging Interface"></p>
+<ul>
+<li>MYD-AM335X-Y Hardware debugging environment structures：</li>
+</ul>
+<p>Connect the debug serial port J10 to the PC,set the baudrate of serial port on host PC to 115,200-8-n-1. Specific as follows:<br><img src="/en/myd-am335x/DevelopmentGuide/chapter2/2-2.png" alt="Figure 2-2 MYD-AM335X-Y Hardware Debugging Interface"></p>
+<ul>
+<li>MYD-AM335X-J Hardware debugging environment structures：</li>
+</ul>
+<p>Connect the debug serial port J3 to the PC,set the baudrate of serial port on host PC to 115,200-8-n-1. Specific as follows:<br><img src="/en/myd-am335x/DevelopmentGuide/chapter2/2-3.png" alt="Figure 2-3 MYD-AM335X-J Hardware Debugging Interface"></p>
+<h2 id="Create-a-working-directory"><a href="#Create-a-working-directory" class="headerlink" title="Create a working directory:"></a>Create a working directory:</h2><p>Create a work directory and copy the resources from 04-Linux_Source of our release package to the work directory on ubuntu host PC，<WORKDIR> here is defined by customers according to their development environment.</p>
+<pre><code class="c">$ mkdir -p &lt;WORKDIR&gt;
+$ cp /media/cdrom/<span class="number">04</span>-Linux_Source<span class="comment">/* &lt;WORKDIR&gt; -rf</span>
+<span class="comment">$ ls  &lt;WORKDIR&gt;</span>
+<span class="comment">Bootloader/ Examples/  Filesystem/  Kernel/  Patches/ ToolChain/</span>
+</code></pre>

@@ -1,0 +1,43 @@
+<hr>
+<p>title: 3.1 Bootloader<br>date: 2018-04-10 15:48:57<br>tags: [AM335X, u-boot]<br>categories: </p>
+<ul>
+<li>中文版</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18开发手册<br>comments: true</li>
+</ul>
+<hr>
+<p><strong>编译U-Boot</strong><br>&emsp;&emsp;进入Bootloader目录，解压U-boot源码：</p>
+<pre><code class="c">$ cd &lt;WORKDIR&gt;/Bootloader
+$ tar -jxvf myir-u-boot.tar.bz2
+$ cd myir-u-boot
+</code></pre>
+<p>&emsp;&emsp;不同的开发板对应不同的配置文件，配置文件位于myir-u-boot/configs/目录。</p>
+<table>
+<thead>
+<tr>
+<th>开发板</th>
+<th>编译选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYD-AM335X</td>
+<td>myd_c335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td>myd_j335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td>myd_y335x_defconfig</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;下面以MYD-AM335X开发板为例，说明u-boot的编译过程：</p>
+<pre><code class="c">$ make distclean
+$ make myd_c335x_defconfig
+$ make
+</code></pre>
+<p>&emsp;&emsp;其中第二步make中的配置选项见上表,编译完成后，在u-boot目录下会生成MLO和u-boot.img文件。MYD-AM335X-Y和MYD-AM335X-J的编译和MYD-AM335X类似。</p>

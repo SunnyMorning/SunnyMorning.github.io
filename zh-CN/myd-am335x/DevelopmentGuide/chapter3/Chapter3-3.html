@@ -1,0 +1,85 @@
+<hr>
+<p>title: 3.3 构建文件系统<br>date: 2018-04-10 15:48:53<br>tags: [AM335X, rootfs]<br>categories: </p>
+<ul>
+<li>中文版</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18开发手册<br>comments: true</li>
+</ul>
+<hr>
+<p>&emsp;&emsp;本节主要介绍使用Buildroot进行文件系统的制作。</p>
+<h2 id="准备编译buildroot"><a href="#准备编译buildroot" class="headerlink" title="准备编译buildroot"></a>准备编译buildroot</h2><p>&emsp;&emsp;拷贝出厂附带资料中的<em>04-Linux_Source/Filesystem/myir-buildroot.tar.gz</em>到本地开发主机，并解压到本地工作目录<WORKDIR>(注意用本地主机上实际工作目录替换<WORKDIR>)，如下所示：</p>
+<pre><code>  $ ls -al &lt;WORKDIR&gt;/Filesystem/myir-buildroot
+arch   CHANGES           configs     dl    linux            output   support
+board  Config.in         COPYING     docs  Makefile         package  system
+boot   Config.in.legacy  DEVELOPERS  fs    Makefile.legacy  README   toolchain
+</code></pre><p>&emsp;&emsp;关于<code>buildroot</code>的目录结构可以参照<a href="https://buildroot.org/downloads/manual/manual.html">https://buildroot.org/downloads/manual/manual.html</a>.其中和<code>MYD-AM335X</code>系列开发板相关的部分主要位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_c335x</code>,<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_y335x</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_j335x</code>目录。</p>
+<h2 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h2><p>&emsp;&emsp;MYD-AM335X系列平台默认的配置文件位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/configs/</code>. 其中主要包含一些硬件测试相关的工具，用户也可以根据不同的应用场景需要编写自己的配置文件。先写入基本配置文件:</p>
+<pre><code>$ cd &lt;WORKDIR&gt;/Filesystem/myir-buildroot/
+$ make myd_y335x_defconfig
+</code></pre><p>&emsp;&emsp;再通过<code>make menuconfig</code>进入配置界面。然后可以跟内核配置一样，对当前的配置进行一些修改。下面以<code>MYD-AM335X-Y</code>平台为例，加以说明。</p>
+<blockquote>
+<p><strong>注意：使用Buildroot编译u-boot和kernel需要用户自行建好代码git仓库，然后用建好的代码git仓库路径替换下面bootloader和Kernel配置中的git路径，具体见下面的bootloader和Kernel的配置</strong></p>
+</blockquote>
+<h3 id="交叉编译工具链"><a href="#交叉编译工具链" class="headerlink" title="交叉编译工具链"></a>交叉编译工具链</h3><p>&emsp;&emsp;Buildroot可以使用外部交叉编译工具链，也可以自行编译产生内部交叉编译工具链，本手册采用的是内部交叉编译工具链。编译完成之后位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin/</code>。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_toolchain.png" alt="图3-3-1 配置buildroot交叉编译工具链"></p>
+<h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><p>&emsp;&emsp;系统配置主要配置目标系统的主机名称，欢迎信息，Init子系统（busybox/systemv/systemd)和对应的设备管理子系统，这里还可以配置root的登陆密码，如下图所示为目标系统配置了root登陆密码<code>myirtech</code>。<br>如果不配置的话，密码为空。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_system_configuration.png" alt="图3-3-2 系统配置"></p>
+<h3 id="bootloader配置"><a href="#bootloader配置" class="headerlink" title="bootloader配置"></a>bootloader配置</h3><p>&emsp;&emsp;Bootloader配置主要配置bootloader的代码来源，以及代码的配置，编译，安装，如下图所示。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_bootloader.png" alt="图3-3-3 bootloader配置"></p>
+<p>&emsp;&emsp;图中采用的是git协议从内网的git服务器获取代码。用户需要自行建好代码git仓库，然后用建好的代码git仓库路径替换这里设置的路径。可以根据实际情况配置合适的代码获取方式，具体的配置方式也可以参考buildroot用户手册。<br>&emsp;&emsp;下面根据开发板附带资料中的代码，创建自己的git仓库。</p>
+<pre><code>$ cd ~/
+$ tar zxvf myir-u-boot.tar.gz
+$ cd myir-u-boot
+$ git init
+$ git add . -f
+$ git commit -m &quot;Initial Version&quot; -a
+</code></pre><p>&emsp;&emsp;修改位于 <WORKDIR>/Filesystem/buildroot/configs/myd_y335x_defconfig 配置文件和<WORKDIR>/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig ，将下面两项的内容改为如下所示：</p>
+<pre><code>BR2_TARGET_UBOOT_CUSTOM_REPO_URL=&quot;~/myir-u-boot/.git&quot;
+BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION=&quot;master&quot;
+</code></pre><blockquote>
+<p>注意：修改了u-boot的代码库中代码之后，buildroot并不能自动重新获取和编译。需要手动删除<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/dl/uboot-master.tgz</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/build/uboot-master</code>目录。</p>
+</blockquote>
+<h3 id="Kernel配置"><a href="#Kernel配置" class="headerlink" title="Kernel配置"></a>Kernel配置</h3><p>&emsp;&emsp;Kernel的配置和bootloader类似，也是配置内核的代码来源，和kernel的配置，编译，安装，如下图所示。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_kernel.png" alt="图3-3-4 Kernel配置"></p>
+<p>&emsp;&emsp;图中采用的是git协议从内网的git服务器获取代码。用户需要自行建好代码git仓库，然后用建好的代码git仓库路径替换这里设置的路径。可以根据实际情况配置合适的代码获取方式，具体的配置方式也可以参考buildroot用户手册。<br>&emsp;&emsp;下面根据开发板附带资料中的代码，创建自己的git仓库。</p>
+<pre><code>$ cd ~/
+$ tar zxvf myir-kernel.tar.gz
+$ cd myir-kernel
+$ git init
+$ git add . -f
+$ git commit -m &quot;Initial Version&quot; -a
+</code></pre><p>&emsp;&emsp;修改位于 <WORKDIR>/Filesystem/buildroot/configs/myd_y335x_defconfig 配置文件和<WORKDIR>/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig ，将下面两项的内容改为如下所示：</p>
+<pre><code>BR2_TARGET_KERNEL_CUSTOM_REPO_URL=&quot;~/myir-kernel/.git&quot;
+BR2_TARGET_KERNEL_CUSTOM_REPO_VERSION=&quot;master&quot;
+</code></pre><blockquote>
+<p>注意：修改了kernel的代码库中代码之后，buildroot并不能自动重新获取和编译。需要手动删除<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/dl/linux-master.tgz</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/build/linux-master</code>目录。</p>
+</blockquote>
+<h3 id="文件系统配置"><a href="#文件系统配置" class="headerlink" title="文件系统配置"></a>文件系统配置</h3><p>&emsp;&emsp;文件系统的配置最终决定了<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>目录下生成哪些格式的文件系统镜像，如下图所示。我们配置了ramdisk, EXT2/4以及UBIFS这几种文件系统镜像和rootfs.tar.gz根文件系统压缩包。<br>用户拿这个压缩包用于nfsroot文件系统加载，也可以生成其它格式的文件系统镜像。<br>除此之外，编译完成之后还在<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/sbin</code>目录下生成一些本地主机上的文件系统工具，如制作ubi文件系统的工具mkfs.ubifs, ubinize等。我们可以用这些工具重新制作基于rootfs.tar.gz<br>的UBIFS格式文件系统(注意用本地主机上实际工作目录替换<WORKDIR>)。</p>
+<p>&emsp;&emsp;创建一个ubinize.cfg文件,内容如下：</p>
+<pre><code>[ubifs]
+mode=ubi
+vol_id=0
+vol_type=dynamic
+vol_name=rootfs
+vol_alignment=1
+vol_flags=autoresize
+image=rootfs.ubifs
+</code></pre><p>&emsp;&emsp;准备需要打包的根文件系统目录rootfs并打包</p>
+<pre><code>$ export PATH=$PATH:&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/sbin
+$ tar zxvf rootfs.tar.gz
+$ mkfs.ubifs -d rootfs -e 0x1f000 -c 2048 -m 0x800 -x lzo -F -o  rootfs.ubifs
+$ ubinize -o rootfs.ubi -m 0x800 -p 0x20000 -s 512 -m 2048 -O 2048 ubinize.cfg
+</code></pre><p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_filesystem.png" alt="图3-3-5 文件系统配置"></p>
+<h3 id="工具包配置"><a href="#工具包配置" class="headerlink" title="工具包配置"></a>工具包配置</h3><p>&emsp;&emsp;工具包的配置相对比较简单，但也是用户经常会改动的配置项。linux下一些常见的工具基本上都能够在这里找到。比如硬件测试相关的I2C-tools, spi-tools, can-utils等，网络相关的DHCP, TFTP, SSH等,<br>用户可以根据需要自行配制，也可以添加自己编写的其他工具包。关于如何添加自己的工具包，在buildroot中也有详细的介绍，参见<a href="https://buildroot.org/downloads/manual/manual.html#adding-packages">https://buildroot.org/downloads/manual/manual.html#adding-packages</a>,这里不再赘述。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_target_packages.png" alt="图3-3-6 工具包配置"></p>
+<h2 id="开始构建"><a href="#开始构建" class="headerlink" title="开始构建"></a>开始构建</h2><p>&emsp;&emsp;Buildroot构建的过程类似于Linux Kernel的构建，只需要简单的命令就可以完成:</p>
+<pre><code>$ make
+</code></pre><p>&emsp;&emsp;编译过程中会生成一个output目录，最终生成的输出的文件位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>目录。</p>
+<pre><code>$ls -al output/images
+boot.vfat  myd_y335x.dtb  readme.txt   rootfs.cpio.gz     rootfs.ext2  rootfs.tar
+rootfs.ubi    sdcard.img  u-boot-spl.bin    uEnv.txt    MLO        ramdisk.gz
+rootfs.cpio  rootfs.cpio.uboot  rootfs.ext4  rootfs.tar.gz  rootfs.ubifs  u-boot.img
+uEnv_ramdisk.txt  zImage
+</code></pre><p>&emsp;&emsp;output/images 目录下的输出文件基本上包含了bootloader, kernel,以及各种格式的文件系统镜像。这些文件在接下来的系统升级章节将会详细介绍。</p>
+<h2 id="Arago构建的文件系统"><a href="#Arago构建的文件系统" class="headerlink" title="Arago构建的文件系统"></a>Arago构建的文件系统</h2><p>&emsp;&emsp;在MYD-AM335X系列开发板支持基于Arago构建的文件系统镜像，具体的构建方法可以参考TI官网WIKI页面。<br><a href="http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK">http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK</a>.</p>

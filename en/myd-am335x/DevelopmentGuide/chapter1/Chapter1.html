@@ -1,0 +1,367 @@
+<hr>
+<p>title: 1. Software Resources<br>date: 2018-04-10 15:50:59<br>tags: [AM335X, Software Resources]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>This section describes the software resources of the MYD-AM335X series development boards.<br>{% raw %}</p>
+<p><div align="center" > Table 1-1 Software Resources.</div><br>{% endraw %}  </p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Name</th>
+<th>Description</th>
+<th>Source</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bootloader</td>
+<td>U-boot</td>
+<td>Responsible for system initialization and boot kernel.</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td>Linux 4.1.18</td>
+<td>Designed for MYD-AM335X hardware</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>LCD Controller</td>
+<td>LCD driver，for 4.3 inch、7 inch</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>Touch Panel</td>
+<td>Resistive touch screen driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>Touch Panel</td>
+<td>Capacitance touch screen driver</td>
+<td>YES</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>RTC</td>
+<td>RTC clock driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>UART</td>
+<td>Serial driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>SDIO WiFi</td>
+<td>WiFi driver</td>
+<td>YES</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>RS485</td>
+<td>RS485 driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>CAN</td>
+<td>CAN driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>Ethernet</td>
+<td>Ethernet driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>MMC/SD</td>
+<td>MMC/SD driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>NAND Flash</td>
+<td>NAND Flash driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>Audio</td>
+<td>Audio driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>GPIO-LED</td>
+<td>GPIO-LED driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>I2C</td>
+<td>I2C driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>HDMI</td>
+<td>HDMI driver</td>
+<td>YES</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>PMU</td>
+<td>Power Management Unit driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>USB Host</td>
+<td>USB Host driver</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Drivers</td>
+<td>USB Device</td>
+<td>USB Device driver（Gadget）</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Filesystem</td>
+<td>Rootfs</td>
+<td>Base on buildroot</td>
+<td>Bin</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Filesystem</td>
+<td>Rootfs-qt</td>
+<td>Qt filesystem</td>
+<td>Bin</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Filesystem</td>
+<td>UBI</td>
+<td>Provide image file</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Filesystem</td>
+<td>Ramdisk.gz</td>
+<td>ramdisk filesystem</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>LCD</td>
+<td>LCD test program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>RTC</td>
+<td>RTC clock test program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>RS485</td>
+<td>RS485 test program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>CAN</td>
+<td>CAN test program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>Ethernet</td>
+<td>Ethernet test program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>NAND Flash</td>
+<td>NAND Flash test program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>GPIO-LED</td>
+<td>GPIO-LED test program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>Audio</td>
+<td>Audio test program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Demo</td>
+<td>Qt</td>
+<td>QT environment verification program</td>
+<td>YES</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>{% raw %}</p>
+<p><div align="center" > Table 1-2 Software Download URLs.</div><br>{% endraw %}  </p>
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Download</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYD-AM335X</td>
+<td><a href="http://d.myirtech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso">http://d.myirtech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://d.myirtech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso">http://d.myirtech.com/MYD-AM335X/public/MYD-AM335X_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td><a href="http://d.myirtech.com/MYD-AM335X-Y/public/MYD-AM335X_Y_V04_20150609.iso">http://d.myirtech.com/MYD-AM335X-Y/public/MYD-AM335X_Y_V04_20150609.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://d.myirtech.com/MYD-AM335X-Y/public/MYD-AM335X-Y_V20_20170522.iso">http://d.myirtech.com/MYD-AM335X-Y/public/MYD-AM335X-Y_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td><a href="http://d.myirtech.com/MYD-AM335X-J/public/MYD-AM335X_J_V10_20151027.iso">http://d.myirtech.com/MYD-AM335X-J/public/MYD-AM335X_J_V10_20151027.iso</a></td>
+<td>u-boot 2011.09, kernel 3.2.0</td>
+</tr>
+<tr>
+<td>&ensp;</td>
+<td><a href="http://d.myirtech.com/MYD-AM335X-J/public/MYD-AM335X-J_V20_20170522.iso">http://d.myirtech.com/MYD-AM335X-J/public/MYD-AM335X-J_V20_20170522.iso</a></td>
+<td>u-boot 2016.05, kernel 4.1.18, buildroot 2017.02</td>
+</tr>
+</tbody>
+</table>

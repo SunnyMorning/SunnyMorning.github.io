@@ -1,0 +1,77 @@
+<hr>
+<p>title: 4.13 SDIO WiFi<br>date: 2018-04-10 15:47:31<br>tags: [AM335X, SDIO WiFi]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>This example demonstrates the feasibility of verifying SDIO Wi-Fi drivers through related commands.There is a SDIO WiFi wireless card in development board, Through the relevant configuration after the implementation of wireless networking capabilities.</p>
+<p><strong>Hardware Preparation：</strong></p>
+<ul>
+<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2">chapter2</a>.</li>
+<li>MYD-AM335X-Y development board</li>
+</ul>
+<blockquote>
+<p><strong>Note：MYD-AM335X and MYD-AM335X-J no onboard SDIO, SDIO Wi-Fi information please click<a href="http://www.myir-tech.com/product/MY-WF004S.htm">SDIO WiFi</a>.</strong></p>
+</blockquote>
+<p><strong>Software Preparation:</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>wpa_supplicant applicatoin</li>
+<li>wpa_cli applicatoin</li>
+</ul>
+<p><strong>Test Steps:</strong></p>
+<ul>
+<li>After the MYD-AM335X-Y development is booted, Run the following command on the development board:</li>
+</ul>
+<pre><code class="c"><span class="meta"># ifconfig eth0 down</span>
+# wpa_supplicant -iwlan0 -Dwext -B -c /etc/wpa_supplicant.conf
+</code></pre>
+<ul>
+<li>Use wpa_cli to configure the network:</li>
+</ul>
+<pre><code class="c"># wpa_cli
+&gt; scan
+OK
+&gt; scan_r
+&gt; scan_r
+bssid / frequency / signal level / flags / ssid
+<span class="number">30</span>:fc:<span class="number">68</span>:<span class="number">9</span>a:e8:<span class="number">99</span>       <span class="number">2412</span>    <span class="number">-43</span>     [WPA-PSK-CCMP][WPA2-PSK-CCMP][ESS]      MYIR_TECH
+&gt; remove_n all
+OK
+&gt; add_n
+<span class="number">0</span>
+&gt; set_n <span class="number">0</span> ssid <span class="string">"MYIR_TECH"</span>
+OK
+&gt; set_n <span class="number">0</span> psk <span class="string">"myir2016"</span>
+OK
+&gt; enable_n <span class="number">0</span>
+OK
+&gt; quit
+</code></pre>
+<ul>
+<li>Get IP address by DHCP:</li>
+</ul>
+<pre><code class="c"><span class="meta"># udhcpc -n -i wlan0</span>
+udhcpc: started, v1<span class="number">.25</span><span class="number">.1</span>
+udhcpc: sending discover
+udhcpc: sending select <span class="keyword">for</span> <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span>
+udhcpc: lease of <span class="number">192.168</span><span class="number">.30</span><span class="number">.140</span> obtained, lease time <span class="number">3600</span>
+deleting routers
+adding dns <span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span>
+adding dns <span class="number">201.104</span><span class="number">.111</span><span class="number">.114</span>
+adding dns <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span>
+</code></pre>
+<ul>
+<li>Check whether the network is connected by Ping server:</li>
+</ul>
+<pre><code class="c"><span class="meta"># ping 192.168.30.137</span>
+PING <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span> (<span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>): <span class="number">56</span> data bytes
+<span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">0</span> ttl=<span class="number">64</span> time=<span class="number">75.532</span> ms
+<span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">1</span> ttl=<span class="number">64</span> time=<span class="number">4.074</span> ms
+<span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">2</span> ttl=<span class="number">64</span> time=<span class="number">3.461</span> ms
+<span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">3</span> ttl=<span class="number">64</span> time=<span class="number">12.684</span> ms
+<span class="number">64</span> bytes from <span class="number">192.168</span><span class="number">.30</span><span class="number">.137</span>: seq=<span class="number">4</span> ttl=<span class="number">64</span> time=<span class="number">11.986</span> ms
+</code></pre>

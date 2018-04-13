@@ -1,0 +1,27 @@
+<hr>
+<p>title: 5.2 配置QtCreator<br>date: 2018-04-10 15:46:55<br>tags: [AM335X, QtCreator]<br>categories: </p>
+<ul>
+<li>中文版</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18开发手册<br>comments: true</li>
+</ul>
+<hr>
+<h1 id="配置-QtCreator-开发环境"><a href="#配置-QtCreator-开发环境" class="headerlink" title="配置 QtCreator 开发环境"></a>配置 QtCreator 开发环境</h1><p>&emsp;&emsp;运行 QtCreator 后,依次点击<code>Tools</code>-&gt;<code>Options</code>,出现选项对话框,在左边点击<code>Build &amp; Run</code>,右边选择<code>Compilers</code>标签。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_1.png" alt="图5-2-1 编译器选择"></p>
+<p>&emsp;&emsp;点击右侧<code>Add</code>,弹出下拉列表后,选择<code>Custom</code>,在下侧填写以下内容: <code>Name</code>, <code>Compiler path</code>, <code>Make path</code> 和 <code>ABI</code>。填写完成后,点击<code>Apply</code>,进行保存。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_2.png" alt="图5-2-2 添加编译器"></p>
+<p>&emsp;&emsp;在同一窗口下,选择<code>Qt Version</code>标签,在右侧点击<code>Add...</code>,会弹出对话框,切换目录到Chapter3.4中编译QT得到的SDK目录,选择<code>qmake</code>文件后,点击<code>Open</code>按钮,设置完成之后，点击<code>Apply</code>按钮保存。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_3.png" alt="图5-2-3 选择qmake构建工具"></p>
+<p>&emsp;&emsp;在<code>Build&amp;Run</code>窗口，继续选择上边的<code>Kits</code>标签,点击右侧<code>Add</code>,填写相应内容。其中<code>Sysroot</code>选择编译工具链的目录,<code>Compiler</code>选择之前填写的名称,<code>Debugger</code>选择<code>None</code>,<code>Qt version</code>选择之前添加时的名称,<code>CMake Tool</code>设置为默认。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_4.png" alt="图5-2-4 添加Kits"></p>
+<h1 id="创建-Helloworld-项目"><a href="#创建-Helloworld-项目" class="headerlink" title="创建 Helloworld 项目"></a>创建 Helloworld 项目</h1><p>&emsp;&emsp;在菜单栏选择<code>File</code>-&gt;<code>New File or Project</code>,在打开的对话框中,依次选择<code>Application</code>-&gt;<code>Qt Widgets Application</code>,点击<code>Choose...</code>, 如下图所示:</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_5.png" alt="图5-2-5 创建新工程"></p>
+<p>&emsp;&emsp;在弹出的<code>Qt Widgets Application</code>对话框中,设置项目名称为<code>helloworld</code>,<code>Create in</code>一栏填写项目的存储路径, 如下：</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_6.png" alt="图5-2-6 设置新工程名称和路径"></p>
+<p>&emsp;&emsp;点击<code>Next</code>后,选择之前添加好的<code>Kits</code>,继续点击<code>Next</code>, 如下:</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_7.png" alt="图5-2-7 设置新工程Kits"></p>
+<p>&emsp;&emsp;选择当前的的应用继承自哪种Widget,默认选择QMainWindow,然后点击<code>Next</code>进入下一步。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_8.png" alt="图5-2-8 选择应用程序的类型"></p>
+<p>&emsp;&emsp;以上信息填写完后,点击<code>Finish</code>, 完成QtCreator工程的创建。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter5/5_2_9.png" alt="图5-2-9 完成工程创建"></p>

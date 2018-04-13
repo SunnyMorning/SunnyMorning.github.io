@@ -1,0 +1,42 @@
+<hr>
+<p>title: 2.2 Setup GCC Toolchain<br>date: 2018-04-10 15:49:55<br>tags: [AM335X, toolchain]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>Set environment variables:</p>
+<pre><code class="c">$ cd &lt;WORKDIR&gt;/Toolchain
+$ tar xvf gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux-gnueabihf.tar.xz
+$ <span class="keyword">export</span> PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux-gnueabihf/bin
+$ <span class="keyword">export</span> ARCH=arm
+$ <span class="keyword">export</span> CROSS_COMPILE=arm-linux-gnueabihf-
+</code></pre>
+<p>After executing the “export” command,type “arm” then press TAB to check if it’s correctly set. This setting is valid only for the this terminal, for a permanent modification, please modify user profiles.</p>
+<pre><code class="c">eg:Set user environment variables
+vi ~/.profile
+</code></pre>
+<p>At the end to add:</p>
+<pre><code class="c"><span class="keyword">export</span> ARCH=arm
+<span class="keyword">export</span> CROSS_COMPILE=arm-linux-gnueabihf-
+<span class="keyword">export</span> PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/
+gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux-gnueabihf/bin
+</code></pre>
+<pre><code>source ~/.profile or Reset Ubuntu
+</code></pre><p>Test：</p>
+<pre><code class="c">$echo $ARCH
+arm
+$echo $CROSS_COMPILE
+arm-linux-gnueabihf-
+</code></pre>
+<p>Cross compiler verification：</p>
+<pre><code class="c">arm-linux-gnueabihf-gcc -v
+$ arm-linux-gnueabihf-gcc -v
+Using built-in specs.
+COLLECT_GCC=arm-linux-gnueabihf-gcc
+……
+Thread model: posix
+gcc version <span class="number">5.3</span><span class="number">.1</span> <span class="number">20160113</span> (Linaro GCC <span class="number">5.3</span><span class="number">-2016.02</span>)
+</code></pre>

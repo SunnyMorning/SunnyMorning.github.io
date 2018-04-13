@@ -1,0 +1,45 @@
+<hr>
+<p>title: 3.1 Bulid Bootloader<br>date: 2018-04-10 15:48:57<br>tags: [AM335X, u-boot]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>Enter the directory of bootloader, uncompress the source code package as shown below：</p>
+<pre><code class="c">$ cd &lt;WORKDIR&gt;/Bootloader
+$ tar -jxvf myir-u-boot.tar.bz2
+$ cd myir-u-boot
+</code></pre>
+<ul>
+<li>Compile U-Boot：</li>
+</ul>
+<p>The configuration of U-boot for MYD-AM335X series is located at <em>myir-u-boot/configs/</em>, the corresponding configuration file name are shown below:</p>
+<table>
+<thead>
+<tr>
+<th>Board</th>
+<th>Configuration File Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYD-AM335X</td>
+<td>myd_c335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td>myd_j335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td>myd_y335x_defconfig</td>
+</tr>
+</tbody>
+</table>
+<p>Compile U-boot for MYD-AM335X development board：</p>
+<pre><code>$ make distclean
+$ make myd_c335x_defconfig
+$ make
+</code></pre><p>The second make in the configuration options see table,after build is completed, In the u-boot directory will generate MLO and u-boot.img files. MYD-AM335X-Y and MYD-AM335X-J are in the similar way.</p>

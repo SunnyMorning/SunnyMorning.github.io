@@ -1,0 +1,43 @@
+<hr>
+<p>title: 2.2 设置交叉编译工具<br>date: 2018-04-10 15:49:55<br>tags: [AM335X, 开发环境, 工具链]<br>categories: </p>
+<ul>
+<li>中文版</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18开发手册<br>comments: true</li>
+</ul>
+<hr>
+<p><strong>设置交叉编译工具</strong></p>
+<pre><code class="c">$ cd &lt;WORKDIR&gt;/Toolchain
+$ tar xvf gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux-gnueabihf.tar.xz
+$ <span class="keyword">export</span> PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux
+-gnueabihf/bin
+$ <span class="keyword">export</span> ARCH=arm
+$ <span class="keyword">export</span> CROSS_COMPILE=arm-linux-gnueabihf-
+</code></pre>
+<p>&emsp;&emsp;执行完“export”命令后输入arm按Tab键来检查是否设置成功，该设置只对当前终端有效，如需永久修改，请修改用户配置文件，例如修改<code>~/.profile</code>。</p>
+<pre><code class="c">vi ~/.profile
+</code></pre>
+<p>&emsp;&emsp;在行尾添加：</p>
+<pre><code class="c"><span class="keyword">export</span> ARCH=arm
+<span class="keyword">export</span> CROSS_COMPILE=arm-linux-gnueabihf-
+<span class="keyword">export</span> PATH=$PATH:&lt;WORKDIR&gt;/Toolchain/
+gcc-linaro<span class="number">-5.3</span><span class="number">-2016.02</span>-x86_64_arm-linux-gnueabihf/bin
+</code></pre>
+<pre><code class="c">source ~/.profile 
+</code></pre>
+<p>&emsp;&emsp;测试环境变量：</p>
+<pre><code class="c">$echo $ARCH
+arm
+$echo $CROSS_COMPILE
+arm-linux-gnueabihf-
+</code></pre>
+<p>&emsp;&emsp;交叉编译器的验证：</p>
+<pre><code class="c">arm-linux-gnueabihf-gcc -v
+$ arm-linux-gnueabihf-gcc -v
+Using built-in specs.
+COLLECT_GCC=arm-linux-gnueabihf-gcc
+……
+Thread model: posix
+gcc version <span class="number">5.3</span><span class="number">.1</span> <span class="number">20160113</span> (Linaro GCC <span class="number">5.3</span><span class="number">-2016.02</span>)
+</code></pre>

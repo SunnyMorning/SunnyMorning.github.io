@@ -1,0 +1,96 @@
+<hr>
+<p>title: 4.1 LCD<br>date: 2018-04-10 15:47:57<br>tags: [AM335X, LCD, FrameBuffer]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>This example demonstrates the usage of Linux API for Linux framebuffer, users can use these API to paint points, lines and areas on LCD frame buffer.<br>At the end of this section, demonstrate drawing a picture on LCD framebuffer with <code>fbv</code> application built by Buildroot.</p>
+<p><strong>Hardware Preparation: </strong></p>
+<ul>
+<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2">chapter2</a>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Board Type</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LCD interface</td>
+<td>(MY-TFT070CV2) 7 inch capacitive screen connection J8</td>
+<td>(MY-TFT070CV2) 7 inch capacitive screen connection J7</td>
+<td>(MY-TFT070CV2) 7 inch capacitive screen connection J8</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong> Note: MY-TFT070CV2 information please click <a href="http://www.myir-tech.com/product/my-tft070cv2.htm">LCD Screen</a>. </strong></p>
+</blockquote>
+<p><strong>Software Preparation:</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>framebuffer_test application</li>
+<li>fbv application built by Buildroot</li>
+</ul>
+<p><strong>Test Steps: </strong></p>
+<ul>
+<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/framebuffer/framebuffer_test</code> to <code>/usr/bin</code> directory of the MYD-AM335X series development board, run <code>framebuffer_test</code> application as below:</li>
+</ul>
+<pre><code># chmod 777 /usr/bin/framebuffer_test
+# framebuffer_test -h
+Usage: framebuffer_test [options]
+
+Version 1.0
+Available options:
+-d | --device name   framebuffer device name, default: /dev/fb0
+-h | --help          Print this message
+
+# framebuffer_test -d /dev/fb0
+xres:800 &gt;&gt;&gt; yres:480 &gt;&gt;&gt; bpp:32&gt;&gt;&gt;
+</code></pre><p>During <code>framebuffer_test</code> running, serval colors of background are painted on LCD one by one, and then colorful points, lines, areas are painted.</p>
+<ul>
+<li>Restart the development board,copy a BMP file with 24BPP and resolution of 800*480 to <code>/media</code> of the MYD-AM335X series development board, display the picture on LCD by fbv application:</li>
+</ul>
+<pre><code># fbv
+Usage: fbv [options] image1 image2 image3 ...
+
+Available options:
+ --help        | -h : Show this help
+ --alpha       | -a : Use the alpha channel (if applicable)
+ --dontclear   | -c : Do not clear the screen before and after displaying the image
+ --donthide    | -u : Do not hide the cursor before and after displaying the image
+ --noinfo      | -i : Supress image information
+ --stretch     | -f : Strech (using a simple resizing routine) the image to fit onto
+                      screen if necessary
+ --colorstretch| -k : Strech (using a &apos;color average&apos; resizing routine) the image to
+                      fit onto screen if necessary
+ --enlarge     | -e : Enlarge the image to fit the whole screen if necessary
+ --ignore-aspect| -r : Ignore the image aspect while resizing
+ --delay &lt;d&gt;   | -s &lt;delay&gt; : Slideshow, &apos;delay&apos; is the slideshow delay in tenths of
+                      seconds.
+
+Keys:
+ r            : Redraw the image
+ a, d, w, x   : Pan the image
+ f            : Toggle resizing on/off
+ k            : Toggle resizing quality
+ e            : Toggle enlarging on/off
+ i            : Toggle respecting the image aspect on/off
+ n            : Rotate the image 90 degrees left
+ m            : Rotate the image 90 degrees right
+ p            : Disable all transformations
+Copyright (C) 2000 - 2004 Mateusz Golicz, Tomasz Sterna.
+Error: Required argument missing.
+
+# fbv /meida/800-480.bmp
+fbv - The Framebuffer Viewer
+/media/800-480.bmp
+800 x 480
+</code></pre><p>After complete, the picture displays just right for the LCD.</p>

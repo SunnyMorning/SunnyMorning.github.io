@@ -5,7 +5,7 @@
 
   <!-- PACE Progress Bar START -->
   
-    <script src="../../js/pace.min.js"></script>
+    <script src="../../../../../js/pace.min.js"></script>
     <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
   
   
@@ -13,26 +13,26 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>myd am335x linux development guide | SunnyMorning</title>
+  <title>5. qt applications development | SunnyMorning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="AM335XLinux" />
+  <meta name="keywords" content="AM335XQT5QtCreator" />
   
   
   
   
-  <meta name="description" content="MYIR AM335X based boards(MYD-C335X,MYD-J335X,MYD-Y335x) linux Development Guide v2 for kernel version 4.1.18, u-boot 201605">
-<meta name="keywords" content="AM335X,Linux">
+  <meta name="description" content="In the previous sections, a build tool for QT5 application qmake has been created. It is used for generate Makefiles and other project files for QT5 application,after that, users can build QT5 applica">
+<meta name="keywords" content="AM335X,QT5,QtCreator">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MYD AM335X Linux Development Guide">
-<meta property="og:url" content="http://sunnymorning.github.io/en/myd-am335x/index.html">
+<meta property="og:title" content="5. Qt Applications Development">
+<meta property="og:url" content="http://sunnymorning.github.io/en/myd-am335x/DevelopmentGuide/chapter5/Chapter5/index.html">
 <meta property="og:site_name" content="SunnyMorning">
-<meta property="og:description" content="MYIR AM335X based boards(MYD-C335X,MYD-J335X,MYD-Y335x) linux Development Guide v2 for kernel version 4.1.18, u-boot 201605">
+<meta property="og:description" content="In the previous sections, a build tool for QT5 application qmake has been created. It is used for generate Makefiles and other project files for QT5 application,after that, users can build QT5 applica">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-10T09:34:07.439Z">
+<meta property="og:updated_time" content="2018-04-13T02:01:56.670Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MYD AM335X Linux Development Guide">
-<meta name="twitter:description" content="MYIR AM335X based boards(MYD-C335X,MYD-J335X,MYD-Y335x) linux Development Guide v2 for kernel version 4.1.18, u-boot 201605">
+<meta name="twitter:title" content="5. Qt Applications Development">
+<meta name="twitter:description" content="In the previous sections, a build tool for QT5 application qmake has been created. It is used for generate Makefiles and other project files for QT5 application,after that, users can build QT5 applica">
   
     <link rel="alternate" href="/atom.xml" title="SunnyMorning" type="application/atom+xml">
   
@@ -50,9 +50,9 @@
     @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
     
   <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../../../../css/style.css">
 
-  <script src="../../js/jquery-3.1.1.min.js"></script>
+  <script src="../../../../../js/jquery-3.1.1.min.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="/css/bootstrap.css" >
@@ -63,7 +63,7 @@
   
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../../css/my.css">
+  <link rel="stylesheet" href="../../../../../css/my.css">
   <!-- Google Adsense -->
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
@@ -77,15 +77,15 @@
 <script>
 var themeMenus = {};
 
-  themeMenus["../../index.html"] = "Home"; 
+  themeMenus["../../../../../index.html"] = "Home"; 
 
-  themeMenus["../../archives"] = "Archives"; 
+  themeMenus["../../../../../archives"] = "Archives"; 
 
-  themeMenus["../../categories"] = "Categories"; 
+  themeMenus["../../../../../categories"] = "Categories"; 
 
-  themeMenus["../../tags"] = "Tags"; 
+  themeMenus["../../../../../tags"] = "Tags"; 
 
-  themeMenus["../../about"] = "About"; 
+  themeMenus["../../../../../about"] = "About"; 
 
 </script>
 
@@ -112,15 +112,15 @@ var themeMenus = {};
 
               <ul id="main-nav" class="nmenu sf-js-enabled">
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../index.html">Home</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../index.html">Home</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../archives">Archives</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../archives">Archives</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../categories">Categories</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../categories">Categories</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../tags">Tags</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../tags">Tags</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../about">About</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../about">About</a> </li>
                     
               </ul>
             </div>
@@ -166,7 +166,7 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-myd-am335x" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-myd-am335x/DevelopmentGuide/chapter5/Chapter5" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -174,7 +174,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      MYD AM335X Linux Development Guide
+      5. Qt Applications Development
     </h1>
   
 
@@ -183,7 +183,7 @@ var themeMenus = {};
     <div class="article-meta">
       
 	Posted on <a href="" class="article-date">
-	  <time datetime="2018-04-10T07:46:36.000Z" itemprop="datePublished">April 10, 2018</time>
+	  <time datetime="2018-04-10T07:46:59.000Z" itemprop="datePublished">April 10, 2018</time>
 	</a>
 
       
@@ -194,23 +194,24 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>MYIR AM335X based boards(MYD-C335X,MYD-J335X,MYD-Y335x) linux Development Guide v2 for kernel version 4.1.18, u-boot 201605</p>
+        <p>In the previous sections, a build tool for QT5 application <code>qmake</code> has been created. It is used for generate Makefiles and other project files for QT5 application,<br>after that, users can build QT5 application with cross compile toolchain. For development of larger QT5 application, IDE tools named as <code>QtCreator</code> is commonly used.<br>There is a evaluation edition of QtCreator in our release package at the path <em>03-Tools/qt-creator-opensource-linux-x86_64-4.1.0.run</em>.</p>
+<p>In the following sections, we will introduce the installation, configuration of QtCreator, and demonstrate how to create a simple QT5 application running on MYD-AM335x series development board.</p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../categories/English-Version/TI/AM335X/">AM335X</a>
+    <a class="article-category-link" href="../../../../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../../../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../../../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../../../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Linux/">Linux</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../../tags/QT5/">QT5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../../tags/QtCreator/">QtCreator</a></li></ul>
 
       
         <div id="donation_div"></div>
 
-<script src="../../js/vdonate.js"></script>
+<script src="../../../../../js/vdonate.js"></script>
 <script>
 var a = new Donate({
   title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
@@ -230,7 +231,7 @@ var a = new Donate({
 	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 	<script>
 	var gitment = new Gitment({
-		id: 'http://sunnymorning.github.io/en/myd-am335x/',
+		id: 'http://sunnymorning.github.io/en/myd-am335x/DevelopmentGuide/chapter5/Chapter5/',
 		owner: 'SunnyGeGe',
 		repo: 'gitment-comments',
 		oauth: {
@@ -241,7 +242,7 @@ var a = new Donate({
 	gitment.render('comments')
 	</script>
 	<!-- Gitment 自定义样式表 -->
-	<link rel="stylesheet" href="../../css/comment-gitment.css">
+	<link rel="stylesheet" href="../../../../../css/comment-gitment.css">
 	<!-- Gitment END! -->
 
 
@@ -252,10 +253,19 @@ var a = new Donate({
     
 <nav id="article-nav">
   
+    <a href="../../../../../zh-CN/myd-am335x/DevelopmentGuide/chapter5/Chapter5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          5. Qt开发
+        
+      </div>
+    </a>
   
-    <a href="../../zh-CN/myd-am335x/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="../Chapter5-1/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">MYD-AM335X-Linux-4.1.18开发手册</div>
+      <div class="article-nav-title">5.1 Install QtCreator</div>
     </a>
   
 </nav>
@@ -289,9 +299,6 @@ var a = new Donate({
             </span>
           
       </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
-      </div>
   </div>
 </footer>
 
@@ -305,19 +312,20 @@ var a = new Donate({
 </script>
 
 <!-- Custome JS -->
-<script src="../../js/my.js"></script>
+<script src="../../../../../js/my.js"></script>
+
     </div>
     <!-- <nav id="mobile-nav">
   
-    <a href="../../index.html" class="mobile-nav-link">Home</a>
+    <a href="../../../../../index.html" class="mobile-nav-link">Home</a>
   
-    <a href="../../archives" class="mobile-nav-link">Archives</a>
+    <a href="../../../../../archives" class="mobile-nav-link">Archives</a>
   
-    <a href="../../categories" class="mobile-nav-link">Categories</a>
+    <a href="../../../../../categories" class="mobile-nav-link">Categories</a>
   
-    <a href="../../tags" class="mobile-nav-link">Tags</a>
+    <a href="../../../../../tags" class="mobile-nav-link">Tags</a>
   
-    <a href="../../about" class="mobile-nav-link">About</a>
+    <a href="../../../../../about" class="mobile-nav-link">About</a>
   
 </nav> -->
     
@@ -354,13 +362,13 @@ var a = new Donate({
 </script>
 
 
-  <link rel="stylesheet" href="../../fancybox/jquery.fancybox.css">
-  <script src="../../fancybox/jquery.fancybox.pack.js"></script>
+  <link rel="stylesheet" href="../../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../../fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="../../js/scripts.js"></script>
-<script src="../../js/bootstrap.js"></script>
-<script src="../../js/main.js"></script>
+<script src="../../../../../js/scripts.js"></script>
+<script src="../../../../../js/bootstrap.js"></script>
+<script src="../../../../../js/main.js"></script>
 
 
 

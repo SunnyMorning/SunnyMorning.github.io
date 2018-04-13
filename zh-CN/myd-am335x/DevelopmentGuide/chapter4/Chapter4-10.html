@@ -1,0 +1,41 @@
+<hr>
+<p>title: 4.10 Audio<br>date: 2018-04-10 15:47:39<br>tags: [AM335X, Audio]<br>categories: </p>
+<ul>
+<li>中文版</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18开发手册<br>comments: true</li>
+</ul>
+<hr>
+<p>&emsp;&emsp;本例程演示如何使用Linux API控制音频的输入与输出，详情请参考源码。</p>
+<p><strong>测试硬件环境：</strong><br>&emsp;&emsp;硬件调试环境搭建见<a href="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2">部署开发环境</a>中的硬件调试环境搭建部分。</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audio接口</td>
+<td>音频输入J11，耳机连接J10</td>
+<td>音频输入J9，耳机连接J8</td>
+<td>音频输入J10，耳机连接J9</td>
+</tr>
+</tbody>
+</table>
+<p><strong>测试软件环境：</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>audio_test 应用程序</li>
+</ul>
+<p><strong>测试过程：</strong><br>&emsp;&emsp;编译并拷贝<code>&lt;WORKDIR&gt;/Examples/audio</code>目录下的测试程序audio_test至开发板/usr/bin目录。将耳机插到音频输出口，音频输入到音频输入口，在Linux终端输入如下命令：</p>
+<pre><code class="c"># audio_test
+rate <span class="built_in">set</span> to <span class="number">21999</span>, expected <span class="number">22000</span>
+Init capture successfully, rate: <span class="number">21999</span>, period_size: <span class="number">128</span>
+rate <span class="built_in">set</span> to <span class="number">21998</span>, expected <span class="number">21999</span>
+Period size: <span class="number">128</span> frames, buffer size: <span class="number">256</span> bytes
+</code></pre>

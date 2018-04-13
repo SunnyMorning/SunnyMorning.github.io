@@ -1,0 +1,138 @@
+<hr>
+<p>title: 4.8 KeyPad<br>date: 2018-04-10 15:47:43<br>tags: [AM335X, KeyPad]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>This example demonstrates how to read the keypad event information by Linux user APIs, please refer to the source code for detail.</p>
+<p><strong>Hardware Preparation:</strong></p>
+<ul>
+<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2">chapter2</a>.</li>
+<li>MYD-AM335x series development board</li>
+</ul>
+<p><strong>Software Preparation: </strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>hexdump command</li>
+<li>keypad_test application</li>
+</ul>
+<p><strong>Test Steps: </strong></p>
+<ul>
+<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/keypad/keypad_test</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board, run <code>keypad_test</code> application as below:</li>
+</ul>
+<pre><code>$ chmod 777 /usr/bin/keypad_test
+$ keypad_test -h
+Usage: keypad_test [options]
+
+Version 1.0
+Options:
+-d | --device name   keypad device name, default: /dev/input/event0
+-h | --help          Print this message
+</code></pre><ul>
+<li>View the device nodes of MYD-AM335X keypad, the following information shows <code>K2</code> and <code>K3</code> keypads are corresponding to <code>/dev/input/event1</code>。</li>
+</ul>
+<pre><code># ls /dev/input/
+by-path/ event0   event1   mice     mouse0
+
+# cat /sys/class/input/event0/device/name
+ti-tsc
+
+# cat /sys/class/input/event1/device/name
+volume_keys@0
+</code></pre><ul>
+<li>Test MYD-AM335X <code>K2</code> and <code>K3</code> keypads as below:</li>
+</ul>
+<pre><code># keypad_test -d /dev/input/event1
+Event: Code = 115, Type = 1, Value=1                -- press K2
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 115, Type = 1, Value=0                -- release K2
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 114, Type = 1, Value=1                -- press K3
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 114, Type = 1, Value=2
+Event: Code = 0, Type = 0, Value=1
+Event: Code = 114, Type = 1, Value=0                -- release K3
+Event: Code = 0, Type = 0, Value=0
+</code></pre><ul>
+<li>View the device nodes of MYD-AM335X-Y keypad, the following information shows <code>K3</code> and <code>K4</code> keypads are corresponding to <code>/dev/input/event3</code>，<code>K5</code> keypad is corresponding to <code>/dev/input/event2</code>.</li>
+</ul>
+<pre><code># ls /dev/input/
+by-path  event0   event1   event2   event3   mice     mouse0
+
+# cat /sys/class/input/event0/device/name
+beeper
+# cat /sys/class/input/event1/device/name
+ti-tsc
+# cat /sys/class/input/event2/device/name
+tps65217_pwrbutton
+# cat /sys/class/input/event3/device/name
+volume_keys@0
+</code></pre><ul>
+<li>Test MYD-AM335X-Y <code>K3</code> and <code>K4</code> keypads as below:</li>
+</ul>
+<pre><code># keypad_test -d /dev/input/event3
+Event: Code = 115, Type = 1, Value=1                -- press K3
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 115, Type = 1, Value=0                -- release K3
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 114, Type = 1, Value=1                -- press K4
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 114, Type = 1, Value=0                -- release K4
+Event: Code = 0, Type = 0, Value=0
+</code></pre><ul>
+<li>Test MYD-AM335X-Y <code>K5</code> keypads as below:</li>
+</ul>
+<pre><code># keypad_test -d /dev/input/event2
+Event: Code = 116, Type = 1, Value=1                -- press K5
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 116, Type = 1, Value=0                -- release K5
+Event: Code = 0, Type = 0, Value=0
+</code></pre><ul>
+<li>View the device nodes of MYD-AM335X-J keypad, the following information shows <code>K3</code> and <code>K4</code> keypads are corresponding to <code>/dev/input/event3</code>，<code>K2</code> keypad is corresponding to <code>/dev/input/event1</code>.</li>
+</ul>
+<pre><code># ls /dev/input/
+by-path  event0   event1   event2   event3   mice     mouse0   mouse1
+
+# cat /sys/class/input/event0/device/name
+ti-tsc
+# cat /sys/class/input/event1/device/name
+tps65217_pwrbutton
+# cat /sys/class/input/event2/device/name
+ft5x06_ts
+# cat /sys/class/input/event3/device/name
+volume_keys@0
+</code></pre><ul>
+<li>Test MYD-AM335X-J <code>K3</code> and <code>K4</code> keypads as below:</li>
+</ul>
+<pre><code># keypad_test -d /dev/input/event3
+Event: Code = 115, Type = 1, Value=1            -- press K3
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 115, Type = 1, Value=0            -- release K3
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 114, Type = 1, Value=1            -- press K4
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 114, Type = 1, Value=0            -- release K4
+Event: Code = 0, Type = 0, Value=0
+</code></pre><ul>
+<li>Test MYD-AM335X-J <code>K2</code> keypads as below:</li>
+</ul>
+<pre><code># keypad_test -d /dev/input/event1
+Event: Code = 116, Type = 1, Value=1            -- press K2
+Event: Code = 0, Type = 0, Value=0
+Event: Code = 116, Type = 1, Value=0            -- release K2
+Event: Code = 0, Type = 0, Value=0
+</code></pre><p>Each keypad has a event code as show above. the code should be consistent with the value in device tree source.Users can use <code>hexdump</code> command to test keypads as below，The following to MYD-AM335X, for example, other types of KeyPad test similar.</p>
+<pre><code># hexdump /dev/input/event1
+0000000 022b 0000 2a83 0005 0001 0073 0001 0000
+0000010 022b 0000 2a83 0005 0000 0000 0000 0000
+0000020 022b 0000 78b5 0007 0001 0073 0000 0000
+0000030 022b 0000 78b5 0007 0000 0000 0000 0000
+
+0000040 0231 0000 8c69 0001 0001 0072 0001 0000
+0000050 0231 0000 8c69 0001 0000 0000 0000 0000
+0000060 0231 0000 fc11 0003 0001 0072 0000 0000
+0000070 0231 0000 fc11 0003 0000 0000 0000 0000
+</code></pre>

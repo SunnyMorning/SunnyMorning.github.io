@@ -1,0 +1,29 @@
+<hr>
+<p>title: 2. 部署开发环境<br>date: 2018-04-10 15:49:59<br>tags: [AM335X, 开发环境, 工具链]<br>categories: </p>
+<ul>
+<li>中文版</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18开发手册<br>comments: true</li>
+</ul>
+<hr>
+<p>&emsp;&emsp;本小节主要介绍相关工具和环境，工具链的设置，开发环境验证。</p>
+<p><strong>pc开发环境：</strong>Ubuntu12.04/14.04/16.04 64位桌面版<br><strong>交叉编译器：</strong>gcc5.3(Linaro GCC 2016.02)</p>
+<h2 id="硬件调试环境搭建"><a href="#硬件调试环境搭建" class="headerlink" title="硬件调试环境搭建"></a>硬件调试环境搭建</h2><ul>
+<li>MYD-AM335X硬件调试环境搭建：</li>
+</ul>
+<p>&emsp;&emsp;把调试串口J12连到PC上并将PC串口的波特率设为115200，数据位为8，停止位为1，无奇偶校验。具体如图2-1：<br><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/2-1.png" alt="图2-1 MYD-AM335X硬件调试接口"></p>
+<ul>
+<li>MYD-AM335X-Y硬件调试环境搭建：</li>
+</ul>
+<p>&emsp;&emsp;把调试串口J10连到PC上并将PC串口的波特率设为115200，数据位为8，停止位为1，无奇偶校验。具体如下2-2：<br><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/2-2.png" alt="图2-2 MYD-AM335X-Y硬件调试接口"></p>
+<ul>
+<li>MYD-AM335X-J硬件调试环境搭建：</li>
+</ul>
+<p>&emsp;&emsp;把调试串口J3连到PC上并将PC串口的波特率设为115200，数据位为8，停止位为1，无奇偶校验。具体如下图2-3：<br><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter2/2-3.png" alt="图2-3 MYD-AM335X-J硬件调试接口"></p>
+<h2 id="建立工作目录"><a href="#建立工作目录" class="headerlink" title="建立工作目录"></a>建立工作目录</h2><p>&emsp;&emsp;创建工作目录, 并拷贝MYD AM335X系列开发板出厂附带资料04-Linux_Source目录到Linux开发主机中，具体目录用户可根据实际情况调整，后文不再赘述，如下所示：</p>
+<pre><code class="c">$ mkdir -p &lt;WORKDIR&gt;
+$ cp /media/cdrom/<span class="number">04</span>-Linux_Source<span class="comment">/* &lt;WORKDIR&gt; -rf</span>
+<span class="comment">$ ls  &lt;WORKDIR&gt;</span>
+<span class="comment">Bootloader/ Examples/  Filesystem/  Kernel/  Patches/ ToolChain/</span>
+</code></pre>

@@ -1,0 +1,77 @@
+<hr>
+<p>title: 4.3 RTC<br>date: 2018-04-10 15:47:53<br>tags: [AM335X, RTC]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>This example demonstrates how to use Linux API to read and write real time on RTC，please refer to the source code for detail.<br>Users can also test the RTC with <code>date</code> and <code>hwclock</code> command built with Buildroot.</p>
+<p><strong>Hardware Preparation:</strong></p>
+<ul>
+<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2">chapter2</a>.</li>
+<li>CR1220 3V button cell</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Board Type</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CR1220 button cell</td>
+<td>J1</td>
+<td>J2</td>
+<td>J23</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Software Preparation: </strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>date, hwclock command</li>
+<li>rtc_test application</li>
+</ul>
+<p><strong>Test Steps: </strong></p>
+<ul>
+<li>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/rtc/rtc_test</code> to <code>/usr/bin</code> directory of the MYD-AM335X seriesdevelopment board, run <code>rtc_test</code> application as below:</li>
+</ul>
+<pre><code># chmod 777 /usr/bin/rtc_test
+# rtc_test -h
+Usage: rtc_test [options]
+
+Version 1.0
+Options:
+-d | --device name   rtc device name, default: /dev/rtc0
+-w | --write  time   time string with format MMDDhhmm[CCYY][.ss]. 
+                     such as: 111817582016.18
+-h | --help          Print this message
+
+# rtc_test -d /dev/rtc -w 111817582016.18
+date/time is updated to:  18-11-2016, 17:58:18.
+</code></pre><ul>
+<li>Power off the development board, wait for a while, power on again and read the rtc time by <code>rtc_test</code> as below:</li>
+</ul>
+<pre><code># rtc_test -d /dev/rtc
+
+  Current RTC date/time is 18-11-2016, 18:04:32.
+</code></pre><ul>
+<li>Users can also use date and hwclock command to test RTC as below:</li>
+</ul>
+<pre><code># date  081518002016.30        -- Set the system time to August 15, 2016 18:00:30
+Mon Aug 15 18:00:30 UTC 2016
+# date
+Mon Aug 15 18:00:38 UTC 2016
+# hwclock -w /dev/rtc          -- Write the system time to rtc
+</code></pre><ul>
+<li>Power off the development board, wait for a while, power on again and read the rtc time by hwclock as below:</li>
+</ul>
+<pre><code># hwclock -r /dev/rtc
+Mon Aug 15 18:11:08 2016  0.000000 seconds
+
+</code></pre>

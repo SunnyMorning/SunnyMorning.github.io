@@ -1,0 +1,23 @@
+<hr>
+<p>title: 5.3 Build QT Application<br>date: 2018-04-10 15:46:53<br>tags: [AM335X, QT Application]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>In the previous section, a QT5 project named as <code>helloworld</code> has been created.<br>It is shown in the project manage of QtCreator as below:</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_3_1.png" alt="Figure 5-3-1 Project Manager of QtCreator"></p>
+<p>Double click the <code>mainwindow.ui</code> at the left side to open the <code>Design</code> view for designing a UI for helloworld project visually.<br>Please drag a <code>Label</code> widget to the center of the mainwindow from the widgets list, double click the label and input `Hello, world!”.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_3_2.png" alt="Figure 5-3-2 UI Design View"></p>
+<p>After complete, choose <code>Build</code>-&gt;<code>Build Project</code> in the main menu of QtCreator to build the helloworld project.<br>Some log information outputs to the <code>Compile Output</code> sub window during compiling, in case of any erros and warning, please fix them and build again.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_3_3.png" alt="Figure 5-3-3 Build Project"></p>
+<p>After building,  a binary format QT5 application is generated at <em>~/build-helloworld-myir_dev_kit-Debug/</em>, please use <code>file</code> command to check it and<br>make sure it can work on ARM embedded Linux system as below:</p>
+<pre><code>file helloworld
+helloworld: ELF 32-bit LSB executable, ARM, version 1 (GNU/Linux), dynamically linked
+ (uses shared libs), for GNU/Linux 4.1.0, not stripped
+</code></pre><p>Finaly, please copy the binary format application <code>helloworld</code> to <code>/usr/bin</code> directory of MYD-AM335X series development board and execute as below:</p>
+<pre><code># helloworld  --platform linuxfb:fb=/dev/fb0
+</code></pre><p>A Window with a <code>Hello,World!</code> text label displays on the LCD screen as below:</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_3_4.png" alt="Figure 5-3-4 Execute QT5 Application"></p>

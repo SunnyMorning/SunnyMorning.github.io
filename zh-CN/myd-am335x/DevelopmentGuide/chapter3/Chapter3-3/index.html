@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="../../../../../js/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>3.3 构建文件系统 | SunnyMorning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="AM335Xrootfs" />
+  
+  
+  
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;本节主要介绍使用Buildroot进行文件系统的制作。 准备编译buildroot&amp;emsp;&amp;emsp;拷贝出厂附带资料中的04-Linux_Source/Filesystem/myir-buildroot.tar.gz到本地开发主机，并解压到本地工作目录(注意用本地主机上实际工作目录替换)，如下所示：1234  $ ls -al &amp;lt;WORKDIR&amp;gt;/File">
+<meta name="keywords" content="AM335X,rootfs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3.3 构建文件系统">
+<meta property="og:url" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/index.html">
+<meta property="og:site_name" content="SunnyMorning">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本节主要介绍使用Buildroot进行文件系统的制作。 准备编译buildroot&amp;emsp;&amp;emsp;拷贝出厂附带资料中的04-Linux_Source/Filesystem/myir-buildroot.tar.gz到本地开发主机，并解压到本地工作目录(注意用本地主机上实际工作目录替换)，如下所示：1234  $ ls -al &amp;lt;WORKDIR&amp;gt;/File">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_toolchain.png">
+<meta property="og:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_system_configuration.png">
+<meta property="og:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_bootloader.png">
+<meta property="og:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_kernel.png">
+<meta property="og:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_filesystem.png">
+<meta property="og:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_target_packages.png">
+<meta property="og:updated_time" content="2018-04-13T03:19:49.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3.3 构建文件系统">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本节主要介绍使用Buildroot进行文件系统的制作。 准备编译buildroot&amp;emsp;&amp;emsp;拷贝出厂附带资料中的04-Linux_Source/Filesystem/myir-buildroot.tar.gz到本地开发主机，并解压到本地工作目录(注意用本地主机上实际工作目录替换)，如下所示：1234  $ ls -al &amp;lt;WORKDIR&amp;gt;/File">
+<meta name="twitter:image" content="http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_toolchain.png">
+  
+    <link rel="alternate" href="/atom.xml" title="SunnyMorning" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="../../../../../css/style.css">
+
+  <script src="../../../../../js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../../../../css/my.css">
+  <!-- Google Adsense -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["../../../../../index.html"] = "首页"; 
+
+  themeMenus["../../../../../archives"] = "归档"; 
+
+  themeMenus["../../../../../categories"] = "分类"; 
+
+  themeMenus["../../../../../tags"] = "标签"; 
+
+  themeMenus["../../../../../about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="SunnyMorning" rel="home"> SunnyMorning </a>
+            
+          </h1>
+
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../index.html">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../../about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-myd-am335x/DevelopmentGuide/chapter3/Chapter3-3" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      3.3 构建文件系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="" class="article-date">
+	  <time datetime="2018-04-10T07:48:53.000Z" itemprop="datePublished">四月 10, 2018</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;本节主要介绍使用Buildroot进行文件系统的制作。</p>
+<h2 id="准备编译buildroot"><a href="#准备编译buildroot" class="headerlink" title="准备编译buildroot"></a>准备编译buildroot</h2><p>&emsp;&emsp;拷贝出厂附带资料中的<em>04-Linux_Source/Filesystem/myir-buildroot.tar.gz</em>到本地开发主机，并解压到本地工作目录<workdir>(注意用本地主机上实际工作目录替换<workdir>)，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  $ ls -al &lt;WORKDIR&gt;/Filesystem/myir-buildroot</span><br><span class="line">arch   CHANGES           configs     dl    linux            output   support</span><br><span class="line">board  Config.in         COPYING     docs  Makefile         package  system</span><br><span class="line">boot   Config.in.legacy  DEVELOPERS  fs    Makefile.legacy  README   toolchain</span><br></pre></td></tr></table></figure></workdir></workdir></p>
+<p>&emsp;&emsp;关于<code>buildroot</code>的目录结构可以参照<a href="https://buildroot.org/downloads/manual/manual.html" target="_blank" rel="noopener">https://buildroot.org/downloads/manual/manual.html</a>.其中和<code>MYD-AM335X</code>系列开发板相关的部分主要位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_c335x</code>,<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_y335x</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/board/myir/myd_j335x</code>目录。</p>
+<h2 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h2><p>&emsp;&emsp;MYD-AM335X系列平台默认的配置文件位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/configs/</code>. 其中主要包含一些硬件测试相关的工具，用户也可以根据不同的应用场景需要编写自己的配置文件。先写入基本配置文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;WORKDIR&gt;/Filesystem/myir-buildroot/</span><br><span class="line">$ make myd_y335x_defconfig</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;再通过<code>make menuconfig</code>进入配置界面。然后可以跟内核配置一样，对当前的配置进行一些修改。下面以<code>MYD-AM335X-Y</code>平台为例，加以说明。</p>
+<blockquote>
+<p><strong>注意：使用Buildroot编译u-boot和kernel需要用户自行建好代码git仓库，然后用建好的代码git仓库路径替换下面bootloader和Kernel配置中的git路径，具体见下面的bootloader和Kernel的配置</strong></p>
+</blockquote>
+<h3 id="交叉编译工具链"><a href="#交叉编译工具链" class="headerlink" title="交叉编译工具链"></a>交叉编译工具链</h3><p>&emsp;&emsp;Buildroot可以使用外部交叉编译工具链，也可以自行编译产生内部交叉编译工具链，本手册采用的是内部交叉编译工具链。编译完成之后位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/bin/</code>。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_toolchain.png" alt="图3-3-1 配置buildroot交叉编译工具链"></p>
+<h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><p>&emsp;&emsp;系统配置主要配置目标系统的主机名称，欢迎信息，Init子系统（busybox/systemv/systemd)和对应的设备管理子系统，这里还可以配置root的登陆密码，如下图所示为目标系统配置了root登陆密码<code>myirtech</code>。<br>如果不配置的话，密码为空。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_system_configuration.png" alt="图3-3-2 系统配置"></p>
+<h3 id="bootloader配置"><a href="#bootloader配置" class="headerlink" title="bootloader配置"></a>bootloader配置</h3><p>&emsp;&emsp;Bootloader配置主要配置bootloader的代码来源，以及代码的配置，编译，安装，如下图所示。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_bootloader.png" alt="图3-3-3 bootloader配置"></p>
+<p>&emsp;&emsp;图中采用的是git协议从内网的git服务器获取代码。用户需要自行建好代码git仓库，然后用建好的代码git仓库路径替换这里设置的路径。可以根据实际情况配置合适的代码获取方式，具体的配置方式也可以参考buildroot用户手册。<br>&emsp;&emsp;下面根据开发板附带资料中的代码，创建自己的git仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/</span><br><span class="line">$ tar zxvf myir-u-boot.tar.gz</span><br><span class="line">$ cd myir-u-boot</span><br><span class="line">$ git init</span><br><span class="line">$ git add . -f</span><br><span class="line">$ git commit -m &quot;Initial Version&quot; -a</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;修改位于 <workdir>/Filesystem/buildroot/configs/myd_y335x_defconfig 配置文件和<workdir>/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig ，将下面两项的内容改为如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BR2_TARGET_UBOOT_CUSTOM_REPO_URL=&quot;~/myir-u-boot/.git&quot;</span><br><span class="line">BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION=&quot;master&quot;</span><br></pre></td></tr></table></figure></workdir></workdir></p>
+<blockquote>
+<p>注意：修改了u-boot的代码库中代码之后，buildroot并不能自动重新获取和编译。需要手动删除<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/dl/uboot-master.tgz</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/build/uboot-master</code>目录。</p>
+</blockquote>
+<h3 id="Kernel配置"><a href="#Kernel配置" class="headerlink" title="Kernel配置"></a>Kernel配置</h3><p>&emsp;&emsp;Kernel的配置和bootloader类似，也是配置内核的代码来源，和kernel的配置，编译，安装，如下图所示。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_kernel.png" alt="图3-3-4 Kernel配置"></p>
+<p>&emsp;&emsp;图中采用的是git协议从内网的git服务器获取代码。用户需要自行建好代码git仓库，然后用建好的代码git仓库路径替换这里设置的路径。可以根据实际情况配置合适的代码获取方式，具体的配置方式也可以参考buildroot用户手册。<br>&emsp;&emsp;下面根据开发板附带资料中的代码，创建自己的git仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/</span><br><span class="line">$ tar zxvf myir-kernel.tar.gz</span><br><span class="line">$ cd myir-kernel</span><br><span class="line">$ git init</span><br><span class="line">$ git add . -f</span><br><span class="line">$ git commit -m &quot;Initial Version&quot; -a</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;修改位于 <workdir>/Filesystem/buildroot/configs/myd_y335x_defconfig 配置文件和<workdir>/Filesystem/buildroot/configs/myd_y335x_qt5_defconfig ，将下面两项的内容改为如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BR2_TARGET_KERNEL_CUSTOM_REPO_URL=&quot;~/myir-kernel/.git&quot;</span><br><span class="line">BR2_TARGET_KERNEL_CUSTOM_REPO_VERSION=&quot;master&quot;</span><br></pre></td></tr></table></figure></workdir></workdir></p>
+<blockquote>
+<p>注意：修改了kernel的代码库中代码之后，buildroot并不能自动重新获取和编译。需要手动删除<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/dl/linux-master.tgz</code>和<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/build/linux-master</code>目录。</p>
+</blockquote>
+<h3 id="文件系统配置"><a href="#文件系统配置" class="headerlink" title="文件系统配置"></a>文件系统配置</h3><p>&emsp;&emsp;文件系统的配置最终决定了<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>目录下生成哪些格式的文件系统镜像，如下图所示。我们配置了ramdisk, EXT2/4以及UBIFS这几种文件系统镜像和rootfs.tar.gz根文件系统压缩包。<br>用户拿这个压缩包用于nfsroot文件系统加载，也可以生成其它格式的文件系统镜像。<br>除此之外，编译完成之后还在<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/sbin</code>目录下生成一些本地主机上的文件系统工具，如制作ubi文件系统的工具mkfs.ubifs, ubinize等。我们可以用这些工具重新制作基于rootfs.tar.gz<br>的UBIFS格式文件系统(注意用本地主机上实际工作目录替换<workdir>)。</workdir></p>
+<p>&emsp;&emsp;创建一个ubinize.cfg文件,内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ubifs]</span><br><span class="line">mode=ubi</span><br><span class="line">vol_id=0</span><br><span class="line">vol_type=dynamic</span><br><span class="line">vol_name=rootfs</span><br><span class="line">vol_alignment=1</span><br><span class="line">vol_flags=autoresize</span><br><span class="line">image=rootfs.ubifs</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;准备需要打包的根文件系统目录rootfs并打包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$PATH:&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host/usr/sbin</span><br><span class="line">$ tar zxvf rootfs.tar.gz</span><br><span class="line">$ mkfs.ubifs -d rootfs -e 0x1f000 -c 2048 -m 0x800 -x lzo -F -o  rootfs.ubifs</span><br><span class="line">$ ubinize -o rootfs.ubi -m 0x800 -p 0x20000 -s 512 -m 2048 -O 2048 ubinize.cfg</span><br></pre></td></tr></table></figure></p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_filesystem.png" alt="图3-3-5 文件系统配置"></p>
+<h3 id="工具包配置"><a href="#工具包配置" class="headerlink" title="工具包配置"></a>工具包配置</h3><p>&emsp;&emsp;工具包的配置相对比较简单，但也是用户经常会改动的配置项。linux下一些常见的工具基本上都能够在这里找到。比如硬件测试相关的I2C-tools, spi-tools, can-utils等，网络相关的DHCP, TFTP, SSH等,<br>用户可以根据需要自行配制，也可以添加自己编写的其他工具包。关于如何添加自己的工具包，在buildroot中也有详细的介绍，参见<a href="https://buildroot.org/downloads/manual/manual.html#adding-packages" target="_blank" rel="noopener">https://buildroot.org/downloads/manual/manual.html#adding-packages</a>,这里不再赘述。</p>
+<p><img src="/zh-CN/myd-am335x/DevelopmentGuide/chapter3/C3_3_buildroot_make_menuconfig_target_packages.png" alt="图3-3-6 工具包配置"></p>
+<h2 id="开始构建"><a href="#开始构建" class="headerlink" title="开始构建"></a>开始构建</h2><p>&emsp;&emsp;Buildroot构建的过程类似于Linux Kernel的构建，只需要简单的命令就可以完成:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;编译过程中会生成一个output目录，最终生成的输出的文件位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>目录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ls -al output/images</span><br><span class="line">boot.vfat  myd_y335x.dtb  readme.txt   rootfs.cpio.gz     rootfs.ext2  rootfs.tar</span><br><span class="line">rootfs.ubi    sdcard.img  u-boot-spl.bin    uEnv.txt    MLO        ramdisk.gz</span><br><span class="line">rootfs.cpio  rootfs.cpio.uboot  rootfs.ext4  rootfs.tar.gz  rootfs.ubifs  u-boot.img</span><br><span class="line">uEnv_ramdisk.txt  zImage</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;output/images 目录下的输出文件基本上包含了bootloader, kernel,以及各种格式的文件系统镜像。这些文件在接下来的系统升级章节将会详细介绍。</p>
+<h2 id="Arago构建的文件系统"><a href="#Arago构建的文件系统" class="headerlink" title="Arago构建的文件系统"></a>Arago构建的文件系统</h2><p>&emsp;&emsp;在MYD-AM335X系列开发板支持基于Arago构建的文件系统镜像，具体的构建方法可以参考TI官网WIKI页面。<br><a href="http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK" target="_blank" rel="noopener">http://processors.wiki.ti.com/index.php/Processor_SDK_Building_The_SDK</a>.</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../../../categories/中文版/">中文版</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/">TI</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../../../../categories/中文版/TI/AM335X/MYD-AM335X-Linux-4-1-18开发手册/">MYD-AM335X-Linux-4.1.18开发手册</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../../tags/rootfs/">rootfs</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+<script src="../../../../../js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/gallery/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/gallery/AliPayQR.jpg'
+});
+</script>
+      
+            
+      
+        
+  <!-- Gitment START! Deploy by Z4HD -->
+	<div id="comments"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+	var gitment = new Gitment({
+		id: 'http://sunnymorning.github.io/zh-CN/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/',
+		owner: 'SunnyGeGe',
+		repo: 'gitment-comments',
+		oauth: {
+			client_id: '30ecccaa1c32f51a9a60',
+			client_secret: '81981c6f91be41322a19d51e1dccbd4648910b3f',
+		},
+	})
+	gitment.render('comments')
+	</script>
+	<!-- Gitment 自定义样式表 -->
+	<link rel="stylesheet" href="../../../../../css/comment-gitment.css">
+	<!-- Gitment END! -->
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../../../../../en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          3.3 Build Filesystem
+        
+      </div>
+    </a>
+  
+  
+    <a href="../Chapter3-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">3.4 编译QT</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备编译buildroot"><span class="nav-number">1.</span> <span class="nav-text">准备编译buildroot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置说明"><span class="nav-number">2.</span> <span class="nav-text">配置说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交叉编译工具链"><span class="nav-number">2.1.</span> <span class="nav-text">交叉编译工具链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统配置"><span class="nav-number">2.2.</span> <span class="nav-text">系统配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bootloader配置"><span class="nav-number">2.3.</span> <span class="nav-text">bootloader配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel配置"><span class="nav-number">2.4.</span> <span class="nav-text">Kernel配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件系统配置"><span class="nav-number">2.5.</span> <span class="nav-text">文件系统配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具包配置"><span class="nav-number">2.6.</span> <span class="nav-text">工具包配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始构建"><span class="nav-number">3.</span> <span class="nav-text">开始构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arago构建的文件系统"><span class="nav-number">4.</span> <span class="nav-text">Arago构建的文件系统</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2018 SunnyMorning All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="../../../../../js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="../../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../../categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="../../../../../tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="../../../../../about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="../../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../../../js/scripts.js"></script>
+<script src="../../../../../js/bootstrap.js"></script>
+<script src="../../../../../js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

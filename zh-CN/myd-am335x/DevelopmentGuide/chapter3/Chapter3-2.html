@@ -1,0 +1,90 @@
+<hr>
+<p>title: 3.2 编译Linux内核<br>date: 2018-04-10 15:48:55<br>tags: [AM335X, Kernel]<br>categories: </p>
+<ul>
+<li>中文版</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18开发手册<br>comments: true</li>
+</ul>
+<hr>
+<h2 id="编译Linux内核"><a href="#编译Linux内核" class="headerlink" title="编译Linux内核"></a>编译Linux内核</h2><p>&emsp;&emsp;进入Kernel目录，解压内核源码：</p>
+<pre><code class="c">$ cd &lt;WORKDIR&gt;/Kernel
+$ tar -jxvf myir-kernel.tar.bz2
+$ cd myir-kernel
+</code></pre>
+<ul>
+<li>开始编译Kernel</li>
+</ul>
+<p>&emsp;&emsp;不同的开发板对应不同的配置文件，配置文件位于myir-kernel/arch/arm/configs/目录。</p>
+<table>
+<thead>
+<tr>
+<th>开发板</th>
+<th>编译选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYD-AM335X</td>
+<td>myd_c335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-Y</td>
+<td>myd_j335x_defconfig</td>
+</tr>
+<tr>
+<td>MYD-AM335X-J</td>
+<td>myd_y335x_defconfig</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;下面以MYD-AM335X开发板为例，说明kernel的编译过程：</p>
+<pre><code class="c">$ make distclean
+$ make myd_c335x_defconfig
+$ make zImage dtbs
+</code></pre>
+<p>&emsp;&emsp;其中第二个make中的配置选项见上表。编译完成后，会在arch/arm/boot目录下生成zImage文件,会在arch/arm/boot/dts目录下生成设备树的二进制.dtb文件。同一块开发板，适当修改DTS文件可以适应于不同的硬件配置，例如屏幕尺寸大小可以修改dts文件。MYD-AM335X-Y和MYD-AM335X-J的编译和MYD-AM335X类似。</p>
+<ul>
+<li>内核补丁文件</li>
+</ul>
+<p>&emsp;&emsp;上面配置中默认为7寸屏，256M NAND 256M DDR，可以通过<code>&lt;WORKDIR&gt;/Patches</code>中的补丁文件生成不同屏和NAND DDR的设备树文件，然后编译内核使用设备树文件即可。以下是相关补丁的列表说明：</p>
+<table>
+<thead>
+<tr>
+<th>板型</th>
+<th>MYD-AM335X</th>
+<th>MYD-AM335X-Y</th>
+<th>MYD-AM335X-J</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDMI补丁</td>
+<td>myd_c335x_hdmi_display.diff</td>
+<td>无扩展</td>
+<td>无扩展</td>
+</tr>
+<tr>
+<td>4.3寸屏补丁</td>
+<td>myd-am335x-lcd4.3.diff</td>
+<td>myd-am335x-y-lcd4.3.diff</td>
+<td>myd-am335x-j-lcd4.3.diff</td>
+</tr>
+<tr>
+<td>512M NAND 512M ddr补丁</td>
+<td>myd-am335x-512N512D.diff</td>
+<td>myd-am335x-y-512N512D.diff</td>
+<td>myd-am335x-j-512N512D.diff</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;例如，MYD-AM335X-Y 512NAND 512 DDR 4.3寸屏打补丁：</p>
+<pre><code class="c">$ patch -p1 &lt; &lt;WORKDIR&gt;/Patches/myd-am335x-y-lcd4<span class="number">.3</span>.diff
+
+$ patch -p1 &lt; &lt;WORKDIR&gt;/Patches/myd-am335x-y<span class="number">-512</span>N512D.diff
+</code></pre>
+<ul>
+<li>编译设备树文件<pre><code class="c">make dtbs
+</code></pre>
+&emsp;&emsp;并用arch/arm/boot/dts目录下的设备树文件去替换烧录的image中的设备树文件。</li>
+</ul>

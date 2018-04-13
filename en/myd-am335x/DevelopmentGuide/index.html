@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="../../../js/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>myd-am335x-linux-4.1.18 development guide | SunnyMorning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="AM335XLinuxQT5Buildroot" />
+  
+  
+  
+  
+  <meta name="description" content="IntroductionThis section provides an overview of the areas covered by the documentation,what is contained, the appropriate readers, the documentation version history, and the applicable hardware">
+<meta name="keywords" content="AM335X,Linux,QT5,Buildroot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MYD-AM335X-Linux-4.1.18 Development Guide">
+<meta property="og:url" content="http://sunnymorning.github.io/en/myd-am335x/DevelopmentGuide/index.html">
+<meta property="og:site_name" content="SunnyMorning">
+<meta property="og:description" content="IntroductionThis section provides an overview of the areas covered by the documentation,what is contained, the appropriate readers, the documentation version history, and the applicable hardware">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://sunnymorning.github.io/en/myd-am335x/DevelopmentGuide/cover.jpg">
+<meta property="og:updated_time" content="2018-04-13T01:41:55.898Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MYD-AM335X-Linux-4.1.18 Development Guide">
+<meta name="twitter:description" content="IntroductionThis section provides an overview of the areas covered by the documentation,what is contained, the appropriate readers, the documentation version history, and the applicable hardware">
+<meta name="twitter:image" content="http://sunnymorning.github.io/en/myd-am335x/DevelopmentGuide/cover.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="SunnyMorning" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="../../../css/style.css">
+
+  <script src="../../../js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../../css/my.css">
+  <!-- Google Adsense -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["../../../index.html"] = "Home"; 
+
+  themeMenus["../../../archives"] = "Archives"; 
+
+  themeMenus["../../../categories"] = "Categories"; 
+
+  themeMenus["../../../tags"] = "Tags"; 
+
+  themeMenus["../../../about"] = "About"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="SunnyMorning" rel="home"> SunnyMorning </a>
+            
+          </h1>
+
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../index.html">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-myd-am335x/DevelopmentGuide" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      MYD-AM335X-Linux-4.1.18 Development Guide
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="" class="article-date">
+	  <time datetime="2018-04-10T07:51:59.000Z" itemprop="datePublished">April 10, 2018</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+<div>
+<img src="/en/myd-am335x/DevelopmentGuide/cover.jpg" ,alt="cover" ,="" width="240">
+</div>
+
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This section provides an overview of the areas covered by the documentation,what is contained, the appropriate readers, the documentation version history, and the applicable hardware version.</p>
+<p>This chapter describes how to run Linux system and embedded Linux applications and the process of drive development in MYD-AM335X series development board. It includes building the development environment, compiling the source code, examples of Linux application and image download.</p>
+<p>This document is suitable for embedded Linux development engineers with some development experience.</p>
+<h2 id="Version-History"><a href="#Version-History" class="headerlink" title="Version History"></a>Version History</h2><table>
+<thead>
+<tr>
+<th>Version Number</th>
+<th>Description</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1.0</td>
+<td>Initial Version</td>
+<td>2017.04.01</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Hardware-Version"><a href="#Hardware-Version" class="headerlink" title="Hardware Version"></a>Hardware Version</h2><p> MYD-AM335X, MYD-AM335X-Y,MYD-AM335X-J.</p>
+<blockquote>
+<p><strong>Note: This document applies to the above three versions of the hardware, the user can choose the corresponding operation according to the corresponding board.In this paper, the MYD-AM335X series is used to represent the three board.</strong></p>
+</blockquote>
+<ul>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter1/Chapter1">1. Software Resources</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter2/Chapter2">2. Deploy development environment</a><ul>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter2/Chapter2-1">2.1 Install tools</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter2/Chapter2-2">2.2 Setup gcc Toolchain</a></li>
+</ul>
+</li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter3/Chapter3">3. Bulid System</a><ul>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-1">3.1 Bulid Bootloader</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-2">3.2 Build Linux Kernel</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-3">3.3 Build Filesystem</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter3/Chapter3-4">3.4 Build QT</a></li>
+</ul>
+</li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4">4. Linux Applications Development</a><ul>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-1">4.1 LCD</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-2">4.2 Touch Panel</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-3">4.3 RTC</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-4">4.4 RS485</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-5">4.5 CAN Bus</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-6">4.6 Ethernet</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-7">4.7 NAND Flash</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-8">4.8 KeyPad</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-9">4.9 GPIO-LED</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-10">4.10 Audio</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-11">4.11 USB Host</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-12">4.12 USB Device</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter4/Chapter4-13">4.13 SDIO WiFi</a></li>
+</ul>
+</li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter5/Chapter5">5. Qt Applications Development</a><ul>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-1">5.1 Install QtCreator</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-2">5.2 Config QtCreator</a></li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter5/Chapter5-3">5.3 Build QT Application</a></li>
+</ul>
+</li>
+<li><a href="/en/myd-am335x/DevelopmentGuide/chapter6/Chapter6">6. Update System</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../categories/English-Version/">English Version</a>, <a class="article-category-link" href="../../../categories/English-Version/TI/">TI</a>, <a class="article-category-link" href="../../../categories/English-Version/TI/AM335X/">AM335X</a>, <a class="article-category-link" href="../../../categories/English-Version/TI/AM335X/MYD-AM335X-Linux-4-1-18-Development-Guide/">MYD-AM335X-Linux-4.1.18 Development Guide</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../tags/AM335X/">AM335X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../tags/Buildroot/">Buildroot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../tags/QT5/">QT5</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+<script src="../../../js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/gallery/WeChatQR.jpg',
+  alipayImage: 'https://raw.githubusercontent.com/SunnyMorning/SunnyMorning.github.io/master/gallery/AliPayQR.jpg'
+});
+</script>
+      
+            
+      
+        
+  <!-- Gitment START! Deploy by Z4HD -->
+	<div id="comments"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+	var gitment = new Gitment({
+		id: 'http://sunnymorning.github.io/en/myd-am335x/DevelopmentGuide/',
+		owner: 'SunnyGeGe',
+		repo: 'gitment-comments',
+		oauth: {
+			client_id: '30ecccaa1c32f51a9a60',
+			client_secret: '81981c6f91be41322a19d51e1dccbd4648910b3f',
+		},
+	})
+	gitment.render('comments')
+	</script>
+	<!-- Gitment 自定义样式表 -->
+	<link rel="stylesheet" href="../../../css/comment-gitment.css">
+	<!-- Gitment END! -->
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../../../zh-CN/myd-am335x/DevelopmentGuide/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MYD-AM335X-Linux-4.1.18开发手册
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../../zh-CN/myd-am335x/DevelopmentGuide/chapter1/Chapter1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">1. 软件资源介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Version-History"><span class="nav-number">1.1.</span> <span class="nav-text">Version History</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hardware-Version"><span class="nav-number">1.2.</span> <span class="nav-text">Hardware Version</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2018 SunnyMorning All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="../../../js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="../../../tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="../../../about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="../../../fancybox/jquery.fancybox.css">
+  <script src="../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../js/scripts.js"></script>
+<script src="../../../js/bootstrap.js"></script>
+<script src="../../../js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

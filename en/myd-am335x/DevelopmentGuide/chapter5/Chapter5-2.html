@@ -1,0 +1,34 @@
+<hr>
+<p>title: 5.2 Config QtCreator<br>date: 2018-04-10 15:46:55<br>tags: [AM335X, QtCreator]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<ul>
+<li>Config Build&amp;Run Environment:</li>
+</ul>
+<p>Open QtCreator, choose <code>Tools</code>-&gt;<code>Options</code>, then the <code>Build &amp; Run</code> dialog popups<code>.
+Please choose the</code>Compilers` tab to set compiler for QtCreator as shown below:</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_1.png" alt="Figure 5-2-1 Settings of Compiler"></p>
+<p>Press <code>Add</code> button at the right side of this dialog, choose <code>Custom</code> in the dropdown list, and then set <code>Name</code>, <code>Compiler path</code>, <code>Make path</code> 和 <code>ABI</code> as shown below.<br>After complete, press the <code>Apply</code> button to save.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_2.png" alt="Figure 5-2-2 Add Compiler for QtCreator"></p>
+<p>At the same dialog, choose <code>Qt Version</code> Tab to add qmake, at the right side of this dialog, press <code>Add</code> button, then a new dialog popups,<br>please choose the qmake tools described at Chapter 3-4-1. After complete, press <code>Open</code> to set qmake, and then <code>Apply</code> to save.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_3.png" alt="Figure 5-2-3 Choose Qmake"></p>
+<p>In the <code>Build&amp;Run</code> window, continue to choose <code>Kits</code> tab, and at the right side of this dialog, press <code>Add</code> button, then add settings of running environment for QT5 application. In the <code>Sysroot</code> editbox, write the path of cross compile toolchain, in the <code>Compiler</code> and <code>Qt Version</code> editboxs, write the settings being set before, set <code>Debugger</code> to <code>None</code>, set <code>CMake Tools</code> to default as shown below:</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_4.png" alt="Figure 5-2-4 Add Kits for QtCreator"></p>
+<ul>
+<li>Create Helloworld Project:</li>
+</ul>
+<p>In the main menu of QtCreate, choose <code>File</code>-&gt;<code>New File or Project</code>, and in the popup dialog, choose <code>Application</code>-&gt;<code>Qt Widgets Application</code> as shown below:</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_5.png" alt="Figure 5-2-5 Create a QT Widgets Application"></p>
+<p>After pressing <code>Choose...</code> button, the <code>Qt Widgets Application</code> settings dialog popups, please set the name and path of the project as shown below in <code>Name</code> and <code>Create in</code> editboxs as shown below:</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_6.png" alt="Figure 5-2-6 Set the Name and Path of the Project"></p>
+<p>Press <code>Next</code> button and choose the setting for <code>Kits</code> as below:</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_7.png" alt="Figure 5-2-7 Set Kits for the Project"></p>
+<p>Choose the base class of the project as shown below:</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_8.png" alt="Figure 5-2-8 Choose Base Class"></p>
+<p>Press <code>Finish</code> button to create and save the project.</p>
+<p><img src="/en/myd-am335x/DevelopmentGuide/chapter5/5_2_9.png" alt="Figure 5-2-9  Finish Creating a New Project"></p>

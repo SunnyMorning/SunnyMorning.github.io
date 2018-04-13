@@ -1,0 +1,85 @@
+<hr>
+<p>title: 4.9 GPIO-LED<br>date: 2018-04-10 15:47:41<br>tags: [AM335X, GPIO-LED]<br>categories: </p>
+<ul>
+<li>English Version</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18 Development Guide<br>comments: true</li>
+</ul>
+<hr>
+<p>On a embbeded Linux system, the LEDs are commonly controlled by sysfs interface.<br>This example demonstrates how to control the LEDs by sysfs with <code>echo</code> command or <code>led_test</code> application.</p>
+<p><strong>Hardware Preparation:</strong></p>
+<ul>
+<li>Hardware debugging environment to see <a href="/en/myd-am335x/DevelopmentGuide/chapter2/chapter2">chapter2</a>.</li>
+<li>MYD-AM335x series development board</li>
+</ul>
+<p><strong>Software Preparation:</strong></p>
+<ul>
+<li>Linux Kernel 4.1.18</li>
+<li>echo, led_test application</li>
+</ul>
+<p><strong>Test Steps: </strong></p>
+<ul>
+<li><p>Copy cross compiled <code>&lt;WORKDIR&gt;/Examples/led/led_test</code> to <code>/usr/bin</code> directory of the MYD-AM335x series development board.</p>
+</li>
+<li><p>View the device node of MYD-AM335X LED devices as below:</p>
+<pre><code># ls /sys/class/leds
+myc:green:user1  myd:green:user2  myd:green:user3
+</code></pre></li>
+<li><p>Control the MYD-AM335X LED by <code>echo</code> command as below:</p>
+<pre><code>D3：
+#echo &quot;1&quot; &gt; /sys/class/leds/myc\:green\:user1/brightness
+#echo &quot;0&quot; &gt; /sys/class/leds/myc\:green\:user1/brightness
+D39：
+#echo &quot;1&quot; &gt; /sys/class/leds/myd\:green\:user2/brightness
+#echo &quot;0&quot; &gt; /sys/class/leds/myd\:green\:user2/brightness
+D40：
+#echo &quot;1&quot; &gt; /sys/class/leds/myd\:green\:user3/brightness
+#echo &quot;0&quot; &gt; /sys/class/leds/myd\:green\:user3/brightness
+</code></pre></li>
+<li>View the device node of MYD-AM335X-Y LED devices as below:</li>
+</ul>
+<pre><code># ls /sys/class/leds
+myc:green:user1  myd:green:user2
+</code></pre><ul>
+<li>Control the MYD-AM335X-Y LED by <code>echo</code> command as below:</li>
+</ul>
+<pre><code class="c">D3：
+<span class="meta">#echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span>
+<span class="meta">#echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span>
+D2：
+<span class="meta">#echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span>
+<span class="meta">#echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span>
+</code></pre>
+<ul>
+<li>View the device node of MYD-AM335X-J LED devices as below:</li>
+</ul>
+<pre><code># ls /sys/class/leds
+myc:green:user1  myd:green:user2
+</code></pre><ul>
+<li>Control the MYD-AM335X-J LED by <code>echo</code> command as below:</li>
+</ul>
+<pre><code class="c">D3：
+<span class="meta"># echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span>
+<span class="meta"># echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myc\:green\:user1/brightness</span>
+D2：
+<span class="meta"># echo <span class="meta-string">"1"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span>
+<span class="meta"># echo <span class="meta-string">"0"</span> &gt; /sys/class/leds/myd\:green\:user2/brightness</span>
+</code></pre>
+<ul>
+<li>Control the LEDs by ‘led_test’ application as below:</li>
+</ul>
+<pre><code># led_test -h
+Usage: led_test [options]
+
+Version 1.0
+Options:
+-d | --device name   led name myc:blue:cpu0
+-l | --light brightness   led brightness. 0~255 0: off.
+-h | --help                Print this message
+
+# led_test -d myc:green:user1 -l 0
+Set led myc:green:user1 off, brightness = 0
+# led_test -d myc:green:user1 -l 1
+Set led myc:green:user1 on, brightness = 1
+</code></pre>

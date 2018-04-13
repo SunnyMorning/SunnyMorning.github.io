@@ -1,0 +1,53 @@
+<hr>
+<p>title: 3.4 编译QT<br>date: 2018-04-10 15:48:51<br>tags: [AM335X, QT5]<br>categories: </p>
+<ul>
+<li>中文版</li>
+<li>TI</li>
+<li>AM335X</li>
+<li>MYD-AM335X-Linux-4.1.18开发手册<br>comments: true</li>
+</ul>
+<hr>
+<h2 id="编译QT"><a href="#编译QT" class="headerlink" title="编译QT"></a>编译QT</h2><p>&emsp;&emsp;QT的编译我们推荐使用Buildroot，Buildroot可以很容易地编译Qt5图形库，并且整合在文件系统中。同时，我们提供了配置文件，可以更方便地编译Qt5。</p>
+<p>&emsp;&emsp;进入上一节中解压好的myir-buildroot目录：</p>
+<pre><code>$ cd &lt;WORKDIR&gt;/Filesystem/myir-buildroot
+</code></pre><p>&emsp;&emsp;开始编译buildroot</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>myd_c335x_defconfig</td>
+<td>MYD-AM335X不带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_c335x_qt5_defconfig</td>
+<td>MYD-AM335X带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_j335x_defconfig</td>
+<td>MYD-AM335X-J不带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_j335x_qt5_defconfig</td>
+<td>MYD-AM335X-J带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_y335x_defconfig</td>
+<td>MYD-AM335X-Y不带qt5运行环境的的Buildroot配置</td>
+</tr>
+<tr>
+<td>myd_y335x_qt5_defconfig</td>
+<td>MYD-AM335X-Y带qt5运行环境的的Buildroot配置</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;以MYD-AM335X为例进行的带qt5运行时库的文件系统编译：</p>
+<pre><code class="c">$ make myd_c335x_qt5_defconfig
+$ make menuconfig  --buildroot中指定自己bootloader和kernle的git路径，同上小节。
+$ make
+</code></pre>
+<p>&emsp;&emsp;等待编译完成后，Qt5会打包在位于<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/images</code>目录之下的文件系统镜像中。<code>&lt;WORKDIR&gt;/Filesystem/myir-buildroot/output/host</code>同样可作为Qt5开<br>发的SDK目录，其中包含了交叉编译工具, QT5应用程序构建工具qmake等，在后续章节中会详细介绍。</p>

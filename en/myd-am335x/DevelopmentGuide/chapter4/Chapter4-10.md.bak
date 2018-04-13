@@ -1,0 +1,34 @@
+---
+title: 4.10 Audio
+date: 2018-04-10 15:47:39
+tags: [AM335X, Audio]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+This example demonstrates how to use the Linux API to control the input and output of audio,please refer to the source code for detail.
+
+**Hardware Preparation: **
+  * Hardware debugging environment to see [chapter2](/en/myd-am335x/DevelopmentGuide/chapter2/chapter2).
+
+
+  | Board Type | MYD-AM335X | MYD-AM335X-Y | MYD-AM335X-J |
+  | ----| ---- | ---- | ---- |
+  | Audio interface | Audio input J11，Headphones Connect J10 | Audio input J9，Headphones Connect J8 | Audio input J10，Headphones Connect J9 |
+
+**Software Preparation: **
+  * Linux Kernel 4.1.18
+  * audio_test application
+
+**Test Steps: **
+  * Copy cross compiled `<WORKDIR>/Examples/audio/audio_test` to `/usr/bin` directory of the MYD-AM335x series development board.Plug the headset into the audio output port, enter the audio input to the audio input port, enter the following command at the Linux terminal:
+```c
+# audio_test
+rate set to 21999, expected 22000
+Init capture successfully, rate: 21999, period_size: 128
+rate set to 21998, expected 21999
+Period size: 128 frames, buffer size: 256 bytes
+```

@@ -14,8 +14,7 @@ comments: true
 Open QtCreator, choose `Tools`->`Options`, then the `Build & Run` dialog popups`.
 Please choose the `Compilers` tab to set compiler for QtCreator as shown below:
 
-![png](/en/myd-am335x/DevelopmentGuide/chapter5/5_2_1.png)
-Figure 5-2-1 Settings of Compiler
+![Figure 5-2-1 Settings of Compiler](/en/myd-am335x/DevelopmentGuide/chapter5/5_2_1.png)
 
 Press `Add` button at the right side of this dialog, choose `Custom` in the dropdown list, and then set `Name`, `Compiler path`, `Make path` 和 `ABI` as shown below.
 After complete, press the `Apply` button to save.

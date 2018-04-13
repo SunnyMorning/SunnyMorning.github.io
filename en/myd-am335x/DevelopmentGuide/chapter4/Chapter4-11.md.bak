@@ -1,0 +1,71 @@
+---
+title: 4.11 USB Host
+date: 2018-04-10 15:47:35
+tags: [AM335X, USB Host]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+This example demonstrates how to use USB host to mount mass stroage device and verify the driver of USB host,to achieve the function of reading and writing USB flash disk.
+
+**Hardware Preparation:**
+  * Hardware debugging environment to see [chapter2](/en/myd-am335x/DevelopmentGuide/chapter2/chapter2).
+  * USB flash disk
+
+
+  | Board Type | MYD-AM335X | MYD-AM335X-Y | MYD-AM335X-J |
+  | ----| ---- | ---- | ---- |
+  | USB Host interface | J3 or J4 | J19 | J27 |
+
+**Software Preparation:**
+  * Linux Kernel 4.1.18
+  * mount and umount commands
+
+**Test Steps:**
+  * Plug the USB disk in the USB host interface of development board, use `mount` or `umount` command to load and unload USB disk. When users plug in  the USB disk, Linux kernel dumps the message as below:
+
+```
+# [  334.568567] usb 2-1.4: new high-speed USB device number 3 using musb-hdrc
+[  334.688922] usb 2-1.4: New USB device found, idVendor=1908, idProduct=0226
+[  334.696305] usb 2-1.4: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+[  334.743502] usb-storage 2-1.4:1.0: USB Mass Storage device detected
+[  334.751563] scsi host0: usb-storage 2-1.4:1.0
+[  334.762053] usbcore: registered new interface driver usb-storage
+[  334.788766] cpu cpu0: clk_voltdm_notifier_handler: Failed to scale voltage(1100000): -22
+[  334.797531] cpu cpu0: clk_voltdm_notifier_handler: Failed to scale voltage(950000): -22
+[  334.806827] cpu cpu0: failed to set clock rate: -16
+[  334.812093] cpufreq: __target_index: Failed to change cpu frequency: -16
+[  335.759638] scsi 0:0:0:0: Direct-Access     Generic  Mass-Storage     1.11 PQ: 0 ANSI: 2
+[  336.488565] sd 0:0:0:0: [sda] 15605760 512-byte logical blocks: (7.99 GB/7.44 GiB)
+[  336.497237] sd 0:0:0:0: [sda] Write Protect is off
+[  336.503459] sd 0:0:0:0: [sda] Mode Sense: 03 00 00 00
+[  336.509699] sd 0:0:0:0: [sda] No Caching mode page found
+[  336.515366] sd 0:0:0:0: [sda] Assuming drive cache: write through
+[  336.531208]  sda: sda1
+[  336.552003] sd 0:0:0:0: [sda] Attached SCSI removable disk
+```
+
+  * It shows USB host works well and USB disk is detected, users can mount it to /mnt directory of the embedded Linux system as below:
+
+```
+# mount /dev/sda1 /mnt
+[  429.892793] FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+# cd /mnt
+# ls
+1.bmp                mtd                  rootfs.ubi
+MLO                  myd_c335x.dtb        spi
+audio                myir-linux-examples  u-boot.img
+audio1               network              zImage
+#
+```
+
+  * Plug out the USB disk, Linux kernel dumps the message as below:
+
+```
+# [  493.899143] usb 2-1.4: USB disconnect, device number 3
+```
+
+

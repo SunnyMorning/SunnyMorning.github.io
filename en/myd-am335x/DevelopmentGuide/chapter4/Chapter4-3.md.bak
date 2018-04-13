@@ -1,0 +1,69 @@
+---
+title: 4.3 RTC
+date: 2018-04-10 15:47:53
+tags: [AM335X, RTC]
+categories: 
+- English Version
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18 Development Guide
+comments: true
+---
+This example demonstrates how to use Linux API to read and write real time on RTC，please refer to the source code for detail.
+Users can also test the RTC with `date` and `hwclock` command built with Buildroot.
+
+**Hardware Preparation:**
+  * Hardware debugging environment to see [chapter2](/en/myd-am335x/DevelopmentGuide/chapter2/chapter2).
+  * CR1220 3V button cell
+
+
+  | Board Type | MYD-AM335X | MYD-AM335X-Y | MYD-AM335X-J |
+  | ----| ---- | ---- | ---- |
+  | CR1220 button cell | J1 | J2 | J23 |
+**Software Preparation: **
+  * Linux Kernel 4.1.18
+  * date, hwclock command
+  * rtc_test application
+
+**Test Steps: **
+  * Copy cross compiled `<WORKDIR>/Examples/rtc/rtc_test` to `/usr/bin` directory of the MYD-AM335X seriesdevelopment board, run `rtc_test` application as below:
+
+```
+# chmod 777 /usr/bin/rtc_test
+# rtc_test -h
+Usage: rtc_test [options]
+
+Version 1.0
+Options:
+-d | --device name   rtc device name, default: /dev/rtc0
+-w | --write  time   time string with format MMDDhhmm[CCYY][.ss]. 
+                     such as: 111817582016.18
+-h | --help          Print this message
+
+# rtc_test -d /dev/rtc -w 111817582016.18
+date/time is updated to:  18-11-2016, 17:58:18.
+```
+
+  * Power off the development board, wait for a while, power on again and read the rtc time by `rtc_test` as below:
+
+```
+# rtc_test -d /dev/rtc
+
+  Current RTC date/time is 18-11-2016, 18:04:32.
+```
+  * Users can also use date and hwclock command to test RTC as below:
+
+```
+# date  081518002016.30        -- Set the system time to August 15, 2016 18:00:30
+Mon Aug 15 18:00:30 UTC 2016
+# date
+Mon Aug 15 18:00:38 UTC 2016
+# hwclock -w /dev/rtc          -- Write the system time to rtc
+```
+  * Power off the development board, wait for a while, power on again and read the rtc time by hwclock as below:
+
+```
+# hwclock -r /dev/rtc
+Mon Aug 15 18:11:08 2016  0.000000 seconds
+
+```

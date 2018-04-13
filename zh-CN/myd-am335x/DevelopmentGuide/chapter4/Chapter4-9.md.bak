@@ -1,0 +1,98 @@
+---
+title: 4.9 GPIO-LED
+date: 2018-04-10 15:47:41
+tags: [AM335X, GPIO-LED]
+categories: 
+- 中文版
+-	TI
+-	AM335X
+- MYD-AM335X-Linux-4.1.18开发手册
+comments: true
+---
+&emsp;&emsp;Linux系统下，LED的控制主要是通过访问sysfs文件系统下文件节点实现的，本例程演示如何使用echo命令和led_test应用对LED进行控制，验证开发板上的LED驱动程序。
+
+**测试硬件环境：**
+  * 硬件调试环境搭建见[部署开发环境](/zh-CN/myd-am335x/DevelopmentGuide/chapter2/chapter2)中的硬件调试环境搭建部。
+  * MYD-AM335x系列开发板一块
+
+**测试软件环境：**
+  * Linux Kernel 4.1.18
+  * echo, led_test 应用程序
+
+**测试过程：**
+&emsp;&emsp;编译并拷贝`<WORKDIR>/Examples/led`目录下的测试程序led_test至开发板/usr/bin目录。
+
+&emsp;&emsp;查看MYD-AM335X LED的设备节点。
+
+```
+# ls /sys/class/leds
+myc:green:user1  myd:green:user2  myd:green:user3
+```
+
+&emsp;&emsp;用'echo'命令对MYD-AM335X LED进行控制。
+
+```
+D3：
+#echo "1" > /sys/class/leds/myc\:green\:user1/brightness
+#echo "0" > /sys/class/leds/myc\:green\:user1/brightness
+D39：
+#echo "1" > /sys/class/leds/myd\:green\:user2/brightness
+#echo "0" > /sys/class/leds/myd\:green\:user2/brightness
+D40：
+#echo "1" > /sys/class/leds/myd\:green\:user3/brightness
+#echo "0" > /sys/class/leds/myd\:green\:user3/brightness
+```
+&emsp;&emsp;查看MYD-AM335X-Y LED的设备节点。
+
+```
+# ls /sys/class/leds
+myc:green:user1  myd:green:user2
+```
+
+&emsp;&emsp;用'echo'命令对MYD-AM335X-Y LED进行控制。
+
+```c
+D3：
+#echo "1" > /sys/class/leds/myc\:green\:user1/brightness
+#echo "0" > /sys/class/leds/myc\:green\:user1/brightness
+D2：
+#echo "1" > /sys/class/leds/myd\:green\:user2/brightness
+#echo "0" > /sys/class/leds/myd\:green\:user2/brightness
+```
+
+&emsp;&emsp;查看MYD-AM335X-J LED的设备节点。
+
+```
+# ls /sys/class/leds
+myc:green:user1  myd:green:user2
+```
+
+&emsp;&emsp;用'echo'命令对MYD-AM335X-J LED进行控制。
+
+```c
+D3：
+# echo "1" > /sys/class/leds/myc\:green\:user1/brightness
+# echo "0" > /sys/class/leds/myc\:green\:user1/brightness
+D2：
+# echo "1" > /sys/class/leds/myd\:green\:user2/brightness
+# echo "0" > /sys/class/leds/myd\:green\:user2/brightness
+```
+&emsp;&emsp;用'led_test'应用程序对LED进行控制。
+
+```
+# led_test -h
+Usage: led_test [options]
+
+Version 1.0
+Options:
+-d | --device name   led name myc:blue:cpu0
+-l | --light brightness   led brightness. 0~255 0: off.
+-h | --help                Print this message
+
+# led_test -d myc:green:user1 -l 0
+Set led myc:green:user1 off, brightness = 0
+# led_test -d myc:green:user1 -l 1
+Set led myc:green:user1 on, brightness = 1
+```
+&emsp;&emsp;依照不同的板型更换对应的设备节点可以用led_test实现不同LED的控制。
+
